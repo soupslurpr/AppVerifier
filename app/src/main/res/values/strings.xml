@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">AppVerifier</string>
+    <string name="settings">Settings</string>
+    <string name="back_button">Back</string>
+    <string name="welcome">Welcome to AppVerifier!</string>
+    <string name="view_source_code_setting_name">Source code</string>
+    <string name="view_source_code_setting_description">View AppVerifier\'s source code on the GitHub website in your web browser</string>
+    <string name="privacy_policy_setting_name">Privacy policy</string>
+    <string name="privacy_policy_setting_description">View AppVerifier\'s privacy policy in app</string>
+    <string name="license">License</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="license_setting_name">AppVerifier\'s License</string>
+    <string name="license_setting_description">View AppVerifier\'s License in app</string>
+    <string name="credits">Credits</string>
+    <string name="credits_setting_name">Credits</string>
+    <string name="credits_setting_description">View open source licenses of code that AppVerifier uses in app</string>
+    <string name="pitch_black_background_setting_name">Pitch black background</string>
+    <string name="pitch_black_background_setting_description">Replaces background with pitch black background when dark theme is on</string>
+    <string name="about">About</string>
+    <string name="theme">Theme</string>
+    <string name="open_appverifier_website_setting_name">AppVerifier\'s Website</string>
+    <string name="open_appverifier_website_setting_description">Open AppVerifier\'s website in your web browser</string>
+    <string name="review_privacy_policy_and_license" translatable="false">Review AppVerifier\'s privacy policy and license (scroll down)</string>
+    <string name="full_privacy_policy" translatable="false">AppVerifier privacy policy\n\nThis app makes no internet
+        connections, and does not store any data other than preferences. This app can see which apps are installed on your device for the purpose of viewing and verifying their signing certificate\'s validity. You can share and copy the package name and hash of an app\'s signing certificate to other apps using the share/copy button and also verify the package name and hash by pasting from your clipboard or sharing the verification info received from others to this app. The clipboard content is not stored and is only used to calculate if the given package name and hash matches with the one you are verifying against. The content shared to this app is not stored and is only used to calculate if the given package name and hash matches with the one you are verifying against.\n\nAppVerifier\'s privacy policy may be updated from time to time. When it does, you will be prompted to accept the new policy upon opening the app.\n\nLast updated: December 24, 2023.</string>
+    <string name="full_license" translatable="false">ISC License\n\nCopyright (c) 2024 soupslurpr\n\nPermission to
+        use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\nPERFORMANCE OF THIS SOFTWARE.</string>
+    <string name="privacy_policy_and_license_checkbox_text" translatable="false">By checking the checkbox and continuing, you agree to AppVerifier\'s privacy policy and license, which are shown above.</string>
+    <string name="continue_to_app" translatable="false">Continue</string>
+    <string name="verify_app">Verify App</string>
+    <string name="app_list">App List</string>
+</resources>
