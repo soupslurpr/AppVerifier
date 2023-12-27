@@ -34,6 +34,10 @@ AppVerifier does the heavy lifting for you 💪
 
 [//]: # (Check out the official website at https://appverifier.soupslurpr.dev/ for more info and download.)
 
+## Community
+
+Join the Matrix space at https://matrix.to/#/#appverifier-space:matrix.org for the Discussion, Announcements, and Beta Testing rooms.
+
 ## Contributing
 
 Check [CONTRIBUTING.md](https://github.com/soupslurpr/AppVerifier/blob/master/CONTRIBUTING.md) for things to know
