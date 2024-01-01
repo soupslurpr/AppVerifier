@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -50,6 +51,7 @@ fun VerifyAppScreen(
     appNotFound: Boolean,
     onVerifyFromClipboard: (String) -> Unit,
     invalidFormat: Boolean,
+    onLaunchedEffectHashEmpty: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -58,6 +60,12 @@ fun VerifyAppScreen(
     val verticalScroll = rememberScrollState()
 
     var showMoreInfoAboutVerificationStatusDialog by rememberSaveable { mutableStateOf(false) }
+
+    LaunchedEffect(hash) {
+        if (hash.isEmpty()) {
+            onLaunchedEffectHashEmpty()
+        }
+    }
 
     Column(
         modifier = Modifier
