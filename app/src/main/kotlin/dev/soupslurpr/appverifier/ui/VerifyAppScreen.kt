@@ -66,7 +66,7 @@ fun VerifyAppScreen(
 
     var showMoreInfoAboutInternalDatabaseStatusDialog by rememberSaveable { mutableStateOf(false) }
 
-    LaunchedEffect(hash) {
+    LaunchedEffect(Unit) {
         if (hash.isEmpty()) {
             onLaunchedEffectHashEmpty()
         }
