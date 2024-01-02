@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationStatus
 
 @Composable
@@ -52,6 +54,7 @@ fun VerifyAppScreen(
     onVerifyFromClipboard: (String) -> Unit,
     invalidFormat: Boolean,
     onLaunchedEffectHashEmpty: () -> Unit,
+    internalDatabaseStatus: InternalDatabaseStatus,
 ) {
     val context = LocalContext.current
 
@@ -60,6 +63,8 @@ fun VerifyAppScreen(
     val verticalScroll = rememberScrollState()
 
     var showMoreInfoAboutVerificationStatusDialog by rememberSaveable { mutableStateOf(false) }
+
+    var showMoreInfoAboutInternalDatabaseStatusDialog by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(hash) {
         if (hash.isEmpty()) {
@@ -88,6 +93,26 @@ fun VerifyAppScreen(
                         "following:\n\ncom.example.app\n96:C0:2C:55:75:5C:17:1C:68:13:70:29:3B:37:11:2B:4A:5D:F7:B9:82:C2:C5:58:05:4C:45:51:AD:F5:50:DC"
             )
         } else {
+            Text(
+                "Internal Database Status:"
+            )
+            Row {
+                FilledTonalButton(
+                    onClick = { showMoreInfoAboutInternalDatabaseStatusDialog = true },
+                ) {
+                    Text(
+                        internalDatabaseStatus.simpleInternalDatabaseStatus.name.replace('_', ' '),
+                        style = typography.headlineLarge
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Icon(
+                        Icons.Default.Info,
+                        "More info about internal database status",
+                        tint = internalDatabaseStatus.simpleInternalDatabaseStatus.color,
+                    )
+                }
+            }
+            Spacer(Modifier.height(8.dp))
             if (icon != null) {
                 Image(
                     rememberDrawablePainter(drawable = icon),
@@ -149,6 +174,34 @@ fun VerifyAppScreen(
                 }
             }
         }
+    }
+
+    if (showMoreInfoAboutInternalDatabaseStatusDialog) {
+        AlertDialog(
+            onDismissRequest = { showMoreInfoAboutInternalDatabaseStatusDialog = false },
+            confirmButton = {
+                TextButton(
+                    { showMoreInfoAboutInternalDatabaseStatusDialog = false }
+                ) {
+                    Text(stringResource(id = android.R.string.ok))
+                }
+            },
+            title = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        internalDatabaseStatus.name,
+                        style = typography.headlineSmall,
+                        color = internalDatabaseStatus.simpleInternalDatabaseStatus.color,
+                    )
+                }
+            },
+            text = {
+                Text(internalDatabaseStatus.info)
+            }
+        )
     }
 
     if (showMoreInfoAboutVerificationStatusDialog) {

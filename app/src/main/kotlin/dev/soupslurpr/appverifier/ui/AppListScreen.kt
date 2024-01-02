@@ -8,6 +8,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Verified
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
+import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
+import dev.soupslurpr.appverifier.data.VerificationInfo
 
 @Composable
 fun AppListScreen(
@@ -23,10 +30,12 @@ fun AppListScreen(
         name: String,
         packageName: String,
         hash: String,
-        icon: Drawable
+        icon: Drawable,
+        internalDatabusStatus: InternalDatabaseStatus,
     ) -> Unit,
     onLaunchedEffect: () -> Unit,
     getHashHexFromPackageInfo: (packageInfo: PackageInfo) -> String,
+    getInternalDatabaseStatusFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseStatus,
 ) {
     val context = LocalContext.current
 
@@ -54,12 +63,15 @@ fun AppListScreen(
 
                 val hashHex = getHashHexFromPackageInfo(packageInfo)
 
+                val verificationInfo = VerificationInfo(packageInfo.packageName, setOf(hashHex))
+
                 AppItem(
                     name = packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                     packageName = packageInfo.packageName,
                     hash = hashHex,
                     icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
                     onClickAppItem = onClickAppItem,
+                    internalDatabaseStatus = getInternalDatabaseStatusFromVerificationInfo(verificationInfo),
                 )
             }
         }
@@ -72,11 +84,18 @@ fun AppItem(
     packageName: String,
     hash: String,
     icon: Drawable,
-    onClickAppItem: (name: String, packageName: String, hash: String, icon: Drawable) -> Unit,
+    onClickAppItem: (
+        name: String,
+        packageName: String,
+        hash: String,
+        icon: Drawable,
+        internalDatabaseStatus: InternalDatabaseStatus
+    ) -> Unit,
+    internalDatabaseStatus: InternalDatabaseStatus,
 ) {
     ListItem(
         modifier = Modifier.clickable {
-            onClickAppItem(name, packageName, hash, icon)
+            onClickAppItem(name, packageName, hash, icon, internalDatabaseStatus)
         },
         headlineContent = {
             Text(name)
@@ -90,6 +109,24 @@ fun AppItem(
                 null,
                 Modifier.size(50.dp),
             )
+        },
+        trailingContent = {
+            when (internalDatabaseStatus) {
+                InternalDatabaseStatus.NOT_FOUND -> null
+                InternalDatabaseStatus.MATCH -> Icon(
+                    Icons.Filled.Verified,
+                    "Verified successfully with internal database",
+                    Modifier,
+                    SimpleVerificationStatus.SUCCESS.color,
+                )
+
+                InternalDatabaseStatus.NOMATCH -> Icon(
+                    Icons.Filled.Error,
+                    "Verification with internal database NOT successful!",
+                    Modifier,
+                    SimpleVerificationStatus.FAILURE.color,
+                )
+            }
         }
     )
 }
