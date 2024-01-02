@@ -142,4 +142,13 @@ val internalVerificationInfoDatabase = setOf(
             "19:DE:04:E5:D6:84:66:06:9D:30:EC:63:C6:BA:7D:9E:3C:F7:3B:5D:61:CB:4B:37:62:C2:B9:B2:53:EC:BD:03"
         )
     ),
+    VerificationInfo(
+        "com.beemdevelopment.aegis",
+        setOf(
+            // Official
+            "C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23",
+            // F-Droid
+            "09:CF:DE:62:E2:A8:1C:80:50:D3:BE:4C:20:E3:F8:D8:DD:D0:15:31:BE:1B:47:CB:3B:0E:EC:21:3F:64:1F:89"
+        )
+    )
 )
