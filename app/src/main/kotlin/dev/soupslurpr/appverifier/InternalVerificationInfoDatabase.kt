@@ -126,4 +126,13 @@ val internalVerificationInfoDatabase = setOf(
             "DC:C9:43:9E:C1:A6:C6:A8:D0:20:3F:34:23:EE:42:BC:C8:B9:70:62:8E:53:CB:73:A0:39:3F:39:8D:D5:B8:53",
         )
     ),
+    VerificationInfo(
+        "com.x8bit.bitwarden",
+        setOf(
+            // Official
+            "24:E0:6C:04:C2:08:04:8F:19:F1:C9:93:B4:DD:A4:43:0E:A8:B0:6D:B8:37:5E:A0:E3:7B:83:46:96:B9:AC:3A",
+            // F-Droid
+            "DE:6E:C9:14:31:55:79:95:29:7B:F3:E6:5B:C8:03:49:BC:60:3A:04:70:81:60:61:8C:86:BC:99:94:17:1C:90"
+        )
+    ),
 )
