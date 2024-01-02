@@ -50,6 +50,12 @@ class MainActivity : ComponentActivity() {
                         } else {
                             verifyAppViewModel.setInvalidFormat(true)
                         }
+                    } else if (lines[0].contains('"') && lines[1].contains('"')) {
+                        val packageName = lines[0].trim().trim('"')
+                        val hash = lines[1].trim().trim('"')
+
+                        verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(packageName, packageManager)
+                        verifyAppViewModel.verifyFromText("$packageName\n$hash")
                     } else if (lines.size == 2) {
                         val packageName = lines[0].trim()
                         val hash = lines[1].trim()
