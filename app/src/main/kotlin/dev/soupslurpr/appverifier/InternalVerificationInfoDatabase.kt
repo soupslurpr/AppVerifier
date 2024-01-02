@@ -135,4 +135,11 @@ val internalVerificationInfoDatabase = setOf(
             "DE:6E:C9:14:31:55:79:95:29:7B:F3:E6:5B:C8:03:49:BC:60:3A:04:70:81:60:61:8C:86:BC:99:94:17:1C:90"
         )
     ),
+    VerificationInfo(
+        "com.github.lamarios.clipious",
+        setOf(
+            // Official
+            "19:DE:04:E5:D6:84:66:06:9D:30:EC:63:C6:BA:7D:9E:3C:F7:3B:5D:61:CB:4B:37:62:C2:B9:B2:53:EC:BD:03"
+        )
+    ),
 )
