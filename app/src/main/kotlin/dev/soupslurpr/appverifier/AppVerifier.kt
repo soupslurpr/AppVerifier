@@ -120,8 +120,8 @@ fun AppVerifierApp(
                     verifyAppUiState.value.appNotFound.value,
                     { verifyAppViewModel.verifyFromText(it) },
                     verifyAppUiState.value.invalidFormat.value,
+                    { navController.navigateUp() },
                     verifyAppUiState.value.internalDatabaseStatus.value,
-                    { navController.navigateUp() }
                 )
             }
             composable(route = AppVerifierScreens.Settings.name) {
