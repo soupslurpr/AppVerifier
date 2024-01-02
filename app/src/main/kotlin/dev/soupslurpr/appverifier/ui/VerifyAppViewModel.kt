@@ -1,17 +1,21 @@
 package dev.soupslurpr.appverifier.ui
 
+import android.app.Application
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
+import dev.soupslurpr.appverifier.data.VerificationInfo
 import dev.soupslurpr.appverifier.data.VerificationStatus
 import dev.soupslurpr.appverifier.data.VerifyAppUiState
+import dev.soupslurpr.appverifier.internalVerificationInfoDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.security.MessageDigest
 
-class VerifyAppViewModel : ViewModel() {
+class VerifyAppViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      * App verification info
@@ -19,14 +23,16 @@ class VerifyAppViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(VerifyAppUiState())
     val uiState: StateFlow<VerifyAppUiState> = _uiState.asStateFlow()
 
-    fun setAppVerificationInfo(name: String, packageName: String, hash: String) {
+    fun setAppVerificationInfo(
+        name: String,
+        packageName: String,
+        hash: String,
+        internalDatabaseStatus: InternalDatabaseStatus
+    ) {
         _uiState.value.name.value = name
         _uiState.value.packageName.value = packageName
         _uiState.value.hash.value = hash
-    }
-
-    fun clearUiState() {
-        _uiState.value = VerifyAppUiState()
+        _uiState.value.internalDatabaseStatus.value = internalDatabaseStatus
     }
 
     fun setAppIcon(icon: Drawable) {
@@ -161,6 +167,7 @@ class VerifyAppViewModel : ViewModel() {
                     packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                     packageInfo.packageName,
                     hashHex,
+                    getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, setOf(hashHex)))
                 )
                 setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
             } else {
@@ -175,5 +182,33 @@ class VerifyAppViewModel : ViewModel() {
 
     fun setInvalidFormat(b: Boolean) {
         _uiState.value.invalidFormat.value = b
+    }
+
+    fun getInternalDatabaseStatusFromVerificationInfo(verificationInfo: VerificationInfo): InternalDatabaseStatus {
+        return internalVerificationInfoDatabase.run {
+            return@run try {
+                val matchedPackageNameVerificationInfo = this.first {
+                    it.packageName == verificationInfo.packageName
+                }
+
+                return@run try {
+                    if (verificationInfo.hashes.first {
+                            matchedPackageNameVerificationInfo.hashes.contains(it)
+                        }.isNotEmpty()) {
+                        InternalDatabaseStatus.MATCH
+                    } else {
+                        InternalDatabaseStatus.NOMATCH
+                    }
+                } catch (e: NoSuchElementException) {
+                    InternalDatabaseStatus.NOMATCH
+                }
+            } catch (e: NoSuchElementException) {
+                InternalDatabaseStatus.NOT_FOUND
+            }
+        }
+    }
+
+    fun clearUiState() {
+        _uiState.value = VerifyAppUiState()
     }
 }

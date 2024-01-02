@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.preferences.PreferencesViewModel
 import dev.soupslurpr.appverifier.ui.AppListScreen
 import dev.soupslurpr.appverifier.ui.CreditsScreen
@@ -99,13 +100,14 @@ fun AppVerifierApp(
             }
             composable(route = AppVerifierScreens.AppList.name) {
                 AppListScreen(
-                    { name: String, packageName: String, hash: String, icon: Drawable ->
-                        verifyAppViewModel.setAppVerificationInfo(name, packageName, hash)
+                    { name: String, packageName: String, hash: String, icon: Drawable, internalDatabaseStatus: InternalDatabaseStatus ->
+                        verifyAppViewModel.setAppVerificationInfo(name, packageName, hash, internalDatabaseStatus)
                         verifyAppViewModel.setAppIcon(icon)
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
                     { verifyAppViewModel.clearUiState() },
-                    { verifyAppViewModel.getHashHexFromPackageInfo(it) }
+                    { verifyAppViewModel.getHashHexFromPackageInfo(it) },
+                    { verifyAppViewModel.getInternalDatabaseStatusFromVerificationInfo(it) }
                 )
             }
             composable(route = AppVerifierScreens.VerifyApp.name) {
@@ -118,6 +120,7 @@ fun AppVerifierApp(
                     verifyAppUiState.value.appNotFound.value,
                     { verifyAppViewModel.verifyFromText(it) },
                     verifyAppUiState.value.invalidFormat.value,
+                    verifyAppUiState.value.internalDatabaseStatus.value,
                 )
             }
             composable(route = AppVerifierScreens.Settings.name) {
