@@ -1,4 +1,5 @@
-A copy of the license for the verified material symbol used in the app icon is provided below.
+A copy of the license for the verified material symbol used in the app icon
+and material symbols used in the app is provided below.
 
                                  Apache License
                            Version 2.0, January 2004

@@ -1144,7 +1144,7 @@ fun CreditsScreen() {
         item {
             CreditsItem(
                 dependencyName = "Material Symbols",
-                dependencyPackageName = "",
+                dependencyPackageName = "androidx.compose.material:material-icons-extended",
                 dependencyLicense = APACHE2LICENSE,
             )
         }
