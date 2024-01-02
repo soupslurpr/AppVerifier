@@ -150,5 +150,12 @@ val internalVerificationInfoDatabase = setOf(
             // F-Droid
             "09:CF:DE:62:E2:A8:1C:80:50:D3:BE:4C:20:E3:F8:D8:DD:D0:15:31:BE:1B:47:CB:3B:0E:EC:21:3F:64:1F:89"
         )
-    )
+    ),
+    VerificationInfo(
+        "dev.imranr.obtainium",
+        setOf(
+            // Official
+            "B3:53:60:1F:6A:1D:5F:D6:60:3A:E2:F5:0B:E8:0C:F3:01:36:7B:86:B6:AB:8B:1F:66:24:3D:A9:6C:D5:73:62",
+        )
+    ),
 )
