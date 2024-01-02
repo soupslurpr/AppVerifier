@@ -19,6 +19,6 @@ local.properties
 /app/release/output-metadata.json
 /app/release/app-release.apk
 /app/release/AppVerifier-app-release.apks
-/app/release/bundletool-all-1.15.5.jar
 /app/release/apk/release/app-release.apk
 /app/release/apk/release/output-metadata.json
+/app/release/bundletool-all-1.15.6.jar
