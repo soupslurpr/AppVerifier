@@ -79,5 +79,14 @@ val internalVerificationInfoDatabase = setOf(
         setOf(
             "6A:A8:0F:DF:4A:8C:C1:37:37:CF:B4:34:FC:0C:DE:48:6F:09:CF:8F:CD:A2:1A:67:BE:A5:EE:1C:A2:70:08:86"
         )
-    )
+    ),
+    VerificationInfo(
+        "org.oxycblt.auxio",
+        setOf(
+            // Official
+            "DA:84:E2:53:4C:1A:CC:0B:6E:4F:57:DE:DB:64:0D:4D:C8:93:F5:BF:41:37:A2:E1:EC:BA:87:AD:F8:25:BA:44",
+            // F-Droid
+            "65:B3:E6:2A:2B:57:BF:73:23:5B:E6:D2:D4:2A:E5:46:FC:B0:2F:D1:7F:62:CD:14:50:0D:1C:41:2A:28:59:72"
+        )
+    ),
 )
