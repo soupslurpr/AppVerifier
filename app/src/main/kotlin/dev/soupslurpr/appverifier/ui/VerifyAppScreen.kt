@@ -37,9 +37,11 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.soupslurpr.appverifier.BuildConfig
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationStatus
@@ -129,6 +131,15 @@ fun VerifyAppScreen(
                 text = hashes.hashes.joinToString("\n"),
                 fontFamily = FontFamily.Monospace
             )
+            if (BuildConfig.DEBUG) {
+                Text(
+                    "hasMultipleSigners: "
+                )
+                Text(
+                    hashes.hasMultipleSigners.toString(),
+                    fontWeight = FontWeight.Black
+                )
+            }
             Button(onClick = {
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
