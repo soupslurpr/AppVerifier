@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationStatus
 
@@ -48,11 +49,10 @@ fun VerifyAppScreen(
     icon: Drawable?,
     name: String,
     packageName: String,
-    hash: String,
+    hashes: Hashes,
     verificationStatus: VerificationStatus,
     appNotFound: Boolean,
     onVerifyFromClipboard: (String) -> Unit,
-    invalidFormat: Boolean,
     onLaunchedEffectHashEmpty: () -> Unit,
     internalDatabaseStatus: InternalDatabaseStatus,
 ) {
@@ -67,7 +67,7 @@ fun VerifyAppScreen(
     var showMoreInfoAboutInternalDatabaseStatusDialog by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        if (hash.isEmpty()) {
+        if (hashes.hashes.isEmpty()) {
             onLaunchedEffectHashEmpty()
         }
     }
@@ -81,16 +81,16 @@ fun VerifyAppScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (appNotFound) {
-            Text("APP NOT INSTALLED")
+            Text("APP NOT INSTALLED OR INVALID FORMAT")
             Text(
-                "The package name provided does not correspond to any installed user app." +
+                "The package name doesn't seem to correspond to any installed user app." +
                         "\nPlease note system apps are not included in the search."
             )
-        } else if (invalidFormat) {
-            Text("INVALID FORMAT")
             Text(
-                "The provided text doesn't seem to be in the correct format. Please make sure it is like the " +
-                        "following:\n\ncom.example.app\n96:C0:2C:55:75:5C:17:1C:68:13:70:29:3B:37:11:2B:4A:5D:F7:B9:82:C2:C5:58:05:4C:45:51:AD:F5:50:DC"
+                "Also please make sure the provided text is in the correct format, like the " +
+                        "following:\n\ncom.example" +
+                        ".app\n96:C0:2C:55:75:5C:17:1C:68:13:70:29:3B:37:11:2B:4A:5D:F7:B9:82:C2:C5:58:05:4C:45:51:AD:F5:50:DC" +
+                        "\n\nThere may be multiple hashes, which is normal."
             )
         } else {
             Text(
@@ -126,13 +126,13 @@ fun VerifyAppScreen(
             )
             Text(text = packageName)
             Text(
-                text = hash,
+                text = hashes.hashes.joinToString("\n"),
                 fontFamily = FontFamily.Monospace
             )
             Button(onClick = {
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "$packageName\n$hash")
+                    putExtra(Intent.EXTRA_TEXT, "$packageName\n${hashes.hashes.joinToString("\n")}")
                     type = "plain/text"
                 }
 

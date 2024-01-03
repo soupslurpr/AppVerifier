@@ -36,35 +36,16 @@ class MainActivity : ComponentActivity() {
                 (intent.action == Intent.ACTION_SEND)
 
             if (isActionSend) {
-                val lines = intent.getStringExtra(Intent.EXTRA_TEXT)?.trim()?.lines()
+                val text = intent.getStringExtra(Intent.EXTRA_TEXT)
 
-                if (lines != null) {
-                    if (lines[0].contains(' ')) {
-                        val split = lines[0].trim('"').split(' ')
-                        if (split.size == 2) {
-                            val packageName = split[0].trim()
-                            val hash = split[1].trim()
+                if (text != null) {
+                    val verificationInfoText = verifyAppViewModel.getVerificationInfoText(text)
 
-                            verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(packageName, packageManager)
-                            verifyAppViewModel.verifyFromText("$packageName\n$hash")
-                        } else {
-                            verifyAppViewModel.setInvalidFormat(true)
-                        }
-                    } else if (lines[0].contains('"') && lines[1].contains('"')) {
-                        val packageName = lines[0].trim().trim('"')
-                        val hash = lines[1].trim().trim('"')
-
-                        verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(packageName, packageManager)
-                        verifyAppViewModel.verifyFromText("$packageName\n$hash")
-                    } else if (lines.size == 2) {
-                        val packageName = lines[0].trim()
-                        val hash = lines[1].trim()
-
-                        verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(packageName, packageManager)
-                        verifyAppViewModel.verifyFromText("$packageName\n$hash")
-                    } else {
-                        verifyAppViewModel.setInvalidFormat(true)
-                    }
+                    verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(
+                        verificationInfoText.lines()[0],
+                        packageManager
+                    )
+                    verifyAppViewModel.verifyFromText(verificationInfoText)
                 }
             }
 

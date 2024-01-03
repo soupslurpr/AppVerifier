@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
@@ -29,12 +30,12 @@ fun AppListScreen(
     onClickAppItem: (
         name: String,
         packageName: String,
-        hash: String,
+        hash: Hashes,
         icon: Drawable,
         internalDatabusStatus: InternalDatabaseStatus,
     ) -> Unit,
     onLaunchedEffect: () -> Unit,
-    getHashHexFromPackageInfo: (packageInfo: PackageInfo) -> String,
+    getHashesFromPackageInfo: (packageInfo: PackageInfo) -> Hashes,
     getInternalDatabaseStatusFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseStatus,
 ) {
     val context = LocalContext.current
@@ -61,14 +62,14 @@ fun AppListScreen(
             if (it.packageName != context.packageName) {
                 val packageInfo = packageManager.getPackageInfo(it.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
 
-                val hashHex = getHashHexFromPackageInfo(packageInfo)
+                val hashes = getHashesFromPackageInfo(packageInfo)
 
-                val verificationInfo = VerificationInfo(packageInfo.packageName, setOf(hashHex))
+                val verificationInfo = VerificationInfo(packageInfo.packageName, hashes)
 
                 AppItem(
                     name = packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                     packageName = packageInfo.packageName,
-                    hash = hashHex,
+                    hashes = hashes,
                     icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
                     onClickAppItem = onClickAppItem,
                     internalDatabaseStatus = getInternalDatabaseStatusFromVerificationInfo(verificationInfo),
@@ -82,12 +83,12 @@ fun AppListScreen(
 fun AppItem(
     name: String,
     packageName: String,
-    hash: String,
+    hashes: Hashes,
     icon: Drawable,
     onClickAppItem: (
         name: String,
         packageName: String,
-        hash: String,
+        hash: Hashes,
         icon: Drawable,
         internalDatabaseStatus: InternalDatabaseStatus
     ) -> Unit,
@@ -95,7 +96,7 @@ fun AppItem(
 ) {
     ListItem(
         modifier = Modifier.clickable {
-            onClickAppItem(name, packageName, hash, icon, internalDatabaseStatus)
+            onClickAppItem(name, packageName, hashes, icon, internalDatabaseStatus)
         },
         headlineContent = {
             Text(name)

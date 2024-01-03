@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.preferences.PreferencesViewModel
 import dev.soupslurpr.appverifier.ui.AppListScreen
@@ -100,13 +101,14 @@ fun AppVerifierApp(
             }
             composable(route = AppVerifierScreens.AppList.name) {
                 AppListScreen(
-                    { name: String, packageName: String, hash: String, icon: Drawable, internalDatabaseStatus: InternalDatabaseStatus ->
-                        verifyAppViewModel.setAppVerificationInfo(name, packageName, hash, internalDatabaseStatus)
+                    { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseStatus:
+                    InternalDatabaseStatus ->
+                        verifyAppViewModel.setAppVerificationInfo(name, packageName, hashes, internalDatabaseStatus)
                         verifyAppViewModel.setAppIcon(icon)
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
                     { verifyAppViewModel.clearUiState() },
-                    { verifyAppViewModel.getHashHexFromPackageInfo(it) },
+                    { verifyAppViewModel.getHashesFromPackageInfo(it) },
                     { verifyAppViewModel.getInternalDatabaseStatusFromVerificationInfo(it) }
                 )
             }
@@ -115,11 +117,10 @@ fun AppVerifierApp(
                     verifyAppUiState.value.icon.value,
                     verifyAppUiState.value.name.value,
                     verifyAppUiState.value.packageName.value,
-                    verifyAppUiState.value.hash.value,
+                    verifyAppUiState.value.hashes.value,
                     verifyAppUiState.value.verificationStatus.value,
-                    verifyAppUiState.value.appNotFound.value,
+                    verifyAppUiState.value.appNotFoundOrInvalidFormat.value,
                     { verifyAppViewModel.verifyFromText(it) },
-                    verifyAppUiState.value.invalidFormat.value,
                     { navController.navigateUp() },
                     verifyAppUiState.value.internalDatabaseStatus.value,
                 )
