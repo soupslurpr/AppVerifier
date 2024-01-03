@@ -337,4 +337,16 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "cloud.pablos.overload",
+        listOf(
+            // Codeberg/Google Play Store/F-Droid
+            Hashes(
+                listOf(
+                    "BD:39:CA:B0:CB:22:4D:4A:E0:97:95:11:F3:24:1E:D8:85:8D:1A:F8:69:37:B7:C6:39:7B:E4:BA:7E:C1:A2:B4"
+                ),
+                false
+            )
+        )
+    )
 )
