@@ -361,5 +361,18 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.google.android.youtube",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "3D:7A:12:23:01:9A:A3:9D:9E:A0:E3:43:6A:B7:C0:89:6B:FB:4F:B6:79:F4:DE:5F:E7:C2:3F:32:6C:8F:99:4A",
+                    "5A:AD:2B:EE:6D:B9:5D:17:E0:5A:08:D7:D1:E6:4C:10:A1:51:18:79:15:44:83:91:6B:6A:E6:C7:FD:9C:B0:C6",
+                ),
+                false
+            )
+        )
     )
 )
