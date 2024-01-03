@@ -348,5 +348,18 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.google.android.apps.maps",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83",
+                    "7C:E8:3C:1B:71:F3:D5:72:FE:D0:4C:8D:40:C5:CB:10:FF:75:E6:D8:7D:9D:F6:FB:D5:3F:04:68:C2:90:50:53"
+                ),
+                false
+            )
+        )
     )
 )
