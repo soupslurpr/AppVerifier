@@ -374,5 +374,24 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         )
+    ),
+    InternalDatabaseVerificationInfo(
+        "eu.faircode.email",
+        listOf(
+            // GitHub/Google Play Store
+            Hashes(
+                listOf(
+                    "E0:20:67:24:9F:5A:35:0E:0E:C7:03:FE:9D:F4:DD:68:2E:02:91:A0:9F:0C:2E:04:10:50:BB:E7:C0:64:F5:C9",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "B9:D0:41:58:2A:F4:6E:E3:9B:BA:0F:2F:18:29:D9:48:AE:21:EC:F7:FF:A6:BA:12:03:85:D2:45:EB:B7:88:AE",
+                ),
+                false
+            )
+        )
     )
 )
