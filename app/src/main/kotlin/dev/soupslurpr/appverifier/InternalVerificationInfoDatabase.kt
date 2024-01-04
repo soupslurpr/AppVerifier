@@ -558,6 +558,9 @@ val internalVerificationInfoDatabase = setOf(
         listOf(
             Hashes(
                 listOf(
+                                        
+                    // rotation key likely missing...
+                    
                     // Google Play Store
                     "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83"
                 ),
@@ -639,6 +642,9 @@ val internalVerificationInfoDatabase = setOf(
         listOf(
             Hashes(
                 listOf(
+                                        
+                    // rotation key likely missing...
+                    
                     // Google Play Store
                     "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83"
                 ),
@@ -651,6 +657,9 @@ val internalVerificationInfoDatabase = setOf(
         listOf(
             Hashes(
                 listOf(
+                    
+                    // rotation key likely missing...
+                    
                     // Google Play Store
                     "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83"
                 ),
@@ -692,9 +701,29 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "fr.emersion.goguma",
         listOf(
+            // Goguma F-Droid 
             Hashes(
                 listOf(
                     "2D:39:E6:25:CD:51:45:F5:40:97:50:CD:D1:B6:38:A6:0E:82:67:AE:92:35:BF:36:2B:08:21:2B:DE:2B:A6:25"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "BD:43:1B:EE:F8:37:80:00:75:68:BF:C0:3C:32:EC:96:10:1A:D6:DD:6A:8B:8E:5A:05:24:5E:C4:D9:79:4B:BE"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "fr.emersion.goguma.play",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "CE:58:F4:DA:7C:70:5B:FA:A2:E5:D9:CF:D7:5C:63:07:C9:A6:AE:AA:D0:09:CF:38:97:15:8A:3F:E4:96:30:F6"
                 ),
                 false
             )
@@ -703,9 +732,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.nutomic.syncthingandroid",
         listOf(
+            // Google Play Store and GitHub
             Hashes(
                 listOf(
                     "03:E7:17:F5:B7:50:C9:AD:44:BC:06:5E:7E:52:50:81:77:6E:73:8B:4F:91:74:F7:D0:55:35:5A:BC:5A:56:4B"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "BA:33:35:6A:09:ED:07:FA:5C:4B:17:68:F7:09:CF:5A:E7:D1:13:FD:B2:E8:93:FC:7A:E2:01:DB:30:0D:45:9D"
                 ),
                 false
             )
@@ -714,9 +751,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.nononsenseapps.feeder",
         listOf(
+            // Google Play Store and GitHub
             Hashes(
                 listOf(
                     "C5:EE:FF:22:48:81:35:FF:C2:58:3C:3A:43:B0:53:A1:61:CA:86:98:62:96:1A:B8:53:4F:44:C7:5F:D5:7D:97"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "A8:0D:F8:17:0D:6C:89:1E:C9:A0:55:21:1D:F6:40:A8:55:D4:51:05:23:07:BF:29:CD:CE:3F:EF:9A:FA:94:FD"
                 ),
                 false
             )
@@ -725,9 +770,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.github.libretube",
         listOf(
+            // GitHub and IzzyOnDroid F-Droid
             Hashes(
                 listOf(
                     "72:0C:4F:CE:CF:73:8A:41:D0:33:B9:FB:E0:BE:F9:7A:C2:32:03:0C:E9:3E:27:4D:2E:0A:E2:32:E4:4E:EA:CE"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "A8:66:31:E8:CC:55:58:38:E8:DF:C2:90:19:FB:0F:7D:AC:33:3E:F1:CD:A1:13:9C:42:4D:1A:08:D6:8A:03:0B",
                 ),
                 false
             )
@@ -736,6 +789,14 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.github.muellerma.coffee",
         listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "90:43:1B:46:5B:44:03:31:14:5C:76:9C:40:D8:72:B0:79:BE:15:40:50:88:22:CD:FC:3A:2A:C3:97:D4:6C:AE"
+                ),
+                false
+            ),
+            // F-Droid
             Hashes(
                 listOf(
                     "70:B1:60:C0:F6:57:4E:BE:9F:FE:B0:F3:AE:93:48:71:41:52:22:4A:BE:7D:DC:48:1C:CB:84:3E:84:F6:99:12"
@@ -747,9 +808,24 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.unciv.app",
         listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "7D:6E:6B:EA:76:81:61:C3:D8:DA:8B:3F:B0:0D:EF:53:77:EF:FE:65:DC:72:68:48:2F:8F:77:9B:B4:FC:6E:2E"
+                ),
+                false
+            ),
+            // Google Play Store
             Hashes(
                 listOf(
                     "B9:39:32:67:BA:C3:37:79:49:23:68:EF:24:19:D5:8E:94:C5:7C:D2:5F:D1:F0:A2:4F:DD:90:09:98:66:0C:0F"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "CD:16:E3:86:46:9F:23:98:8F:C9:CD:EC:A0:1B:FE:FB:D0:DE:AE:D1:3A:49:07:BC:E7:6E:91:AC:C9:66:2C:68"
                 ),
                 false
             )
@@ -758,6 +834,14 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.kunzisoft.keepass.free",
         listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "7D:55:B8:AF:21:03:81:AA:BF:96:0F:07:E1:7C:F7:85:7B:6D:2A:64:2C:A2:DA:6B:F0:BD:F1:B2:00:36:2F:04"
+                ),
+                false
+            ),
+            // Google Play Store
             Hashes(
                 listOf(
                     "46:D5:15:D5:F4:15:72:42:0C:EF:30:C0:7B:52:6B:F2:C4:0F:C4:A1:13:EF:19:1F:4F:9D:F9:01:2E:09:1F:35"
@@ -767,8 +851,28 @@ val internalVerificationInfoDatabase = setOf(
         )
     ),
     InternalDatabaseVerificationInfo(
+        "com.kunzisoft.keepass.libre",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "7D:55:B8:AF:21:03:81:AA:BF:96:0F:07:E1:7C:F7:85:7B:6D:2A:64:2C:A2:DA:6B:F0:BD:F1:B2:00:36:2F:04"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "C8:10:AA:B7:EF:A4:D5:AD:3F:C2:94:1F:DF:5F:99:B8:8A:3B:73:F8:62:19:71:56:27:ED:B4:DA:BA:C5:41:A4"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
         "org.telegram.messenger",
         listOf(
+            // Google Play Store and Official Website
             Hashes(
                 listOf(
                     "49:C1:52:25:48:EB:AC:D4:6C:E3:22:B6:FD:47:F6:09:2B:B7:45:D0:F8:80:82:14:5C:AF:35:E1:4D:CC:38:E1"
@@ -780,6 +884,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.duolingo",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "12:33:FF:6D:E4:C7:0E:F4:D7:DE:AE:54:AF:15:B1:67:FC:7C:FD:25:39:51:7B:D2:17:58:70:F3:CB:77:17:31"
@@ -791,6 +896,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.sovworks.edslite",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "77:92:47:36:BE:E1:ED:C6:D4:9A:7F:A3:6D:5F:1E:1C:43:31:EF:E8:08:3B:4B:DB:0A:8C:04:BA:B1:E9:3E:AA"
@@ -802,6 +908,14 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "me.hackerchick.catima",
         listOf(
+            // GitHub and IzzyOnDroid F-Droid
+            Hashes(
+                listOf(
+                    "D4:05:CD:69:ED:E4:C2:20:74:C3:28:FB:82:56:89:A8:4A:B3:FC:A4:B3:FD:F0:B6:CC:13:33:AF:62:C6:7E:B3"
+                ),
+                false
+            ),
+            // F-Droid
             Hashes(
                 listOf(
                     "62:86:4D:B7:87:CC:31:92:8D:C2:C1:14:67:3C:DB:B0:17:BE:AB:B1:3B:A6:DF:6A:E5:25:6E:73:8B:B9:53:AE"
@@ -813,9 +927,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.github.olga_yakovleva.rhvoice.android",
         listOf(
+            // Official Website
             Hashes(
                 listOf(
                     "ED:6B:F5:A8:DA:10:F1:DF:B1:03:84:F3:9B:D5:85:9C:06:61:7C:9B:F3:5E:24:B3:86:90:2E:50:92:CB:09:EA"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "10:79:02:73:B7:C5:68:B3:C3:11:35:4D:47:3D:4B:83:B4:82:07:12:E1:F5:95:E3:24:C4:DD:B9:67:2B:D2:3A"
                 ),
                 false
             )
@@ -824,17 +946,38 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.kylecorry.trail_sense",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "8A:0A:C4:74:32:1E:FD:27:8E:E1:05:BF:35:F6:7A:26:4B:94:3F:C4:D0:38:71:A0:1C:95:71:7A:D5:24:A2:62"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "AF:A3:19:DC:E2:2C:6A:8F:B3:E4:D8:52:A2:C0:DF:6C:07:CF:99:5D:AB:2F:78:33:1E:4B:C5:B5:DD:48:BF:AF"
                 ),
                 false
             )
         )
     ),
     InternalDatabaseVerificationInfo(
+        "com.kylecorry.trail_sense.dev",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "D3:B7:CB:BC:63:3F:7C:1B:E2:CA:A2:F7:5F:B0:72:EE:9B:40:FD:10:FA:AF:96:42:69:2B:27:C4:AF:5E:C4:A7"
+                ),
+                false
+            ),
+        )
+    ),
+    InternalDatabaseVerificationInfo(
         "com.collabora.libreoffice",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "57:32:58:C8:4E:14:9B:5F:4D:92:99:E7:43:4B:2B:69:A8:41:03:72:92:1D:4A:E5:86:BA:91:EC:76:78:92:CC"
@@ -846,6 +989,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "de.dennisguse.opentracks",
         listOf(
+            // F-Droid
             Hashes(
                 listOf(
                     "47:74:E9:91:7C:E0:5A:20:71:B5:C3:39:E8:E6:FA:A8:01:BF:C9:1B:9D:CC:C4:80:45:58:CF:8A:E6:55:5C:74"
@@ -855,8 +999,21 @@ val internalVerificationInfoDatabase = setOf(
         )
     ),
     InternalDatabaseVerificationInfo(
+        "de.dennisguse.opentracks.nightly",
+        listOf(
+            // StorchPs F-Droid
+            Hashes(
+                listOf(
+                    "71:C1:27:B4:2F:EF:A3:37:2E:ED:95:44:AA:25:97:C8:FA:C4:E1:A4:79:17:1B:E3:BC:B4:81:DE:2D:95:AC:D2"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
         "org.breezyweather",
         listOf(
+            // GitHub and IzzyOnDroid F-Droid and Breezy Weather F-Droid
             Hashes(
                 listOf(
                     "29:D4:35:F7:0A:A9:AE:C3:C1:FA:FF:7F:7F:FA:6E:15:78:50:88:D8:7F:06:EC:FC:AB:9C:3C:C6:2D:C2:69:D8"
@@ -868,9 +1025,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "org.videolan.vlc",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "C8:76:8D:2C:EA:0C:4B:62:2E:41:9B:4B:47:15:98:19:46:82:1E:4E:BC:03:5F:B4:17:76:CA:D3:95:A7:F6:8E"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "80:53:5B:E6:1E:ED:B9:A0:3B:04:76:A6:F4:93:D4:96:C3:49:87:70:40:43:39:EA:7A:80:00:F5:E6:1D:22:C0"
                 ),
                 false
             )
@@ -879,9 +1044,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.fsck.k9",
         listOf(
+            // Google Play Store and GitHub
             Hashes(
                 listOf(
                     "55:C8:A5:23:B9:73:35:F5:BF:60:DF:E8:A9:F3:E1:DD:E7:44:51:6D:93:57:E8:0A:92:5B:7B:22:E4:F5:55:24"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "C4:30:66:5E:36:62:25:3B:20:78:DC:DA:35:0C:2C:6C:E4:4D:91:5A:3D:8A:14:7B:63:CE:D6:19:BB:9E:85:76"
                 ),
                 false
             )
