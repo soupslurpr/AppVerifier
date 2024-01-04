@@ -444,10 +444,6 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
-    
-    // ignore the above, only below should be applied
-    
-    // ignore the above, only below should be applied
     InternalDatabaseVerificationInfo(
         "org.futo.voiceinput",
         listOf(
@@ -481,8 +477,6 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // F-Droid
                     "C7:5A:BE:78:59:36:43:AE:7C:AC:52:73:27:CD:21:93:48:2D:B0:67:40:4A:88:B8:C1:3F:7A:07:01:94:61:87"
-                    // Google Play Store
-                    // ...
                 ),
                 false
             )
