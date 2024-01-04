@@ -412,5 +412,24 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         ),
+    ),
+    InternalDatabaseVerificationInfo(
+        "de.tutao.tutanota",
+        listOf(
+            // Google Play Store/GitHub
+            Hashes(
+                listOf(
+                    "B4:54:C1:76:F9:0A:1E:A0:57:29:87:D3:82:72:3B:5C:D7:4F:94:2A:79:37:A2:A0:B9:9A:36:80:69:14:88:50",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "FC:19:32:E0:84:64:AE:FC:AE:82:59:7D:C0:FC:9D:04:C0:8B:24:AA:09:D1:F9:50:DF:20:EA:81:23:4F:30:CB",
+                ),
+                false
+            )
+        )
     )
 )
