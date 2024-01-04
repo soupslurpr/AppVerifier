@@ -1063,6 +1063,14 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.flauschcode.broccoli",
         listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "BF:A3:F7:DA:10:9F:7D:33:07:10:6E:C4:86:28:15:DF:82:E8:A4:EB:CA:74:0D:38:45:ED:57:97:50:11:2A:F6"
+                ),
+                false
+            ),
+            // F-Droid
             Hashes(
                 listOf(
                     "73:8E:4F:5A:7C:A8:28:E8:00:C0:22:AB:44:AB:51:72:8E:66:00:1E:61:D3:50:E2:7C:E7:D9:DF:CF:0F:6B:99"
@@ -1074,9 +1082,24 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "app.organicmaps",
         listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "B9:C7:AE:79:A5:A9:02:70:DF:08:A1:32:E5:36:B9:C6:66:F5:BE:F1:F5:9B:30:4F:CE:CF:86:87:86:5E:4B:5B"
+                ),
+                false
+            ),
+            // Google Play Store
             Hashes(
                 listOf(
                     "9D:5A:95:65:8F:EC:4E:A2:FD:C1:E0:A6:96:E3:69:E5:B9:38:D2:E3:0A:28:ED:FF:50:AE:99:BD:A2:7E:8F:A3"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "E2:16:FC:38:6C:32:7E:C8:8D:05:60:26:F1:DE:A2:7B:E2:BC:3F:9D:7E:E9:56:E4:36:1C:4B:64:EC:45:9F:E9"
                 ),
                 false
             )
@@ -1085,17 +1108,26 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.noahjutz.gymroutines",
         listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "93:84:20:5F:EF:78:98:F2:E8:F8:A5:43:5F:B1:7D:E9:7E:4A:92:5D:78:B0:72:99:15:3D:05:D2:A0:7A:8B:52"
+                ),
+                false
+            ),
+            // F-Droid
             Hashes(
                 listOf(
                     "C5:0C:37:9B:64:63:43:CF:83:85:F4:21:E9:DE:27:BC:BA:DB:29:05:4F:81:67:52:52:37:B7:AB:F4:A2:8E:31"
                 ),
                 false
-            )
+            )       
         )
     ),
     InternalDatabaseVerificationInfo(
         "com.instagram.lite",
         listOf(
+            // Google Play Store
             Hashes(
                 listOf(
                     "5F:3E:50:F4:35:58:3C:9A:E6:26:30:2A:71:F7:34:00:44:08:7A:7E:2C:60:AD:AC:FC:25:42:05:A9:93:E3:05"
@@ -1107,6 +1139,14 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.apps.adrcotfas.goodtime",
         listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "F9:56:D7:C5:FD:49:90:AA:43:D4:F2:FF:25:4C:70:F6:3D:6E:38:23:68:4D:35:A7:50:32:80:A5:97:48:B0:7C"
+                ),
+                false
+            ),
+            // F-Droid
             Hashes(
                 listOf(
                     "5F:72:28:01:44:59:51:76:B6:64:F4:8D:0F:80:E4:8B:6F:30:0B:F7:60:98:8C:E6:60:79:B1:88:44:F2:4E:90"
