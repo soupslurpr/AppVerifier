@@ -489,15 +489,15 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // GitHub
                     "AA:E0:BE:2A:65:90:40:3E:1A:E3:FD:25:DC:AB:67:8E:73:F8:4A:50:C8:CA:4E:B5:72:7E:BB:B7:F7:6B:83:C2",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
                     // Google Play Store
                     "F8:D9:23:A7:77:53:B2:93:13:11:25:36:84:69:D9:54:B6:5B:CC:75:C4:BD:C7:FB:8B:BA:30:20:46:1B:57:47",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -515,15 +515,15 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // GitHub
                     "DC:28:10:10:FD:AC:57:C7:C4:D3:9C:74:CB:8C:8B:2F:CC:A9:42:8D:16:4E:43:8F:71:57:B5:E2:06:6C:11:A3",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
                     // Google Play Store
                     "92:83:2A:E7:79:56:ED:9A:FC:E3:DB:0A:DE:44:AB:88:DD:02:BE:84:DE:9A:F7:C3:3B:94:98:29:EB:EE:4C:74",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -541,8 +541,8 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // Google Play Store and GitHub
                     "57:D1:06:D0:CF:A8:76:34:42:B3:64:5E:F2:74:1C:38:BB:82:0B:D5:6F:D4:61:2B:F4:0A:23:B6:D9:98:BE:5E",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -584,8 +584,8 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // GitHub
                     "B7:A3:48:D9:01:70:D3:5F:05:6A:A1:C9:9B:49:08:7F:17:52:56:0A:28:AF:67:56:B1:7E:E1:12:C4:CA:1D:89",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -603,8 +603,8 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // Official Website and GitLab
                     "4C:62:61:57:AD:02:BD:A3:40:1A:72:63:55:5F:68:A7:96:63:FC:3E:13:A4:D4:36:9A:12:57:09:41:AA:28:0F",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -622,8 +622,8 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // GitHub
                     "E9:48:6A:3C:94:F5:1F:63:97:62:0B:04:AE:41:BD:68:26:DB:B4:D1:11:C4:98:6A:39:63:1A:44:65:C2:18:C2",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
@@ -665,8 +665,8 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // Google Play Store
                     "F9:A2:D8:D8:94:FA:FE:A1:4C:F6:05:C4:D7:22:AF:D0:49:4D:69:41:1F:60:6A:AA:0B:B1:F2:85:E7:A9:A6:60",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
