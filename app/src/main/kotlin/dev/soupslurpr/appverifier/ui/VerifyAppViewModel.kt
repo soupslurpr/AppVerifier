@@ -79,25 +79,29 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
     }
     private fun parseTextToVerificationStatus(text: String): VerificationStatus {
         fun parseVerificationInfoTextToVerificationStatus(verificationInfoText: String): VerificationStatus {
-            if (
-                uiState.value.hashes.value.hashes.contains(verificationInfoText.lines()[0])
-                || (verificationInfoText.lines()[0].trim().iterator().run {
-                    var convertedHash = ""
-                    this.withIndex().forEach {
-                        convertedHash += it.value
-                        if (it.index % 2 != 0 && (it.index != verificationInfoText.lines()[0].trim().length.dec())) {
-                            convertedHash += ":"
+            if (!uiState.value.hashes.value.hasMultipleSigners) {
+                if (
+                    uiState.value.hashes.value.hashes.contains(verificationInfoText.lines()[0])
+                    || (verificationInfoText.lines()[0].trim().iterator().run {
+                        var convertedHash = ""
+                        this.withIndex().forEach {
+                            convertedHash += it.value
+                            if (it.index % 2 != 0 && (it.index != verificationInfoText.lines()[0].trim().length.dec())) {
+                                convertedHash += ":"
+                            }
                         }
-                    }
-                    uiState.value.hashes.value.hashes.contains(convertedHash.uppercase())
-                })
-                || uiState.value.hashes.value.hashes.contains(
-                    verificationInfoText.lines()[0].trim() + ":" + verificationInfoText.lines()[1].trim()
-                )
-            ) {
+                        uiState.value.hashes.value.hashes.contains(convertedHash.uppercase())
+                    })
+                    || uiState.value.hashes.value.hashes.contains(
+                        verificationInfoText.lines()[0].trim() + ":" + verificationInfoText.lines()[1].trim()
+                    )
+                ) {
+                    return VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
+                } else if (verificationInfoText.lines()[0].length == 95) {
+                    return VerificationStatus.PKG_NOT_GIVEN_AND_SIG_HASH_NOMATCH
+                }
+            } else if (uiState.value.hashes.value.hashes == verificationInfoText.lines()) {
                 return VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
-            } else if (verificationInfoText.lines()[0].length == 95) {
-                return VerificationStatus.PKG_NOT_GIVEN_AND_SIG_HASH_NOMATCH
             }
 
             val isPackageNameMatch = verificationInfoText.lines()[0] == uiState.value.packageName.value
