@@ -899,6 +899,13 @@ val internalVerificationInfoDatabase = setOf(
             // Google Play Store
             Hashes(
                 listOf(
+                    "EF:3B:6D:4C:3E:6A:6E:CD:31:3F:8F:F5:04:BA:01:60:06:DE:AC:D4:79:65:01:56:D2:1B:11:AF:20:29:69:26"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
                     "77:92:47:36:BE:E1:ED:C6:D4:9A:7F:A3:6D:5F:1E:1C:43:31:EF:E8:08:3B:4B:DB:0A:8C:04:BA:B1:E9:3E:AA"
                 ),
                 false
