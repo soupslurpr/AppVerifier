@@ -451,15 +451,15 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     // Official Website
                     "74:3F:AD:58:64:AB:C4:26:50:0B:2D:C2:C4:7C:8A:D3:24:CB:CD:16:03:3F:80:16:99:48:41:35:63:74:F9:95",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
                     // FUTO F-Droid Repo
                     "39:D4:78:69:D2:9C:BF:CE:46:91:D9:F7:E6:94:6A:7B:6D:7E:6F:F4:88:34:97:E6:E6:75:74:4E:CD:FA:6D:6D",
-                    ),
-                    false
+                ),
+                false
             ),
             Hashes(
                 listOf(
