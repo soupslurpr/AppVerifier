@@ -393,5 +393,24 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.localsend.localsend_app",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "BB:3E:E2:82:39:B1:41:8A:F1:6D:DC:64:7D:5A:94:8A:57:3C:2D:13:6D:2B:74:BC:E4:7E:9D:8E:23:35:30:4E",
+                ),
+                false
+            ),
+            // F-Droid/GitHub
+            Hashes(
+                listOf(
+                    "32:20:C3:53:A7:3C:FB:D0:C2:F3:05:24:71:C4:45:32:4C:F4:52:BC:BA:26:DE:1C:47:3A:52:FE:5C:44:E1:D6",
+                ),
+                false
+            )
+        ),
     )
 )
