@@ -29,4 +29,5 @@
     <string name="continue_to_app" translatable="false">Continue</string>
     <string name="verify_app">Verify App</string>
     <string name="app_list">App List</string>
+    <string name="verify_apk_file">Verify Apk File</string>
 </resources>

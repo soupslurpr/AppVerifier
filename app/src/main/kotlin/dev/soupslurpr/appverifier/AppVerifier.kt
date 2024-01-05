@@ -1,6 +1,8 @@
 package dev.soupslurpr.appverifier
 
 import android.graphics.drawable.Drawable
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -68,6 +71,20 @@ fun AppVerifierApp(
         }
     }
 
+    val context = LocalContext.current
+
+    val openApkFileLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) {
+                verifyAppViewModel.setApkVerificationInfoAndInternalDatabaseStatusFromUri(
+                    context.contentResolver,
+                    uri,
+                    context.packageManager,
+                )
+                navController.navigate(AppVerifierScreens.VerifyApp.name)
+            }
+        }
+
     Scaffold(
         topBar = {
             AppVerifierAppBar()
@@ -97,6 +114,9 @@ fun AppVerifierApp(
                         navController.navigate(AppVerifierScreens.AppList.name)
                     },
                     verifyAppViewModel = verifyAppViewModel,
+                    onVerifyApkFileButtonClicked = {
+                        openApkFileLauncher.launch(arrayOf("application/vnd.android.package-archive"))
+                    },
                 )
             }
             composable(route = AppVerifierScreens.AppList.name) {
@@ -123,6 +143,7 @@ fun AppVerifierApp(
                     { verifyAppViewModel.verifyFromText(it) },
                     { navController.navigateUp() },
                     verifyAppUiState.value.internalDatabaseStatus.value,
+                    verifyAppUiState.value.apkFailedToParse.value,
                 )
             }
             composable(route = AppVerifierScreens.Settings.name) {

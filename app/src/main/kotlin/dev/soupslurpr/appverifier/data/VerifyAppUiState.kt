@@ -12,6 +12,7 @@ data class VerifyAppUiState(
     val icon: MutableState<Drawable?> = mutableStateOf(null),
     val verificationStatus: MutableState<VerificationStatus> = mutableStateOf(VerificationStatus.UNKNOWN),
     val appNotFoundOrInvalidFormat: MutableState<Boolean> = mutableStateOf(false),
+    val apkFailedToParse: MutableState<Boolean> = mutableStateOf(false),
     val internalDatabaseStatus: MutableState<InternalDatabaseStatus> = mutableStateOf(InternalDatabaseStatus.NOT_FOUND)
 )
 

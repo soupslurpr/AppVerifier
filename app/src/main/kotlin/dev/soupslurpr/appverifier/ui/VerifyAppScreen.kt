@@ -57,6 +57,7 @@ fun VerifyAppScreen(
     onVerifyFromClipboard: (String) -> Unit,
     onLaunchedEffectHashEmpty: () -> Unit,
     internalDatabaseStatus: InternalDatabaseStatus,
+    apkFailedToParse: Boolean,
 ) {
     val context = LocalContext.current
 
@@ -82,7 +83,12 @@ fun VerifyAppScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (appNotFound) {
+        if (apkFailedToParse) {
+            Text("APK FAILED TO PARSE")
+            Text(
+                "Make sure you provided a valid apk file."
+            )
+        } else if (appNotFound) {
             Text("APP NOT INSTALLED OR INVALID FORMAT")
             Text(
                 "The package name doesn't seem to correspond to any installed user app." +

@@ -1,9 +1,11 @@
 package dev.soupslurpr.appverifier.ui
 
 import android.app.Application
+import android.content.ContentResolver
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
@@ -14,6 +16,8 @@ import dev.soupslurpr.appverifier.internalVerificationInfoDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.io.File
+import java.io.IOException
 import java.security.MessageDigest
 
 class VerifyAppViewModel(application: Application) : AndroidViewModel(application) {
@@ -204,6 +208,10 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         _uiState.value.appNotFoundOrInvalidFormat.value = b
     }
 
+    fun setApkFailedToParse(b: Boolean) {
+        _uiState.value.apkFailedToParse.value = b
+    }
+
     fun getInternalDatabaseStatusFromVerificationInfo(verificationInfo: VerificationInfo): InternalDatabaseStatus {
         return internalVerificationInfoDatabase.run {
             val packageNameMatchedInternalDatabaseVerificationInfo = try {
@@ -240,6 +248,51 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                         }
                     }
                 return InternalDatabaseStatus.NOMATCH
+            }
+        }
+    }
+
+    fun setApkVerificationInfoAndInternalDatabaseStatusFromUri(
+        contentResolver: ContentResolver,
+        uri: Uri,
+        packageManager: PackageManager,
+    ) {
+        contentResolver.openInputStream(uri).use { inputStream ->
+            val tempFile = File.createTempFile("temp", null, getApplication<Application>().cacheDir)
+
+            tempFile.outputStream().use { fileOut ->
+                inputStream.use { it!!.copyTo(fileOut) }
+            }
+
+            val packageInfo = packageManager.getPackageArchiveInfo(
+                tempFile.path,
+                PackageManager.GET_SIGNING_CERTIFICATES
+            )
+
+            if (packageInfo == null) {
+                setApkFailedToParse(true)
+                return
+            }
+
+            val packageName = packageInfo.packageName
+
+            val hashes = getHashesFromPackageInfo(packageInfo)
+
+            setAppVerificationInfo(
+                packageName, // Last time I checked packageManager.getApplicationLabel didn't return a valid name
+                packageName,
+                hashes,
+                getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
+            )
+            setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
+
+            val isFileDeleted = tempFile.delete()
+
+            if (!isFileDeleted) {
+                throw IOException(
+                    "Temporary APK file couldn't be deleted! Report this bug please with instructions " +
+                            "on how to reproduce!"
+                )
             }
         }
     }
