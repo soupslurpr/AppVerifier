@@ -1,4 +1,4 @@
-package dev.soupslurpr.appverifier.settings
+package dev.soupslurpr.appverifier.preferences
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 data class PreferencesUiState(
     /** Whether the user has accepted the privacy policy and license. */
     val acceptedPrivacyPolicyAndLicense: Pair<Preferences.Key<Boolean>, MutableState<Boolean>> = Pair(
-        (booleanPreferencesKey("ACCEPTED_PRIVACY_POLICY_AND_LICENSE")),
+        (booleanPreferencesKey("ACCEPTED_PRIVACY_POLICY_AND_LICENSE_DATE_1/4/2024")),
         mutableStateOf(false)
     ),
 
