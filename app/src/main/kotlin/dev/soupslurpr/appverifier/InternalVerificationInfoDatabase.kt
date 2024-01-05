@@ -1154,41 +1154,78 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
-    VerificationInfo(
+    InternalDatabaseVerificationInfo(
         "app.grapheneos.apps",
-        setOf(
-            // Official
-            "33:84:C3:1F:CE:4A:7C:00:8A:8F:7B:26:52:BC:48:CC:43:21:F1:D2:C8:77:B1:8E:30:A4:ED:61:9A:F1:2F:6B"
+        listOf(
+            // GrapheneOS Apps/GitHub
+            Hashes(
+                listOf(
+                    "33:84:C3:1F:CE:4A:7C:00:8A:8F:7B:26:52:BC:48:CC:43:21:F1:D2:C8:77:B1:8E:30:A4:ED:61:9A:F1:2F:6B"
+                ),
+                false
+            )
         )
     ),
-    VerificationInfo(
+    InternalDatabaseVerificationInfo(
         "com.looker.droidify",
-        setOf(
-            // Official
-            "ED:88:59:C5:5A:F3:11:16:26:58:B9:4A:F9:82:B9:F0:91:DC:D2:76:28:D4:DE:34:86:D1:21:7E:BF:3C:99:35",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "ED:88:59:C5:5A:F3:11:16:26:58:B9:4A:F9:82:B9:F0:91:DC:D2:76:28:D4:DE:34:86:D1:21:7E:BF:3C:99:35"
+                ),
+                false
+            ),
             // F-Droid
-            "B4:F1:C8:A8:1E:4B:9F:6E:02:63:8E:93:BE:AD:56:65:65:02:C2:1F:B9:5C:8D:3E:C9:3D:0C:DD:1F:6E:0D:3F"
+            Hashes(
+                listOf(
+                    "B4:F1:C8:A8:1E:4B:9F:6E:02:63:8E:93:BE:AD:56:65:65:02:C2:1F:B9:5C:8D:3E:C9:3D:0C:DD:1F:6E:0D:3F"
+                ),
+                false
+            )
         )
     ),
-    VerificationInfo(
-        "org.fdroid.fdroid",
-        setOf(
-            "43:23:8D:51:2C:1E:5E:B2:D6:56:9F:4A:3A:FB:F5:52:34:18:B8:2E:0A:3E:D1:55:27:70:AB:B9:A9:C9:CC:AB"
-        )
-    ),
-    VerificationInfo(
-        "org.fdroid.basic",
-        setOf(
-            "EF:7F:82:2B:76:53:E2:01:1C:B8:C5:A7:FC:99:E8:D2:AD:E1:71:7E:53:9C:A5:6D:64:56:29:5E:3B:C0:73:12"
-        )
-    ),
-    VerificationInfo(
+    InternalDatabaseVerificationInfo(
         "com.machiav3lli.fdroid",
-        setOf(
-            // Official
-            "C5:86:01:46:13:8B:77:99:BB:9D:06:17:C3:98:C1:E5:24:15:50:F5:58:25:2A:3F:97:B2:A5:1F:15:26:3E:F7",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "C5:86:01:46:13:8B:77:99:BB:9D:06:17:C3:98:C1:E5:24:15:50:F5:58:25:2A:3F:97:B2:A5:1F:15:26:3E:F7"
+                ),
+                false
+            ),
             // F-Droid
-            "6D:8F:A0:E2:D8:F4:C1:D8:11:B8:5C:C7:33:E8:7D:5D:AC:66:67:40:C5:D7:32:38:E2:37:5B:81:A1:17:61:B5"
+            Hashes(
+                listOf(
+                    "6D:8F:A0:E2:D8:F4:C1:D8:11:B8:5C:C7:33:E8:7D:5D:AC:66:67:40:C5:D7:32:38:E2:37:5B:81:A1:17:61:B5"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.fdroid.fdroid",
+        listOf(
+            // F-Droid
+            Hashes(
+                listOf(
+                    "43:23:8D:51:2C:1E:5E:B2:D6:56:9F:4A:3A:FB:F5:52:34:18:B8:2E:0A:3E:D1:55:27:70:AB:B9:A9:C9:CC:AB"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.fdroid.basic",
+        listOf(
+            // F-Droid
+            Hashes(
+                listOf(
+                    "EF:7F:82:2B:76:53:E2:01:1C:B8:C5:A7:FC:99:E8:D2:AD:E1:71:7E:53:9C:A5:6D:64:56:29:5E:3B:C0:73:12"
+                ),
+                false
+            )
         )
     ),
 )
