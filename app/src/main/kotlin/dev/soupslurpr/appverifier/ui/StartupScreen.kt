@@ -47,7 +47,7 @@ fun StartupScreen(
     verifyAppViewModel: VerifyAppViewModel,
     onVerifyApkFileButtonClicked: () -> Unit,
 ) {
-    // clear VerifyAppUiState when exiting VerifyApkFileScreen and going back to AppListScreen.
+    // clear VerifyAppUiState when exiting VerifyAppScreen from opening an apk and going back to StartupScreen.
     LaunchedEffect(key1 = Unit) {
         verifyAppViewModel.clearUiState()
     }
