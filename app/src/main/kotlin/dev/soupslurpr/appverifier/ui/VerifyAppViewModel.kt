@@ -271,6 +271,16 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
 
             if (packageInfo == null) {
                 setApkFailedToParse(true)
+
+                val isFileDeleted = tempFile.delete()
+
+                if (!isFileDeleted) {
+                    throw IOException(
+                        "Temporary APK file couldn't be deleted! Report this bug please with instructions " +
+                                "on how to reproduce!"
+                    )
+                }
+
                 return
             }
 
