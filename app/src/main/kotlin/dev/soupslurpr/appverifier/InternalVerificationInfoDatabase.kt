@@ -444,4 +444,218 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.futo.voiceinput",
+        listOf(
+            // Website
+            Hashes(
+                listOf(
+                    "74:3F:AD:58:64:AB:C4:26:50:0B:2D:C2:C4:7C:8A:D3:24:CB:CD:16:03:3F:80:16:99:48:41:35:63:74:F9:95",
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "0F:C8:4A:BB:FB:37:10:88:2E:0D:32:98:35:E7:B3:C1:6B:2D:B8:36:88:2C:94:D3:B2:B8:A0:BC:5B:84:A9:43"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "io.github.divverent.aaaaxy",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "AA:E0:BE:2A:65:90:40:3E:1A:E3:FD:25:DC:AB:67:8E:73:F8:4A:50:C8:CA:4E:B5:72:7E:BB:B7:F7:6B:83:C2",
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "F8:D9:23:A7:77:53:B2:93:13:11:25:36:84:69:D9:54:B6:5B:CC:75:C4:BD:C7:FB:8B:BA:30:20:46:1B:57:47",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "3A:03:6C:60:5F:89:04:73:71:B3:0A:78:D9:9F:45:C5:12:48:32:35:26:82:04:8C:72:18:03:B8:9D:EE:1F:C8"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "tech.ula",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "DC:28:10:10:FD:AC:57:C7:C4:D3:9C:74:CB:8C:8B:2F:CC:A9:42:8D:16:4E:43:8F:71:57:B5:E2:06:6C:11:A3",
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "92:83:2A:E7:79:56:ED:9A:FC:E3:DB:0A:DE:44:AB:88:DD:02:BE:84:DE:9A:F7:C3:3B:94:98:29:EB:EE:4C:74",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "3A:19:DD:7D:23:81:C9:41:4F:70:64:5C:F0:BA:AB:EB:CB:0A:74:3F:1E:EE:07:0D:61:9B:0C:A1:79:73:3F:9F"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "net.gsantner.markor",
+        listOf(
+            // Google Play Store/GitHub
+            Hashes(
+                listOf(
+                    "57:D1:06:D0:CF:A8:76:34:42:B3:64:5E:F2:74:1C:38:BB:82:0B:D5:6F:D4:61:2B:F4:0A:23:B6:D9:98:BE:5E",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "9C:70:03:32:37:DC:46:FE:50:52:E4:20:C6:65:70:8D:E8:B3:10:5B:89:84:28:43:81:89:81:82:6B:7E:EC:9C"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.android.vending",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83",
+                    "7C:E8:3C:1B:71:F3:D5:72:FE:D0:4C:8D:40:C5:CB:10:FF:75:E6:D8:7D:9D:F6:FB:D5:3F:04:68:C2:90:50:53"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.brave.browser",
+        listOf(
+            // Google Play Store/GitHub
+            Hashes(
+                listOf(
+                    "9C:2D:B7:05:13:51:5F:DB:FB:BC:58:5B:3E:DF:3D:71:23:D4:DC:67:C9:4F:FD:30:63:61:C1:D7:9B:BF:18:AC"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.dslul.openboard.inputmethod.latin",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "B7:A3:48:D9:01:70:D3:5F:05:6A:A1:C9:9B:49:08:7F:17:52:56:0A:28:AF:67:56:B1:7E:E1:12:C4:CA:1D:89",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "73:54:79:EF:F8:75:F0:F4:2B:F6:12:52:85:89:CA:57:E6:FC:EF:F9:1D:19:6D:C2:23:4F:DE:09:82:63:B8:9C"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.aurora.store",
+        listOf(
+            // Website/GitLab
+            Hashes(
+                listOf(
+                    "4C:62:61:57:AD:02:BD:A3:40:1A:72:63:55:5F:68:A7:96:63:FC:3E:13:A4:D4:36:9A:12:57:09:41:AA:28:0F",
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "5C:83:C7:67:2B:92:99:55:DC:0A:1D:B8:9A:5E:6A:E4:38:9E:2E:AE:7E:C9:39:95:60:41:69:4E:58:15:F5:32"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.aurora.store.nightly",
+        listOf(
+            // Website
+            Hashes(
+                listOf(
+                    "4C:62:61:57:AD:02:BD:A3:40:1A:72:63:55:5F:68:A7:96:63:FC:3E:13:A4:D4:36:9A:12:57:09:41:AA:28:0F",
+                ),
+                false
+            ),
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.limbo.emu.main.arm",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "E9:48:6A:3C:94:F5:1F:63:97:62:0B:04:AE:41:BD:68:26:DB:B4:D1:11:C4:98:6A:39:63:1A:44:65:C2:18:C2",
+                ),
+                false
+            ),
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.limbo.emu.main",
+        listOf(
+            // F-Droid
+            Hashes(
+                listOf(
+                    "F7:8B:31:E0:F5:B8:2F:06:0B:44:17:E7:E2:7A:E5:1B:CE:DE:42:77:B6:F2:7A:7F:42:43:EB:74:2C:C5:4A:A2"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.google.android.gms",
+        listOf(
+            // Google Pixel OS
+            Hashes(
+                listOf(
+                    "F0:FD:6C:5B:41:0F:25:CB:25:C3:B5:33:46:C8:97:2F:AE:30:F8:EE:74:11:DF:91:04:80:AD:6B:2D:60:DB:83",
+                    "7C:E8:3C:1B:71:F3:D5:72:FE:D0:4C:8D:40:C5:CB:10:FF:75:E6:D8:7D:9D:F6:FB:D5:3F:04:68:C2:90:50:53"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.google.android.gsf",
+        listOf(
+            // Google Pixel OS
+            Hashes(
+                listOf(
+                    "BA:83:57:40:B0:89:8D:BB:0F:FD:CB:00:F5:3F:9C:90:D3:19:4B:64:C3:9A:55:88:47:8F:9A:1A:AD:79:14:4F",
+                ),
+                false
+            )
+        )
+    ),
 )
