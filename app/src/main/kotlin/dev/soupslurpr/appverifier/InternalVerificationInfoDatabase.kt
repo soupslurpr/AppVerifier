@@ -435,7 +435,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.google.android.markup",
         listOf(
-            // Google Play Store
+            // Pixel OS
             Hashes(
                 listOf(
                     "BA:83:57:40:B0:89:8D:BB:0F:FD:CB:00:F5:3F:9C:90:D3:19:4B:64:C3:9A:55:88:47:8F:9A:1A:AD:79:14:4F",
