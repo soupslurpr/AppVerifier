@@ -1,10 +1,13 @@
 package dev.soupslurpr.appverifier.ui
 
 import android.app.Application
+import android.content.ContentResolver
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
 import dev.soupslurpr.appverifier.data.VerificationStatus
@@ -13,6 +16,8 @@ import dev.soupslurpr.appverifier.internalVerificationInfoDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.io.File
+import java.io.IOException
 import java.security.MessageDigest
 
 class VerifyAppViewModel(application: Application) : AndroidViewModel(application) {
@@ -26,12 +31,12 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
     fun setAppVerificationInfo(
         name: String,
         packageName: String,
-        hash: String,
+        hashes: Hashes,
         internalDatabaseStatus: InternalDatabaseStatus
     ) {
         _uiState.value.name.value = name
         _uiState.value.packageName.value = packageName
-        _uiState.value.hash.value = hash
+        _uiState.value.hashes.value = hashes
         _uiState.value.internalDatabaseStatus.value = internalDatabaseStatus
     }
 
@@ -43,106 +48,129 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         _uiState.value.verificationStatus.value = parseTextToVerificationStatus(text)
     }
 
-    private fun parseTextToVerificationStatus(text: String): VerificationStatus {
-        val trimmedText = text.trim()
-        val lines = trimmedText.lines()
+    fun getVerificationInfoText(text: String): String {
+        val trimmedText = text.trim().trim('"').lines().joinToString("") { it.trim().plus('\n') }
 
-        return if (lines.size == 1) {
-            val line0 = lines[0].trim()
-
-            if (lines[0].contains(' ') && (lines[0].trim('"').split(' ').size == 2)) {
-                val split = lines[0].trim('"').split(' ')
-                val packageName = split[0].trim()
-                val hash = split[1].trim()
-
-                parseTextToVerificationStatus("$packageName\n$hash")
-            } else if (line0 == uiState.value.packageName.value) {
-                VerificationStatus.PKG_MATCH_BUT_SIG_HASH_NOT_GIVEN
-            } else if ((lines[0].trim() == uiState.value.hash.value) || (lines[0].trim().iterator().run {
-                    var convertedHash = ""
-                    this.withIndex().forEach {
-                        convertedHash += it.value
-                        if (it.index % 2 != 0 && (it.index != lines[0].trim().length.dec())) {
-                            convertedHash += ":"
-                        }
-                    }
-                    return@run convertedHash.uppercase() == uiState.value.hash.value
-                })) {
-                VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
-            } else if (
-                (lines[0].trim().contains(uiState.value.packageName.value))
-                && (lines[0].trim().contains(uiState.value.hash.value))
-            ) {
-                VerificationStatus.PKG_CONTAINS_AND_SIG_HASH_CONTAINS
-            } else {
-                VerificationStatus.NOMATCH
-            }
-        } else if (lines.size == 2) {
-            val isLine0EqualToPackageName = lines[0].trim() == uiState.value.packageName.value
-            val isLine1EqualToSigHash = lines[1].trim() == uiState.value.hash.value
-            val isLine0ContainPackageName = lines[0].trim().contains(uiState.value.packageName.value)
-            val isLine1ContainSigHash = lines[1].trim().contains(uiState.value.hash.value)
-
-            if ((lines[0].trim() + ":" + lines[1].trim()) == uiState.value.hash.value) {
-                VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
-            } else if (isLine0EqualToPackageName && isLine1EqualToSigHash) {
-                VerificationStatus.MATCH
-            } else if (isLine0EqualToPackageName && isLine1ContainSigHash) {
-                VerificationStatus.PKG_MATCH_BUT_SIG_HASH_CONTAINS
-            } else if ((!isLine0EqualToPackageName && isLine0ContainPackageName) && isLine1EqualToSigHash) {
-                VerificationStatus.PKG_CONTAINS_BUT_SIG_HASH_MATCH
-            } else if ((isLine0ContainPackageName) && (isLine1ContainSigHash)) {
-                VerificationStatus.PKG_CONTAINS_AND_SIG_HASH_CONTAINS
-            } else if ((!trimmedText.contains(uiState.value.packageName.value)
-                        && isLine1EqualToSigHash)
-            ) {
-                VerificationStatus.PKG_NOMATCH_BUT_SIG_HASH_MATCH
-            } else if (!trimmedText.contains(uiState.value.packageName.value)
-                && trimmedText.contains(uiState.value.hash.value)
-            ) {
-                VerificationStatus.PKG_NOMATCH_BUT_SIG_HASH_CONTAINS
-            } else if (isLine0EqualToPackageName && !trimmedText.contains(uiState.value.hash.value)) {
-                VerificationStatus.PKG_MATCH_BUT_SIG_HASH_NOMATCH
-            } else if (trimmedText.contains(uiState.value.packageName.value)
-                && !trimmedText.contains(uiState.value.hash.value)
-            ) {
-                VerificationStatus.PKG_CONTAINS_BUT_SIG_HASH_NOMATCH
-            } else {
-                VerificationStatus.NOMATCH
-            }
+        return if (trimmedText.contains('"')) {
+            trimmedText
+                .lines()
+                .dropLast(2)
+                .joinToString("") {
+                    it
+                        .trim()
+                        .replace(
+                            ' ',
+                            '\n'
+                        )
+                        .trim('"')
+                        .plus('\n')
+                }
+        } else if (trimmedText.contains(' ')) {
+            trimmedText
+                .lines()
+                .joinToString("") {
+                    it
+                        .trim()
+                        .replace(
+                            ' ',
+                            '\n'
+                        )
+                        .plus('\n')
+                }
         } else {
-            if ((trimmedText.contains(uiState.value.packageName.value))
-                && (trimmedText.contains(uiState.value.hash.value))
-            ) {
-                VerificationStatus.PKG_CONTAINS_AND_SIG_HASH_CONTAINS
-            } else if ((!trimmedText.contains(uiState.value.packageName.value))
-                && (trimmedText.contains(uiState.value.hash.value))
-            ) {
-                VerificationStatus.PKG_NOMATCH_BUT_SIG_HASH_CONTAINS
-            } else if ((trimmedText.contains(uiState.value.packageName.value))
-                && (!trimmedText.contains(uiState.value.hash.value))
-            ) {
-                VerificationStatus.PKG_CONTAINS_BUT_SIG_HASH_NOMATCH
-            } else {
-                VerificationStatus.NOMATCH
-            }
+            trimmedText
         }
     }
+    private fun parseTextToVerificationStatus(text: String): VerificationStatus {
+        fun parseVerificationInfoTextToVerificationStatus(verificationInfoText: String): VerificationStatus {
+            if (!uiState.value.hashes.value.hasMultipleSigners) {
+                if (
+                    uiState.value.hashes.value.hashes.contains(verificationInfoText.lines()[0])
+                    || (verificationInfoText.lines()[0].trim().iterator().run {
+                        var convertedHash = ""
+                        this.withIndex().forEach {
+                            convertedHash += it.value
+                            if (it.index % 2 != 0 && (it.index != verificationInfoText.lines()[0].trim().length.dec())) {
+                                convertedHash += ":"
+                            }
+                        }
+                        uiState.value.hashes.value.hashes.contains(convertedHash.uppercase())
+                    })
+                    || uiState.value.hashes.value.hashes.contains(
+                        verificationInfoText.lines()[0].trim() + ":" + verificationInfoText.lines()[1].trim()
+                    )
+                ) {
+                    return VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
+                } else if (verificationInfoText.lines()[0].length == 95) {
+                    return VerificationStatus.PKG_NOT_GIVEN_AND_SIG_HASH_NOMATCH
+                }
+            } else if (uiState.value.hashes.value.hashes == verificationInfoText.lines()) {
+                return VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
+            }
 
-    fun getHashHexFromPackageInfo(packageInfo: PackageInfo): String {
-        val signingInfo = packageInfo.signingInfo
-        val signatures = if (signingInfo.hasMultipleSigners()) {
-            signingInfo.apkContentsSigners
-        } else {
-            signingInfo.signingCertificateHistory
+            val isPackageNameMatch = verificationInfoText.lines()[0] == uiState.value.packageName.value
+            val verificationStatus = if (uiState.value.hashes.value.hasMultipleSigners) {
+                if (verificationInfoText.lines().drop(1) == uiState.value.hashes.value.hashes) {
+                    VerificationStatus.MATCH
+                } else {
+                    VerificationStatus.NOMATCH
+                }
+            } else if (verificationInfoText.lines().drop(1).any {
+                    uiState.value.hashes.value.hashes.contains(it)
+                }) {
+                VerificationStatus.MATCH
+            } else {
+                VerificationStatus.NOMATCH
+            }
+
+            return if (isPackageNameMatch && (verificationStatus.ordinal == VerificationStatus.NOMATCH.ordinal)) {
+                VerificationStatus.PKG_MATCH_BUT_SIG_HASH_NOMATCH
+            } else if (!isPackageNameMatch && (verificationStatus.ordinal == VerificationStatus.MATCH.ordinal)) {
+                VerificationStatus.PKG_NOMATCH_BUT_SIG_HASH_MATCH
+            } else if (verificationStatus.ordinal == VerificationStatus.NOMATCH.ordinal) {
+                VerificationStatus.NOMATCH
+            } else if (verificationStatus.ordinal == VerificationStatus.MATCH.ordinal) {
+                VerificationStatus.MATCH
+            } else {
+                TODO(
+                    "This should never happen. If it does, then make sure you accounted for any new verification " +
+                            "statuses that can happen in this function."
+                )
+            }
         }
 
-        val firstCertificate = signatures.first().toByteArray()
+        return parseVerificationInfoTextToVerificationStatus(getVerificationInfoText(text))
+    }
 
-        val digest = MessageDigest.getInstance("SHA-256")
-        val hashByteArray = digest.digest(firstCertificate)
+    fun getHashesFromPackageInfo(packageInfo: PackageInfo): Hashes {
+        val signingInfo = packageInfo.signingInfo
+        val hasMultipleSigners = signingInfo.hasMultipleSigners()
 
-        return hashByteArray.joinToString(":") { "%02x".format(it) }.uppercase()
+        val signatures = if (hasMultipleSigners) {
+            signingInfo.apkContentsSigners
+                .map { signature ->
+                    MessageDigest
+                        .getInstance("SHA-256")
+                        .digest(signature.toByteArray())
+                        .joinToString(":") {
+                            "%02x".format(it)
+                        }
+                        .uppercase()
+                }
+        } else {
+            signingInfo.signingCertificateHistory
+                .map { signature ->
+                    MessageDigest
+                        .getInstance("SHA-256")
+                        .digest(signature.toByteArray())
+                        .joinToString(":") {
+                            "%02x".format(it)
+                        }
+                        .uppercase()
+                }
+        }
+
+        return Hashes(signatures, hasMultipleSigners)
     }
 
     fun findAndSetAppVerificationInfoFromPackageName(packageName: String, packageManager: PackageManager) {
@@ -161,49 +189,110 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 val packageInfo =
                     packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
 
-                val hashHex = getHashHexFromPackageInfo(packageInfo)
+                val hashes = getHashesFromPackageInfo(packageInfo)
 
                 setAppVerificationInfo(
                     packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                     packageInfo.packageName,
-                    hashHex,
-                    getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, setOf(hashHex)))
+                    hashes,
+                    getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
                 )
                 setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
             } else {
-                setAppNotFound(true)
+                setAppNotFoundOrInvalidFormat(true)
             }
         }
     }
 
-    fun setAppNotFound(b: Boolean) {
-        _uiState.value.appNotFound.value = b
+    fun setAppNotFoundOrInvalidFormat(b: Boolean) {
+        _uiState.value.appNotFoundOrInvalidFormat.value = b
     }
 
-    fun setInvalidFormat(b: Boolean) {
-        _uiState.value.invalidFormat.value = b
+    fun setApkFailedToParse(b: Boolean) {
+        _uiState.value.apkFailedToParse.value = b
     }
 
     fun getInternalDatabaseStatusFromVerificationInfo(verificationInfo: VerificationInfo): InternalDatabaseStatus {
         return internalVerificationInfoDatabase.run {
-            return@run try {
-                val matchedPackageNameVerificationInfo = this.first {
+            val packageNameMatchedInternalDatabaseVerificationInfo = try {
+                this.first {
                     it.packageName == verificationInfo.packageName
                 }
+            } catch (e: NoSuchElementException) {
+                return@run InternalDatabaseStatus.NOT_FOUND
+            }
 
-                return@run try {
-                    if (verificationInfo.hashes.first {
-                            matchedPackageNameVerificationInfo.hashes.contains(it)
-                        }.isNotEmpty()) {
-                        InternalDatabaseStatus.MATCH
-                    } else {
-                        InternalDatabaseStatus.NOMATCH
-                    }
-                } catch (e: NoSuchElementException) {
+            return@run if (verificationInfo.hashes.hasMultipleSigners) { // Has multiple signers
+                if (packageNameMatchedInternalDatabaseVerificationInfo
+                        .hashesList
+                        .contains(verificationInfo.hashes)
+                ) {
+                    InternalDatabaseStatus.MATCH
+                } else {
                     InternalDatabaseStatus.NOMATCH
                 }
-            } catch (e: NoSuchElementException) {
-                InternalDatabaseStatus.NOT_FOUND
+            } else {
+                packageNameMatchedInternalDatabaseVerificationInfo
+                    .hashesList
+                    .forEach { internalDatabaseHashes ->
+                        if (internalDatabaseHashes
+                                .hasMultipleSigners
+                            == verificationInfo.hashes
+                                .hasMultipleSigners
+                        ) {
+                            verificationInfo.hashes.hashes.forEach { hash ->
+                                if (internalDatabaseHashes.hashes.contains(hash)) {
+                                    return@run InternalDatabaseStatus.MATCH
+                                }
+                            }
+                        }
+                    }
+                return InternalDatabaseStatus.NOMATCH
+            }
+        }
+    }
+
+    fun setApkVerificationInfoAndInternalDatabaseStatusFromUri(
+        contentResolver: ContentResolver,
+        uri: Uri,
+        packageManager: PackageManager,
+    ) {
+        contentResolver.openInputStream(uri).use { inputStream ->
+            val tempFile = File.createTempFile("temp", null, getApplication<Application>().cacheDir)
+
+            tempFile.outputStream().use { fileOut ->
+                inputStream.use { it!!.copyTo(fileOut) }
+            }
+
+            val packageInfo = packageManager.getPackageArchiveInfo(
+                tempFile.path,
+                PackageManager.GET_SIGNING_CERTIFICATES
+            )
+
+            if (packageInfo == null) {
+                setApkFailedToParse(true)
+                return
+            }
+
+            val packageName = packageInfo.packageName
+
+            val hashes = getHashesFromPackageInfo(packageInfo)
+
+            setAppVerificationInfo(
+                packageName, // Last time I checked packageManager.getApplicationLabel didn't return a valid name
+                packageName,
+                hashes,
+                getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
+            )
+            setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
+
+            val isFileDeleted = tempFile.delete()
+
+            if (!isFileDeleted) {
+                throw IOException(
+                    "Temporary APK file couldn't be deleted! Report this bug please with instructions " +
+                            "on how to reproduce!"
+                )
             }
         }
     }

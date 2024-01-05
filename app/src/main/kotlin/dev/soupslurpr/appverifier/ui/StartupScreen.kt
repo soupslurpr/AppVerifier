@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FileOpen
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.FilledTonalButton
@@ -41,6 +42,7 @@ fun StartupScreen(
     onSettingsButtonClicked: () -> Unit,
     onAppListButtonClicked: () -> Unit,
     verifyAppViewModel: VerifyAppViewModel,
+    onVerifyApkFileButtonClicked: () -> Unit,
 ) {
     // clear VerifyAppUiState when exiting VerifyAppScreen and going back to AppListScreen.
     LaunchedEffect(key1 = Unit) {
@@ -87,6 +89,17 @@ fun StartupScreen(
             )
             Spacer(modifier = modifier.width(8.dp))
             Text("App List")
+        }
+        FilledTonalButton(
+            modifier = modifier.fillMaxWidth(),
+            onClick = { onVerifyApkFileButtonClicked() }
+        ) {
+            Icon(
+                Icons.Filled.FileOpen,
+                null
+            )
+            Spacer(Modifier.width(8.dp))
+            Text("Verify APK File")
         }
         FilledTonalButton(
             modifier = modifier.fillMaxWidth(),
