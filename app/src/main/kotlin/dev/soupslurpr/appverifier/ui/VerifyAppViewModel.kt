@@ -284,12 +284,15 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 return
             }
 
+            packageInfo.applicationInfo.sourceDir = tempFile.path
+            packageInfo.applicationInfo.publicSourceDir = tempFile.path
+
             val packageName = packageInfo.packageName
 
             val hashes = getHashesFromPackageInfo(packageInfo)
 
             setAppVerificationInfo(
-                packageName, // Last time I checked packageManager.getApplicationLabel didn't return a valid name
+                packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                 packageName,
                 hashes,
                 getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
