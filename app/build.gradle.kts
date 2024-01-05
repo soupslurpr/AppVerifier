@@ -11,8 +11,8 @@ android {
         applicationId = "dev.soupslurpr.appverifier"
         minSdk = 28
         targetSdk = 34
-        versionCode = 5
-        versionName = "0.5.0"
+        versionCode = 6
+        versionName = "0.5.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
