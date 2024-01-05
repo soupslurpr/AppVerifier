@@ -112,5 +112,7 @@ fun StartupScreen(
             Spacer(modifier = modifier.width(8.dp))
             Text(stringResource(R.string.settings))
         }
+
+        Spacer(Modifier.padding(WindowInsets.navigationBars.asPaddingValues()))
     }
 }
