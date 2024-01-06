@@ -1157,10 +1157,17 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "io.simplelogin.android",
         listOf(
-            // Google Play Store/GitHub
+            // GitHub
             Hashes(
                 listOf(
                     "3E:A1:BE:55:8A:BA:9D:0C:8C:AA:AA:75:EA:91:7A:DB:A4:6A:5E:8B:BF:82:BC:7E:69:48:6B:EB:7C:54:C0:01"
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "F2:02:30:63:37:BB:3B:C6:69:F7:E8:1D:10:2F:D1:10:C4:8C:67:2A:E4:56:3F:63:B9:7A:53:59:1D:F8:E8:CC"
                 ),
                 false
             )
