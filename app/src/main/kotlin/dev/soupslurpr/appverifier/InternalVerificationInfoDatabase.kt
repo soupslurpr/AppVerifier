@@ -1154,4 +1154,142 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "io.simplelogin.android",
+        listOf(
+            // Google Play Store/GitHub
+            Hashes(
+                listOf(
+                    "3E:A1:BE:55:8A:BA:9D:0C:8C:AA:AA:75:EA:91:7A:DB:A4:6A:5E:8B:BF:82:BC:7E:69:48:6B:EB:7C:54:C0:01"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "io.simplelogin.android.fdroid",
+        listOf(
+            // F-Droid
+            Hashes(
+                listOf(
+                    "C9:FB:E0:95:83:03:D6:B9:6C:3F:C8:A1:FA:0A:78:21:1C:71:85:18:97:BC:07:86:33:93:E7:6B:D8:4C:3B:F7"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "ru.zdevs.zugate",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "74:DD:42:51:7D:0A:30:DB:4E:13:1D:C3:FF:D1:CF:11:D0:FD:95:75:3C:7D:27:C3:EB:33:2A:E0:59:92:DD:0E"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.connectbot",
+        listOf(
+            // Google Play Store/GitHub
+            Hashes(
+                listOf(
+                    "AA:43:74:6A:46:12:78:42:16:9F:81:76:41:2A:1F:4B:1B:1E:2F:8A:D9:E1:5A:BA:21:7C:38:22:DB:EB:2D:5F"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "08:78:9B:AD:18:CE:8E:C7:B6:63:7B:5E:70:24:5A:76:3A:E5:02:4F:4D:49:AC:85:32:40:47:FB:06:B5:DA:8A"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "eu.depau.etchdroid",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "B4:F8:85:40:B9:2C:42:15:1F:0F:8A:66:97:7D:1E:32:54:37:9F:4E:97:45:A4:9E:0C:85:B0:F6:44:B1:82:81"
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "B2:42:E9:89:E4:01:36:6D:0E:92:4B:15:C9:BC:66:76:7D:A7:4A:B3:08:FF:21:B0:BA:50:33:02:81:59:A6:AE"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "BB:B3:C5:88:55:98:00:54:DF:31:5B:F5:1C:04:5F:F2:B5:01:C5:87:06:51:14:59:FC:34:53:27:DF:BF:3E:CE"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "chat.simplex.app",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "3C:52:C4:FD:3C:AD:1C:07:C9:B0:0A:70:80:E3:58:FA:B9:FE:FC:B8:AF:5A:EC:14:77:65:F1:6D:0F:21:AD:85"
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "5E:3E:DC:C2:00:FB:A8:D5:F4:88:F3:CA:4C:32:5B:05:78:C5:6A:9C:03:A1:CC:B5:92:9C:D7:5C:7E:57:E2:4D"
+                ),
+                false
+            ),
+            // SimpleX Chat F-Droid
+            Hashes(
+                listOf(
+                    "9F:35:8F:F2:84:D1:F7:16:56:A2:BF:AF:0E:00:5D:EA:E6:AA:14:14:37:20:E0:89:F1:1F:F2:DD:CF:EB:01:BA"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "AE:C1:95:DC:FD:46:14:BD:3A:91:EC:26:D1:D5:14:C8:75:71:C5:CC:8D:CF:48:08:3F:92:83:14:3C:A2:B9:A6"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.briarproject.briar.android",
+        listOf(
+            // Official Website/F-Droid/Google Play Store/Briar F-Droid
+            Hashes(
+                listOf(
+                    "50:1D:DF:14:A6:EC:F9:04:FB:20:28:5C:56:A5:65:CB:98:7A:86:7F:91:57:2E:E3:3C:2D:43:77:1C:CA:4E:37"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.briarproject.mailbox",
+        listOf(
+            // Google Play Store/Official Website/Briar F-Droid
+            Hashes(
+                listOf(
+                    "AC:C4:DB:A4:8B:EA:4C:14:DF:80:36:1A:68:E5:60:7C:0B:DB:E4:DD:FA:FF:F6:0C:F5:CA:6C:09:19:0F:6B:83"
+                ),
+                false
+            )
+        )
+    ),
 )
