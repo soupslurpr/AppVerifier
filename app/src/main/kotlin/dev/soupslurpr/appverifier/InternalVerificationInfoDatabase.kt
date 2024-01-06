@@ -1279,4 +1279,23 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabseVerificationInfo(
+        "im.vector.app",
+        listOf(
+            // GitHub/Google Play Store
+            Hashes(
+                listOf(
+                    "F3:FF:38:D2:E5:A6:38:84:86:4A:4E:0D:45:C5:3B:19:8E:7E:39:C0:50:5B:D9:63:F5:55:D6:53:2D:EA:BF:5F"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "B1:5D:9B:67:3B:55:B9:FE:65:61:90:79:4D:87:2E:59:EC:5B:85:B3:BF:B8:A7:6B:94:42:F1:7E:AE:28:87:C9"
+                ),
+                false
+            )
+        )
+    ),
 )
