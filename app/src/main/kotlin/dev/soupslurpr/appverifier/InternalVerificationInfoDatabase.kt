@@ -1154,4 +1154,129 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "chat.fluffy.fluffychat",
+        listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "5E:DB:5C:43:95:B2:F2:D9:BA:68:2F:6A:1D:27:51:70:CC:E5:36:5A:6F:A2:7D:22:20:EA:8D:52:A6:D9:5F:07"
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "21:64:41:F3:2F:AD:2A:60:64:71:23:F8:08:DD:D1:E9:C2:D2:D7:74:37:1E:26:E1:C9:D2:1F:E3:28:D9:54:F8"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "05:7A:C4:51:64:A2:E6:E3:1F:6D:DE:55:5A:5F:2C:CC:B4:D8:83:4C:B1:85:25:49:68:1B:00:E3:46:68:CA:F3"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        // Syphon
+        "org.tether.tether",
+        listOf(
+            // GitHub/Google Play Store
+            Hashes(
+                listOf(
+                    "6C:BD:9B:DC:71:F0:8A:AF:53:BC:F2:0A:16:48:D0:3A:BE:D4:5B:C2:76:B8:EF:53:D8:DD:E6:2A:ED:B0:F0:BD"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "D3:DD:DB:89:34:EC:0B:A7:AF:85:14:60:FA:8A:5B:C0:C0:15:99:78:D9:B0:E7:D2:9F:EC:0C:2F:8B:4E:2A:65"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "chat.quadrix.android",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "57:16:3A:29:A5:EE:D8:CC:9A:AA:3C:9F:4E:C8:2F:B9:16:2C:48:A5:DE:A3:90:65:15:F0:64:D8:32:43:C7:14"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "de.spiritcroc.riotx",
+        listOf(
+            // Google Play Store/SpiritCroc F-Droid
+            Hashes(
+                listOf(
+                    "66:12:AD:E7:E9:31:74:A5:89:CF:5B:A2:6E:D3:AB:28:23:1A:78:96:40:54:6C:8F:30:37:5E:F0:45:BC:92:42"
+                ),
+                false
+            ),
+            // F-Droid
+            Hashes(
+                listOf(
+                    "5D:47:3A:51:69:EF:71:AE:DC:BC:A1:DA:51:12:10:BA:B4:AA:FF:27:8C:5E:F7:85:76:0D:F8:82:95:4B:1A:99"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabseVerificationInfo(
+        "de.spiritcroc.riotx.foss",
+        listOf(
+            // SpiritCroc F-Droid Stable
+            Hashes(
+                listOf(
+                    "FA:C0:73:C4:2D:F8:A2:4E:D7:9E:D6:1A:19:86:A0:08:B6:3D:64:68:99:21:70:F8:2C:29:D7:9B:C6:80:8E:AC"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabseVerificationInfo(
+        "de.spiritcroc.riotx.fcm",
+        listOf(
+            // SpiritCroc F-Droid Stable
+            Hashes(
+                listOf(
+                    "FA:C0:73:C4:2D:F8:A2:4E:D7:9E:D6:1A:19:86:A0:08:B6:3D:64:68:99:21:70:F8:2C:29:D7:9B:C6:80:8E:AC"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabseVerificationInfo(
+        "de.spiritcroc.riotx.testing.foss",
+        listOf(
+            // SpiritCroc F-Droid Beta
+            Hashes(
+                listOf(
+                    "52:D0:3F:2F:AB:78:55:73:BB:29:5C:7A:B2:70:69:5E:3A:1B:DD:2A:DC:6A:6D:E8:71:32:50:B3:3F:23:12:25"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabseVerificationInfo(
+        "de.spiritcroc.riotx.testing.fcm",
+        listOf(
+            // SpiritCroc F-Droid Beta
+            Hashes(
+                listOf(
+                    "0F:D3:50:17:8D:3E:15:6D:FE:52:32:63:6D:7C:43:31:A5:DF:85:C3:6E:8E:3A:11:79:8D:4D:06:6D:31:62:27"
+                ),
+                false
+            )
+        )
+    ),
 )
