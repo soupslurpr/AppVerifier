@@ -1176,6 +1176,13 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "io.simplelogin.android.fdroid",
         listOf(
+            // GitHub
+            Hashes(
+                listOf(
+                    "3E:A1:BE:55:8A:BA:9D:0C:8C:AA:AA:75:EA:91:7A:DB:A4:6A:5E:8B:BF:82:BC:7E:69:48:6B:EB:7C:54:C0:01"
+                ),
+                false
+            ),
             // F-Droid
             Hashes(
                 listOf(
