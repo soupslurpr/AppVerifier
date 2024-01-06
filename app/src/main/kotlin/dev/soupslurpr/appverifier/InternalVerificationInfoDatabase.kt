@@ -1207,10 +1207,18 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "org.connectbot",
         listOf(
-            // Google Play Store/GitHub
+            // GitHub
             Hashes(
                 listOf(
                     "AA:43:74:6A:46:12:78:42:16:9F:81:76:41:2A:1F:4B:1B:1E:2F:8A:D9:E1:5A:BA:21:7C:38:22:DB:EB:2D:5F"
+                ),
+                false
+            ),
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "AA:43:74:6A:46:12:78:42:16:9F:81:76:41:2A:1F:4B:1B:1E:2F:8A:D9:E1:5A:BA:21:7C:38:22:DB:EB:2D:5F",
+                    "2F:EF:9C:FE:29:BE:E1:93:20:61:A8:1B:FB:B8:B5:7C:5C:65:88:54:B8:2C:C9:7B:BF:26:52:65:DD:B2:27:7C"
                 ),
                 false
             ),
