@@ -1260,7 +1260,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "chat.simplex.app",
         listOf(
-            // GitHub
+            // GitHub/SimpleX Chat F-Droid
             Hashes(
                 listOf(
                     "3C:52:C4:FD:3C:AD:1C:07:C9:B0:0A:70:80:E3:58:FA:B9:FE:FC:B8:AF:5A:EC:14:77:65:F1:6D:0F:21:AD:85"
@@ -1271,13 +1271,6 @@ val internalVerificationInfoDatabase = setOf(
             Hashes(
                 listOf(
                     "5E:3E:DC:C2:00:FB:A8:D5:F4:88:F3:CA:4C:32:5B:05:78:C5:6A:9C:03:A1:CC:B5:92:9C:D7:5C:7E:57:E2:4D"
-                ),
-                false
-            ),
-            // SimpleX Chat F-Droid
-            Hashes(
-                listOf(
-                    "9F:35:8F:F2:84:D1:F7:16:56:A2:BF:AF:0E:00:5D:EA:E6:AA:14:14:37:20:E0:89:F1:1F:F2:DD:CF:EB:01:BA"
                 ),
                 false
             ),
