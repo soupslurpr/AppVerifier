@@ -8,8 +8,13 @@ AppVerifier does the heavy lifting for you 💪
 
 ## Download
 
-AppVerifier is available on the [Accrescent](https://accrescent.app) app store and GitHub releases. [Accrescent](https://accrescent.app) is the recommended way to get AppVerifier as it is more secure than GitHub releases.
+AppVerifier is available on the [Accrescent](https://accrescent.app) app store and GitHub releases. [Accrescent](https://accrescent.app) is the recommended way to get AppVerifier as it is more secure than GitHub releases.\
+Click on the badge below to get it on [Accrescent](https://accrescent.app).
 
+<a href="https://accrescent.app/app/dev.soupslurpr.appverifier">
+                            <img alt="Get it on Accrescent" src="https://accrescent.app/badges/get-it-on.png" style="max-width:auto; height:200px;">
+                        </a>
+                        
 The package name and SHA-256 hash of the signing certificate is below, so you can verify AppVerifier with [apksigner](https://developer.android.com/studio/command-line/apksigner#usage-verify) verify --print-certs if you are downloading the apk. If you are downloading from [Accrescent](https://accrescent.app) then you should verify [Accrescent](https://accrescent.app) itself [here](https://accrescent.app/faq#verifying).
 
 dev.soupslurpr.appverifier\
