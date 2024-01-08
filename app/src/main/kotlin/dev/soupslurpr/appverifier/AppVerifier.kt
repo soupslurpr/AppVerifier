@@ -52,6 +52,7 @@ fun AppVerifierApp(
     verifyAppViewModel: VerifyAppViewModel,
     preferencesViewModel: PreferencesViewModel,
     isActionSend: Boolean,
+    isActionView: Boolean,
 ) {
     val verifyAppUiState = verifyAppViewModel.uiState.collectAsState()
 
@@ -92,7 +93,7 @@ fun AppVerifierApp(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = if (isActionSend) {
+            startDestination = if (isActionSend || isActionView) {
                 AppVerifierScreens.VerifyApp.name
             } else {
                 AppVerifierScreens.Start.name

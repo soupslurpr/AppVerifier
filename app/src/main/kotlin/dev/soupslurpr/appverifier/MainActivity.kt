@@ -2,6 +2,7 @@ package dev.soupslurpr.appverifier
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,17 +36,37 @@ class MainActivity : ComponentActivity() {
             val isActionSend =
                 (intent.action == Intent.ACTION_SEND)
 
-            if (isActionSend) {
-                val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+            val isActionView =
+                (intent.action == Intent.ACTION_VIEW)
 
-                if (text != null) {
-                    val verificationInfoText = verifyAppViewModel.getVerificationInfoText(text)
+            if (isActionSend) {
+                val extraText = intent.getStringExtra(Intent.EXTRA_TEXT)
+                val extraStream: Uri? = intent.getParcelableExtra(Intent.EXTRA_STREAM)
+
+                if (extraText != null) {
+                    val verificationInfoText = verifyAppViewModel.getVerificationInfoText(extraText)
 
                     verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(
                         verificationInfoText.lines()[0],
                         packageManager
                     )
                     verifyAppViewModel.verifyFromText(verificationInfoText)
+                } else if (extraStream != null) {
+                    verifyAppViewModel.setApkVerificationInfoAndInternalDatabaseStatusFromUri(
+                        contentResolver,
+                        extraStream,
+                        packageManager
+                    )
+                }
+            } else if (isActionView) {
+                if (intent.data != null) {
+                    intent.data?.let {
+                        verifyAppViewModel.setApkVerificationInfoAndInternalDatabaseStatusFromUri(
+                            contentResolver,
+                            it,
+                            packageManager
+                        )
+                    }
                 }
             }
 
@@ -62,6 +83,7 @@ class MainActivity : ComponentActivity() {
                         verifyAppViewModel = verifyAppViewModel,
                         preferencesViewModel = preferencesViewModel,
                         isActionSend = isActionSend,
+                        isActionView = isActionView,
                     )
                 }
             }
