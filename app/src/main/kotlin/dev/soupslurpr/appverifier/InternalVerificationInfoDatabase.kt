@@ -1384,7 +1384,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "com.amazon.mShop.android.shopping",
         listOf(
-            // Amazon Shopping
+            // Google Play Store
             Hashes(
                 listOf(
                     "2F:19:AD:EB:28:4E:B3:6F:7F:07:78:61:52:B9:A1:D1:4B:21:65:32:03:AD:0B:04:EB:BF:9C:73:AB:6D:76:25"
