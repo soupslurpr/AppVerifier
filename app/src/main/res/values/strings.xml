@@ -29,4 +29,7 @@
     <string name="verify_app">Verify App</string>
     <string name="app_list">App List</string>
     <string name="verify_apk_file">Verify Apk File</string>
+    <string name="donation">Donation</string>
+    <string name="donation_setting_name">Donation</string>
+    <string name="donation_setting_description">View how to donate to AppVerifier\'s lead developer in-app</string>
 </resources>
