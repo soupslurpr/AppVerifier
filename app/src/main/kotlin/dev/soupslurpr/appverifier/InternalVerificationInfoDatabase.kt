@@ -1381,4 +1381,16 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.delta.mobile.android",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "DC:BE:F3:76:6B:C1:AA:52:28:EB:75:AC:A9:C7:AE:02:3C:FE:BB:43:83:90:CB:73:75:85:28:0A:26:DE:AA:11"
+                ),
+                false
+            )
+        )
+    ),
 )
