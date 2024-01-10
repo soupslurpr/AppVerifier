@@ -1392,5 +1392,17 @@ val internalVerificationInfoDatabase = setOf(
                 false
             )
         )
-    ),	
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.paypal.android.p2pmobile",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "C7:C6:2E:A0:F6:E2:F6:EB:A8:7F:95:40:69:87:50:55:30:EF:2F:51:6E:7C:DE:59:91:D7:14:03:31:44:80:72"
+                ),
+                false
+            )
+        )
+    ),
 )
