@@ -9,7 +9,7 @@ the simplest way is to create an issue on GitHub with the verification info obta
 For every source that has the same package name but different hash(es) make another entry in the same issue as shown by the template. Use AppVerifier to get the verification info. 
 Other tools may not provide all the needed info or hashes. 
 If you want to make it easier for reviewers and contribute
-it in the form of code (its fairly simple still), please see
+it in the form of code (it's fairly simple still), please see
 app/src/main/kotlin/dev/soupslurpr/appverifier/InternalVerificationInfoDatabase.kt for the database.
 
 If you need help with development or have questions it's recommended to join the AppVerifier room on matrix at
