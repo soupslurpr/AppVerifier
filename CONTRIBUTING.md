@@ -17,6 +17,7 @@ the same but not the hashes, then you have to make a `Hashes` in the same `Inter
 If the package name is different, then create another `InternalDatabaseVerificationInfo`.
 Above the `Hashes` put a comment that says the source where the app was obtained from.
 Please look at the other entries in the database for examples of this.
+Make one pull request for every app instead of multiple apps in one pull request.
 
 If you need help with development or have questions it's recommended to join the AppVerifier room on matrix at
 https://matrix.to/#/#appverifier:matrix.org and ask for help there from [soupslurpr](https://github.com/soupslurpr),
