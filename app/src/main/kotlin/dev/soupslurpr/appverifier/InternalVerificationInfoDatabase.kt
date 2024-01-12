@@ -19,6 +19,45 @@ data class InternalDatabaseVerificationInfo(val packageName: String, val hashesL
  */
 val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
+        "PACKAGE-NAME-NEEDED", //Circle back with package name
+        listOf(
+            // Wireguard website (source: https://lists.zx2c4.com/pipermail/wireguard/2023-April/008045.html)
+
+            Hashes(
+                listOf(
+                    58:3F:C4:1B:49:0C:38:0B:56:FB:E9:EE:47:38:1E:B4:EF:53:E0:37:19:A5:50:3F:C1:F2:9D:CD:8E:28:90:2A"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.standardnotes",
+        listOf(
+            // GitHub (source: https://github.com/standardnotes/app/blob/14a82941b8b6719641ed4ab04b4d93cfe0170cdf/packages/web/src/.well-known/assetlinks.json#L4)
+
+            Hashes(
+                listOf(
+                    58:3F:C4:1B:49:0C:38:0B:56:FB:E9:EE:47:38:1E:B4:EF:53:E0:37:19:A5:50:3F:C1:F2:9D:CD:8E:28:90:2A"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "org.cryptomator.lite",
+        listOf(
+            // GitHub (source: https://github.com/cryptomator/android readme)
+
+            Hashes(
+                listOf(
+                    "f7:c3:ec:3b:0d:58:8d:3c:b5:29:83:e9:eb:1a:74:21:c9:3d:43:39:a2:86:39:8e:71:d7:b6:51:e8:d8:ec:dd"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
         "dev.soupslurpr.beautyxt",
         listOf(
             // GitHub/Accrescent
