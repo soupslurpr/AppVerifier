@@ -19,9 +19,9 @@ data class InternalDatabaseVerificationInfo(val packageName: String, val hashesL
  */
 val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
-        "PACKAGE-NAME-NEEDED", //Circle back with package name
+        "com.wireguard.android", 
         listOf(
-            // Wireguard website (source: https://lists.zx2c4.com/pipermail/wireguard/2023-April/008045.html)
+            // Wireguard website (source: this PGP signed message https://lists.zx2c4.com/pipermail/wireguard/2023-April/008045.html)
 
             Hashes(
                 listOf(
@@ -47,7 +47,7 @@ val internalVerificationInfoDatabase = setOf(
     InternalDatabaseVerificationInfo(
         "org.cryptomator.lite",
         listOf(
-            // GitHub (source: https://github.com/cryptomator/android readme)
+            // GitHub (source: ReadMe of https://github.com/cryptomator/android)
 
             Hashes(
                 listOf(
