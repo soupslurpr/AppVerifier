@@ -11,7 +11,7 @@ It is available at https://www.jetbrains.com/idea/download/?section=windows#:~:t
 Open the file at app/src/main/kotlin/dev/soupslurpr/appverifier/InternalVerificationInfoDatabase.kt for the database and start adding entries from the bottom. 
 Use AppVerifier (with "Show hasMultipleSigners" on in Settings) to get the verification info.
 Other tools may not provide all the needed info or hashes so do not use them.
-You must check the app's website or repo to see which sources they say the app is officially available from,
+You must check the app's website or repo to see which sources they say the app is officially available from (view INTERNAL_DATABASE_CRITERIA.md),
 and check the verification info of each source to see if it's the same. If the package name is
 the same but not the hashes, then you have to make a `Hashes` in the same `InternalDatabaseVerificationInfo` with the hashes for the app from that source and whether it has multiple signers.
 If the package name is different, then create another `InternalDatabaseVerificationInfo`.
