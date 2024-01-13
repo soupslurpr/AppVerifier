@@ -1381,4 +1381,16 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.ringapp",
+        listOf(
+            // Google Play Store
+            Hashes(
+                listOf(
+                    "C6:37:07:C9:00:14:1B:80:77:49:C6:03:8E:21:5C:9B:21:71:26:2B:0D:A9:AF:C5:75:FA:60:AB:C4:D6:8D:EB"
+                ),
+                false
+            )
+        )
+    ),
 )
