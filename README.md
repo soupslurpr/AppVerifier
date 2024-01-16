@@ -3,7 +3,7 @@
 AppVerifier is an app signing certificate hash viewer and verifier.\
 It enables you to easily verify that your apps are genuine with others!
 
-AppVerifier includes a database for verifying apps.\
+AppVerifier takes the app's package name and signing certificates hash(es) and compares them to the ones you provided or the ones in the internal database to verify that your apps are genuine.\
 If an app isn't on the internal database yet, you can simply share the verification info to others and receive verification info from them and
 share the received verification info to AppVerifier and you will see the verification status.\
 AppVerifier does the heavy lifting for you 💪
