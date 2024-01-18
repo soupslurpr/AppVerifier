@@ -1783,4 +1783,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "app.myzel394.locus",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "85:E4:B5:DB:23:82:B2:B0:AC:F0:C2:C6:B2:F6:71:D6:DF:57:DA:42:86:BD:56:CB:D0:4F:8C:5B:29:62:65:54",
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "E2:88:33:4F:25:A4:06:DC:13:E6:B2:A2:9B:D4:56:D4:C7:54:43:CF:F2:9D:C8:D9:E3:58:6F:12:6C:D8:28:33",
+                ),
+                false
+            )
+        )
+    ),
 )
