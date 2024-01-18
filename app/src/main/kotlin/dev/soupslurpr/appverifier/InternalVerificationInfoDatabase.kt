@@ -1783,4 +1783,21 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.torproject.android",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "A4:54:B8:7A:18:47:A8:9E:D7:F5:E7:0F:BA:6B:BA:96:F3:EF:29:C2:6E:09:81:20:4F:E3:47:BF:23:1D:FD:5B"
+                ),
+                false
+            )
+        )
+    ),
 )
