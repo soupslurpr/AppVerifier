@@ -1783,4 +1783,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.qwerty287.ftpclient",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.CODEBERG
+                ),
+                listOf(
+                    "EB:CD:A4:06:40:F9:99:76:23:C5:54:A7:B9:8D:5A:53:1E:62:5A:A1:35:DE:BB:CC:65:8A:CA:11:D6:7F:D5:82",
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "94:2B:8B:8D:A8:46:38:41:18:FF:DB:43:1E:2A:8D:B1:AF:41:DE:30:A3:9B:C9:F2:40:EC:7B:D9:B4:48:FE:3D",
+                ),
+                false
+            )
+        )
+    ),
 )
