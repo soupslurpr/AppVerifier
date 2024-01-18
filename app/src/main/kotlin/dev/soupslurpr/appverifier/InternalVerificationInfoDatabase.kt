@@ -1783,4 +1783,20 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.bnyro.translate",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID,
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "B3:BC:73:B1:17:DF:5D:FE:38:13:0C:6C:2B:94:68:52:AE:70:88:55:7F:E8:E4:33:F0:D9:98:3A:6B:55:CC:95"
+                ),
+                false
+            )
+        )
+    ),
 )
