@@ -1783,4 +1783,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.junkfood.seal",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "44:93:58:2A:41:48:DF:38:FC:26:90:73:C8:78:7C:31:C4:31:ED:5B:6D:62:71:08:92:A0:40:6F:F5:0C:4D:67",
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "7D:E6:AE:B9:3F:19:6E:67:7B:08:7B:C8:D0:40:FE:59:8B:61:3A:96:54:99:0D:6F:CA:A4:0D:71:EB:13:CD:49",
+                ),
+                false
+            )
+        )
+    ),
 )
