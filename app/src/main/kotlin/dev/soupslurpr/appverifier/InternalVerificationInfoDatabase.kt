@@ -1824,4 +1824,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "dev.lbeernaert.youhavemail",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID
+                ),
+                listOf(
+                    "1B:B4:B3:43:AA:70:5F:49:B7:3B:3E:F4:89:C9:87:DD:2E:2F:68:4C:C1:B6:EB:49:F6:25:BC:BF:6C:8F:01:EE"
+                ),
+                false
+            )
+        )
+    ),
 )
