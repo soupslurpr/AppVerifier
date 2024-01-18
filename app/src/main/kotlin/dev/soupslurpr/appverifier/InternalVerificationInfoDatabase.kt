@@ -1783,4 +1783,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "tv.megacubo.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "A4:77:EA:2E:F0:40:F1:ED:B5:8B:21:BD:EE:91:5A:41:C3:3F:62:CE:BA:D6:23:9C:48:5A:C3:11:30:1C:3D:73"
+                ),
+                false
+            )
+        )
+    ),
 )
