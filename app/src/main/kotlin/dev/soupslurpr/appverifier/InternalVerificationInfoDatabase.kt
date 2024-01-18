@@ -3,16 +3,17 @@ package dev.soupslurpr.appverifier
 import dev.soupslurpr.appverifier.data.Hashes
 
 
-enum class Source {
-    GOOGLE_PLAY_STORE,
-    GOOGLE_PIXEL_OS,
-    GITHUB,
-    ACCRESCENT,
-    CODEBERG,
-    FDROID,
-    APP_FDROID_REPO,
-    WEBSITE,
-    GITLAB,
+enum class Source(val displayName: String) {
+    NONE("NONE"), // DO NOT USE IN DATABASE ENTRIES.
+    GOOGLE_PLAY_STORE("Google Play Store"),
+    GOOGLE_PIXEL_OS("Google Pixel OS"),
+    GITHUB("GitHub"),
+    ACCRESCENT("Accrescent"),
+    CODEBERG("Codeberg"),
+    FDROID("F-Droid"),
+    APP_FDROID_REPO("App's F-Droid Repo"),
+    WEBSITE("App's Website"),
+    GITLAB("GitLab"),
 }
 
 /**
@@ -35,7 +36,7 @@ enum class Source {
  *     listOf(
  *         Hashes(
  *             listOf(
- *                 Source.GITHUB
+ *                 Source.GITHUB,
  *                 Source.GOOGLE_PLAY_STORE
  *             ),
  *             listOf(

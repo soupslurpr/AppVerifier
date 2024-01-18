@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.soupslurpr.appverifier.data.Hashes
+import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
@@ -37,11 +38,11 @@ fun AppListScreen(
         packageName: String,
         hash: Hashes,
         icon: Drawable,
-        internalDatabusStatus: InternalDatabaseStatus,
+        internalDatabaseInfo: InternalDatabaseInfo,
     ) -> Unit,
     onLaunchedEffect: () -> Unit,
     getHashesFromPackageInfo: (packageInfo: PackageInfo) -> Hashes,
-    getInternalDatabaseStatusFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseStatus,
+    getInternalDatabaseInfoFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseInfo,
 ) {
     val context = LocalContext.current
 
@@ -77,7 +78,7 @@ fun AppListScreen(
                     hashes = hashes,
                     icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
                     onClickAppItem = onClickAppItem,
-                    internalDatabaseStatus = getInternalDatabaseStatusFromVerificationInfo(verificationInfo),
+                    internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
                 )
             }
         }
@@ -98,13 +99,13 @@ fun AppItem(
         packageName: String,
         hash: Hashes,
         icon: Drawable,
-        internalDatabaseStatus: InternalDatabaseStatus
+        internalDatabaseInfo: InternalDatabaseInfo
     ) -> Unit,
-    internalDatabaseStatus: InternalDatabaseStatus,
+    internalDatabaseInfo: InternalDatabaseInfo,
 ) {
     ListItem(
         modifier = Modifier.clickable {
-            onClickAppItem(name, packageName, hashes, icon, internalDatabaseStatus)
+            onClickAppItem(name, packageName, hashes, icon, internalDatabaseInfo)
         },
         headlineContent = {
             Text(name)
@@ -120,7 +121,7 @@ fun AppItem(
             )
         },
         trailingContent = {
-            when (internalDatabaseStatus) {
+            when (internalDatabaseInfo.internalDatabaseStatus) {
                 InternalDatabaseStatus.NOT_FOUND -> null
                 InternalDatabaseStatus.MATCH -> Icon(
                     Icons.Filled.Verified,

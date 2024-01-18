@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.soupslurpr.appverifier.data.Hashes
-import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
+import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.preferences.PreferencesViewModel
 import dev.soupslurpr.appverifier.ui.AppListScreen
 import dev.soupslurpr.appverifier.ui.CreditsScreen
@@ -124,15 +124,20 @@ fun AppVerifierApp(
             }
             composable(route = AppVerifierScreens.AppList.name) {
                 AppListScreen(
-                    { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseStatus:
-                    InternalDatabaseStatus ->
-                        verifyAppViewModel.setAppVerificationInfo(name, packageName, hashes, internalDatabaseStatus)
+                    { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseInfo:
+                    InternalDatabaseInfo ->
+                        verifyAppViewModel.setAppVerificationInfo(
+                            name,
+                            packageName,
+                            hashes,
+                            internalDatabaseInfo
+                        )
                         verifyAppViewModel.setAppIcon(icon)
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
                     { verifyAppViewModel.clearUiState() },
                     { verifyAppViewModel.getHashesFromPackageInfo(it) },
-                    { verifyAppViewModel.getInternalDatabaseStatusFromVerificationInfo(it) }
+                    { verifyAppViewModel.getInternalDatabaseInfoFromVerificationInfo(it) }
                 )
             }
             composable(route = AppVerifierScreens.VerifyApp.name) {
@@ -145,7 +150,7 @@ fun AppVerifierApp(
                     verifyAppUiState.value.appNotFoundOrInvalidFormat.value,
                     { verifyAppViewModel.verifyFromText(it) },
                     { navController.navigateUp() },
-                    verifyAppUiState.value.internalDatabaseStatus.value,
+                    verifyAppUiState.value.internalDatabaseInfo.value,
                     verifyAppUiState.value.apkFailedToParse.value,
                 )
             }

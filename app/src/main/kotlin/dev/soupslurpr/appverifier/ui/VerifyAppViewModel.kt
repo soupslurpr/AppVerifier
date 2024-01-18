@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import dev.soupslurpr.appverifier.Source
 import dev.soupslurpr.appverifier.data.Hashes
+import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
 import dev.soupslurpr.appverifier.data.VerificationStatus
@@ -32,12 +34,12 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         name: String,
         packageName: String,
         hashes: Hashes,
-        internalDatabaseStatus: InternalDatabaseStatus
+        internalDatabaseInfo: InternalDatabaseInfo,
     ) {
         _uiState.value.name.value = name
         _uiState.value.packageName.value = packageName
         _uiState.value.hashes.value = hashes
-        _uiState.value.internalDatabaseStatus.value = internalDatabaseStatus
+        _uiState.value.internalDatabaseInfo.value = internalDatabaseInfo
     }
 
     fun setAppIcon(icon: Drawable) {
@@ -170,7 +172,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 }
         }
 
-        return Hashes(signatures, hasMultipleSigners)
+        return Hashes(listOf(Source.NONE), signatures, hasMultipleSigners)
     }
 
     fun findAndSetAppVerificationInfoFromPackageName(packageName: String, packageManager: PackageManager) {
@@ -195,7 +197,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                     packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                     packageInfo.packageName,
                     hashes,
-                    getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
+                    getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
                 )
                 setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
             } else {
@@ -212,24 +214,25 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         _uiState.value.apkFailedToParse.value = b
     }
 
-    fun getInternalDatabaseStatusFromVerificationInfo(verificationInfo: VerificationInfo): InternalDatabaseStatus {
+    fun getInternalDatabaseInfoFromVerificationInfo(verificationInfo: VerificationInfo): InternalDatabaseInfo {
         return internalVerificationInfoDatabase.run {
             val packageNameMatchedInternalDatabaseVerificationInfo = try {
                 this.first {
                     it.packageName == verificationInfo.packageName
                 }
             } catch (e: NoSuchElementException) {
-                return@run InternalDatabaseStatus.NOT_FOUND
+                return@run InternalDatabaseInfo(InternalDatabaseStatus.NOT_FOUND, listOf(Source.NONE))
             }
 
             return@run if (verificationInfo.hashes.hasMultipleSigners) { // Has multiple signers
-                if (packageNameMatchedInternalDatabaseVerificationInfo
-                        .hashesList
-                        .contains(verificationInfo.hashes)
-                ) {
-                    InternalDatabaseStatus.MATCH
+                val maybeMatchedHashes = packageNameMatchedInternalDatabaseVerificationInfo.hashesList.find {
+                    it ==
+                            verificationInfo.hashes
+                }
+                if (maybeMatchedHashes != null) {
+                    InternalDatabaseInfo(InternalDatabaseStatus.MATCH, maybeMatchedHashes.sources)
                 } else {
-                    InternalDatabaseStatus.NOMATCH
+                    InternalDatabaseInfo(InternalDatabaseStatus.NOMATCH, listOf(Source.NONE))
                 }
             } else {
                 packageNameMatchedInternalDatabaseVerificationInfo
@@ -242,12 +245,15 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                         ) {
                             verificationInfo.hashes.hashes.forEach { hash ->
                                 if (internalDatabaseHashes.hashes.contains(hash)) {
-                                    return@run InternalDatabaseStatus.MATCH
+                                    return@run InternalDatabaseInfo(
+                                        InternalDatabaseStatus.MATCH,
+                                        internalDatabaseHashes.sources
+                                    )
                                 }
                             }
                         }
                     }
-                return InternalDatabaseStatus.NOMATCH
+                return InternalDatabaseInfo(InternalDatabaseStatus.NOMATCH, listOf(Source.NONE))
             }
         }
     }
@@ -295,7 +301,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
                 packageName,
                 hashes,
-                getInternalDatabaseStatusFromVerificationInfo(VerificationInfo(packageName, hashes))
+                getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
             )
             setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
 

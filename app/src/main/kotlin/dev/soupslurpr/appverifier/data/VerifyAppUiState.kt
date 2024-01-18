@@ -9,15 +9,29 @@ import dev.soupslurpr.appverifier.Source
 data class VerifyAppUiState(
     val name: MutableState<String> = mutableStateOf(""),
     val packageName: MutableState<String> = mutableStateOf(""),
-    val hashes: MutableState<Hashes> = mutableStateOf(Hashes(listOf(Source.WEBSITE), listOf(""), false)),
+    val hashes: MutableState<Hashes> = mutableStateOf(Hashes(listOf(Source.NONE), listOf(""), false)),
     val icon: MutableState<Drawable?> = mutableStateOf(null),
     val verificationStatus: MutableState<VerificationStatus> = mutableStateOf(VerificationStatus.UNKNOWN),
     val appNotFoundOrInvalidFormat: MutableState<Boolean> = mutableStateOf(false),
     val apkFailedToParse: MutableState<Boolean> = mutableStateOf(false),
-    val internalDatabaseStatus: MutableState<InternalDatabaseStatus> = mutableStateOf(InternalDatabaseStatus.NOT_FOUND)
+    val internalDatabaseInfo: MutableState<InternalDatabaseInfo> = mutableStateOf(
+        InternalDatabaseInfo(
+            InternalDatabaseStatus.NOT_FOUND,
+            listOf(Source.NONE)
+        )
+    ),
 )
 
-enum class InternalDatabaseStatus(val info: String, val simpleInternalDatabaseStatus: SimpleInternalDatabaseStatus) {
+
+class InternalDatabaseInfo(
+    val internalDatabaseStatus: InternalDatabaseStatus,
+    val sources: List<Source>
+)
+
+enum class InternalDatabaseStatus(
+    val info: String,
+    val simpleInternalDatabaseStatus: SimpleInternalDatabaseStatus,
+) {
     NOT_FOUND(
         "This app was not found in the internal database. This isn't anything to worry about, but please verify the " +
                 "app normally.",

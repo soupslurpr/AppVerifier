@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -46,6 +47,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.soupslurpr.appverifier.BuildConfig
 import dev.soupslurpr.appverifier.data.Hashes
+import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.VerificationStatus
 
@@ -59,7 +61,7 @@ fun VerifyAppScreen(
     appNotFound: Boolean,
     onVerifyFromClipboard: (String) -> Unit,
     onLaunchedEffectHashEmpty: () -> Unit,
-    internalDatabaseStatus: InternalDatabaseStatus,
+    internalDatabaseInfo: InternalDatabaseInfo,
     apkFailedToParse: Boolean,
 ) {
     val context = LocalContext.current
@@ -112,14 +114,14 @@ fun VerifyAppScreen(
                     onClick = { showMoreInfoAboutInternalDatabaseStatusDialog = true },
                 ) {
                     Text(
-                        internalDatabaseStatus.simpleInternalDatabaseStatus.name.replace('_', ' '),
+                        internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.name.replace('_', ' '),
                         style = typography.headlineLarge
                     )
                     Spacer(Modifier.width(8.dp))
                     Icon(
                         Icons.Default.Info,
                         "More info about internal database status",
-                        tint = internalDatabaseStatus.simpleInternalDatabaseStatus.color,
+                        tint = internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.color,
                     )
                 }
             }
@@ -214,14 +216,31 @@ fun VerifyAppScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        internalDatabaseStatus.name,
+                        internalDatabaseInfo.internalDatabaseStatus.name,
                         style = typography.headlineSmall,
-                        color = internalDatabaseStatus.simpleInternalDatabaseStatus.color,
+                        color = internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.color,
                     )
                 }
             },
             text = {
-                Text(internalDatabaseStatus.info)
+                LazyColumn {
+                    item {
+                        Text(internalDatabaseInfo.internalDatabaseStatus.info)
+                    }
+                    item {
+                        if (internalDatabaseInfo.internalDatabaseStatus == InternalDatabaseStatus.MATCH) {
+                            Text("\nThe matched database entry for this app is from the following sources:\n")
+                            Text(
+                                text = internalDatabaseInfo.sources.joinToString("\n") { it.displayName },
+                                style = typography.headlineSmall,
+                            )
+                            Text(
+                                "\nThis information can be useful if you distrust a specific source and want to make" +
+                                        " sure the app isn't signed with their keys."
+                            )
+                        }
+                    }
+                }
             }
         )
     }
