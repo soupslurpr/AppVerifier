@@ -1839,4 +1839,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.cromite.cromite",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "63:3F:A4:1D:82:11:D6:D0:91:6A:81:9B:89:66:8C:6D:E9:2E:64:23:2D:A6:7F:9D:16:FD:81:C3:B7:E9:23:FF"
+                ),
+                false
+            )
+        )
+    ),
 )
