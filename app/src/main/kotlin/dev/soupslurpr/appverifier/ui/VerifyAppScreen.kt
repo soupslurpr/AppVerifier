@@ -268,7 +268,11 @@ fun VerifyAppScreen(
                 }
             },
             text = {
-                Text(verificationStatus.info)
+                LazyColumn {
+                    item {
+                        Text(verificationStatus.info)
+                    }
+                }
             }
         )
     }
