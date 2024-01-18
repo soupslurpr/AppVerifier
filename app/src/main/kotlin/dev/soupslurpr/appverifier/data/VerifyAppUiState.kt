@@ -4,11 +4,12 @@ import android.graphics.drawable.Drawable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
+import dev.soupslurpr.appverifier.Source
 
 data class VerifyAppUiState(
     val name: MutableState<String> = mutableStateOf(""),
     val packageName: MutableState<String> = mutableStateOf(""),
-    val hashes: MutableState<Hashes> = mutableStateOf(Hashes(listOf(""), false)),
+    val hashes: MutableState<Hashes> = mutableStateOf(Hashes(listOf(Source.WEBSITE), listOf(""), false)),
     val icon: MutableState<Drawable?> = mutableStateOf(null),
     val verificationStatus: MutableState<VerificationStatus> = mutableStateOf(VerificationStatus.UNKNOWN),
     val appNotFoundOrInvalidFormat: MutableState<Boolean> = mutableStateOf(false),
@@ -39,7 +40,11 @@ enum class SimpleInternalDatabaseStatus(val color: Color) {
     FAILURE(Color.Red)
 }
 
-data class Hashes(val hashes: List<String>, val hasMultipleSigners: Boolean)
+data class Hashes(
+    val sources: List<Source>,
+    val hashes: List<String>,
+    val hasMultipleSigners: Boolean
+)
 
 data class VerificationInfo(val packageName: String, val hashes: Hashes)
 
