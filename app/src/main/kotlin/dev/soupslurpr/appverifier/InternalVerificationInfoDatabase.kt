@@ -1783,4 +1783,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.ca.squawker",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "39:FB:AE:AF:F1:D5:C7:76:73:8F:28:01:EF:26:02:F6:30:5C:7D:8A:C4:D2:F1:E3:9E:E6:E2:36:89:39:95:E3",
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "A0:E9:E7:13:07:85:5E:38:FD:E5:4C:B0:54:E7:24:46:E7:6D:FB:61:35:BE:F4:C2:82:08:6E:03:EC:46:55:71",
+                ),
+                false
+            )
+        )
+    ),
 )
