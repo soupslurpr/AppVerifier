@@ -19,7 +19,7 @@ Above the `Hashes` put a comment that says the source where the app was obtained
 Please look at the other entries in the database for examples of this.
 Make one pull request for every app instead of multiple apps in one pull request.
 
-If you need help with development or have questions it's recommended to join the AppVerifier room on matrix at
+If you need help with development or have questions it's recommended to join the AppVerifier room on Matrix at
 https://matrix.to/#/#appverifier:matrix.org and ask for help there from [soupslurpr](https://github.com/soupslurpr),
 the lead developer.
 
