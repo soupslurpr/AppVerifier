@@ -15,8 +15,7 @@ You must check the app's website or repo to see which sources they say the app i
 and check the verification info of each source to see if it's the same. If the package name is
 the same but not the hashes, then you have to make a `Hashes` in the same `InternalDatabaseVerificationInfo` with the hashes for the app from that source and whether it has multiple signers.
 If the package name is different, then create another `InternalDatabaseVerificationInfo`.
-Above the `Hashes` put a comment that says the source where the app was obtained from.
-Please look at the other entries in the database for examples of this.
+Please view the comment for `InternalDatabaseVerificationInfo` for more info and examples.
 Make one pull request for every app instead of multiple apps in one pull request.
 
 If you need help with development or have questions it's recommended to join the AppVerifier room on Matrix at
