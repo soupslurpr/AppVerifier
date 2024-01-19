@@ -32,4 +32,7 @@
     <string name="donation">Donation</string>
     <string name="donation_setting_name">Donation</string>
     <string name="donation_setting_description">View how to donate to AppVerifier\'s lead developer in-app</string>
+    <string name="contributing">Contributing</string>
+    <string name="show_hasmultiplesigners_setting_name">Show hasMultipleSigners</string>
+    <string name="show_hasmultiplesigners_setting_description">"Shows hasMultipleSigners in the app verification screen. This is useful for contributing to the internal verification info database."</string>
 </resources>

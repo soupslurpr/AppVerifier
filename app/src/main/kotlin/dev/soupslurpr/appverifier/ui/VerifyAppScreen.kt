@@ -45,7 +45,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import dev.soupslurpr.appverifier.BuildConfig
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
@@ -63,6 +62,7 @@ fun VerifyAppScreen(
     onLaunchedEffectHashEmpty: () -> Unit,
     internalDatabaseInfo: InternalDatabaseInfo,
     apkFailedToParse: Boolean,
+    showHasMultipleSigners: Boolean,
 ) {
     val context = LocalContext.current
 
@@ -142,7 +142,7 @@ fun VerifyAppScreen(
                 text = hashes.hashes.joinToString("\n"),
                 fontFamily = FontFamily.Monospace
             )
-            if (BuildConfig.DEBUG) {
+            if (showHasMultipleSigners) {
                 Text(
                     "hasMultipleSigners: "
                 )

@@ -43,6 +43,13 @@ class PreferencesViewModel(private val dataStore: DataStore<Preferences>) : View
                                 .acceptedPrivacyPolicyAndLicense.second.value
                         )
                     ),
+                    showHasMultipleSigners = Pair(
+                        uiState.value.showHasMultipleSigners.first,
+                        mutableStateOf(
+                            settings[uiState.value.showHasMultipleSigners.first] ?: uiState.value
+                                .showHasMultipleSigners.second.value
+                        )
+                    ),
                     pitchBlackBackground = Pair(
                         uiState.value.pitchBlackBackground.first,
                         mutableStateOf(

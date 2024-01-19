@@ -70,6 +70,21 @@ fun SettingsScreen(
         }
 
         Column {
+            SettingsCategoryText(category = stringResource(id = R.string.contributing))
+            SettingsItem(
+                name = stringResource(id = R.string.show_hasmultiplesigners_setting_name),
+                description = stringResource(R.string.show_hasmultiplesigners_setting_description),
+                hasSwitch = true,
+                checked = preferencesUiState.showHasMultipleSigners.second.value,
+                onCheckedChange = {
+                    coroutineScope.launch {
+                        preferencesViewModel.setPreference(preferencesUiState.showHasMultipleSigners.first, it)
+                    }
+                }
+            )
+        }
+
+        Column {
             SettingsCategoryText(category = stringResource(id = R.string.about))
 //            SettingsItem(
 //                name = stringResource(id = R.string.open_appverifier_website_setting_name),

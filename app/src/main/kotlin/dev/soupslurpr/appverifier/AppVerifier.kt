@@ -56,6 +56,8 @@ fun AppVerifierApp(
     isActionSend: Boolean,
     isActionView: Boolean,
 ) {
+    val preferencesUiState = preferencesViewModel.uiState.collectAsState()
+
     val verifyAppUiState = verifyAppViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
@@ -152,6 +154,7 @@ fun AppVerifierApp(
                     { navController.navigateUp() },
                     verifyAppUiState.value.internalDatabaseInfo.value,
                     verifyAppUiState.value.apkFailedToParse.value,
+                    preferencesUiState.value.showHasMultipleSigners.second.value,
                 )
             }
             composable(route = AppVerifierScreens.Settings.name) {
