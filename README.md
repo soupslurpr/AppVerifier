@@ -20,10 +20,10 @@ Click on the badge below to get it on [Accrescent](https://accrescent.app).
                         </a>
                         
 The package name and SHA-256 hash of the signing certificate is below, so you can verify AppVerifier with [`apksigner`](https://developer.android.com/studio/command-line/apksigner#usage-verify) using `apksigner verify --print-certs AppVerifier-X.Y.Z.apk` if you are downloading the APK. If you are downloading from [Accrescent](https://accrescent.app) then you should verify [Accrescent](https://accrescent.app) itself [here](https://accrescent.app/faq#verifying).
-```
-dev.soupslurpr.appverifier
+
+dev.soupslurpr.appverifier\
 3A:04:A8:0B:2A:88:33:4C:74:74:85:F0:B2:15:16:40:A3:8B:B3:D2:D7:3A:8E:AB:81:DF:50:3E:0F:02:02:B2
-```
+
 
 It can also be found on a [Bluesky post](https://bsky.app/profile/soupslurpr.dev/post/3khnczlribj2i) to distrust the website. It is encouraged to verify it's the same with other people as well for assurance.
 
