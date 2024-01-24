@@ -236,7 +236,7 @@ fun VerifyAppScreen(
                             )
                             Text(
                                 "\nThis information can be useful if you distrust a specific source and want to make" +
-                                        " sure the app isn't signed with their keys."
+                                        " sure the app isn't from them."
                             )
                         }
                     }
