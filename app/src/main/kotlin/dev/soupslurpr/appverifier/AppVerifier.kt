@@ -8,8 +8,12 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -29,6 +33,7 @@ import dev.soupslurpr.appverifier.ui.SettingsScreen
 import dev.soupslurpr.appverifier.ui.StartupScreen
 import dev.soupslurpr.appverifier.ui.VerifyAppScreen
 import dev.soupslurpr.appverifier.ui.VerifyAppViewModel
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 enum class AppVerifierScreens(@StringRes val title: Int) {
@@ -59,6 +64,10 @@ fun AppVerifierApp(
     val preferencesUiState = preferencesViewModel.uiState.collectAsState()
 
     val verifyAppUiState = verifyAppViewModel.uiState.collectAsState()
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    val snackbarCoroutineScope = rememberCoroutineScope()
 
     val navController = rememberNavController()
 
@@ -93,7 +102,12 @@ fun AppVerifierApp(
     Scaffold(
         topBar = {
             AppVerifierAppBar()
-        }
+        },
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+            )
+        },
     ) { innerPadding ->
         NavHost(
             navController = navController,
@@ -155,6 +169,11 @@ fun AppVerifierApp(
                     verifyAppUiState.value.internalDatabaseInfo.value,
                     verifyAppUiState.value.apkFailedToParse.value,
                     preferencesUiState.value.showHasMultipleSigners.second.value,
+                    {
+                        snackbarCoroutineScope.launch {
+                            snackbarHostState.showSnackbar("Clipboard is empty!")
+                        }
+                    }
                 )
             }
             composable(route = AppVerifierScreens.Settings.name) {

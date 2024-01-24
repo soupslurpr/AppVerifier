@@ -63,6 +63,7 @@ fun VerifyAppScreen(
     internalDatabaseInfo: InternalDatabaseInfo,
     apkFailedToParse: Boolean,
     showHasMultipleSigners: Boolean,
+    showClipboardEmptyMessage: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -171,7 +172,7 @@ fun VerifyAppScreen(
                 if (clipboardManager.hasText()) {
                     onVerifyFromClipboard(clipboardManager.getText()!!.text)
                 } else {
-
+                    showClipboardEmptyMessage()
                 }
             }) {
                 Text("Verify from clipboard")
