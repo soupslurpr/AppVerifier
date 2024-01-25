@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.ledger.live",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "D3:03:FF:5E:88:07:37:60:24:E0:31:51:FC:83:F3:D1:11:31:05:D3:BB:FB:B9:10:FB:96:D5:B0:62:86:8C:3E"
+                ),
+                false
+            )
+        )
+    ),
 )
