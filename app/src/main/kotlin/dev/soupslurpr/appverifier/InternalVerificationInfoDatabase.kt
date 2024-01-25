@@ -14,6 +14,7 @@ enum class Source(val displayName: String) {
     APP_FDROID_REPO("App's F-Droid Repo"),
     WEBSITE("App's Website"),
     GITLAB("GitLab"),
+    AMAZON_APPSTORE("Amazon Appstore"),
 }
 
 /**
