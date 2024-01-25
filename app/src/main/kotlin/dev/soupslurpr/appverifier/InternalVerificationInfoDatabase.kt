@@ -1900,4 +1900,28 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.etesync.syncadapter",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID
+                ),
+                listOf(
+                    "E3:A0:65:E5:4A:E1:D2:00:2D:31:0B:37:54:D0:0D:4E:66:CB:B7:1C:47:52:8A:08:9C:14:54:E1:70:69:17:80"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "16:E8:01:CA:2E:38:D0:A8:3F:2E:2D:A0:B6:C7:83:25:7F:2F:1D:93:17:97:0B:A5:9D:31:D0:80:E8:D3:06:9B"
+                ),
+                false
+            )
+        )
+    ),
 )
