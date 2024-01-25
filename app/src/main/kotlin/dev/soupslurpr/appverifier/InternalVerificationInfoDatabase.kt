@@ -1900,4 +1900,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "dev.patrickgold.florisboard",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "0B:80:71:64:50:8E:AF:EB:1F:BB:81:5B:E7:A2:3C:77:FE:68:9D:94:B1:43:75:C9:9B:DA:A9:B6:57:7F:D6:D6"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "83:6B:2F:E1:89:24:FA:D8:35:65:61:32:46:5F:6C:CB:86:5D:BC:D6:0B:E8:D2:70:66:05:79:DF:77:95:2D:94"
+                ),
+                false
+            )
+        )
+    ),
 )
