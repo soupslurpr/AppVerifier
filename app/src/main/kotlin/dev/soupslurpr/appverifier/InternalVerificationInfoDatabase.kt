@@ -1901,4 +1901,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.overdrive.mobile.android.libby",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.AMAZON_APP_STORE
+                ),
+                listOf(
+                    "59:1F:64:E1:42:F4:ED:C3:F0:5C:AC:2D:23:3D:44:4C:2E:20:94:71:79:87:24:EC:9E:02:74:B9:5A:98:D6:96"
+                ),
+                false
+            )
+        )
+    ),
 )
