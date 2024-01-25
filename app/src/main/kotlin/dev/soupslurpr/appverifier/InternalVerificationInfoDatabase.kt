@@ -1901,4 +1901,20 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.gematik.ti.erp.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "B4:63:DF:B0:59:76:99:64:DD:74:97:21:48:0E:20:5A:52:D8:F0:F2:40:08:47:A9:E2:31:C3:55:8C:A2:D8:48"
+                ),
+                false
+            )
+        )
+    ),
 )
