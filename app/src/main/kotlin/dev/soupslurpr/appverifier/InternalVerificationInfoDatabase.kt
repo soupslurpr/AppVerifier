@@ -1900,4 +1900,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "net.typeblog.shelter",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "D7:3D:3C:71:5B:DE:7F:C8:6C:1C:15:6F:F3:D5:73:CF:8B:9C:67:0F:5A:1F:3C:5E:F8:23:BE:40:E6:05:29:8A"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "2D:48:37:13:4F:35:19:A1:1D:10:46:30:ED:42:A4:A7:95:F4:AB:23:27:E1:C9:89:9C:BE:BF:BF:89:AB:A4:83"
+                ),
+                false
+            )
+        )
+    ),
 )
