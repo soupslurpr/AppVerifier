@@ -1901,4 +1901,20 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.governikus.ausweisapp2",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "B0:2A:C7:6B:50:A4:97:AE:81:0A:EA:C2:25:98:18:7B:3D:42:90:27:7D:08:51:A7:FA:8E:1A:EA:5A:97:98:70"
+                ),
+                false
+            )
+        )
+    ),
 )
