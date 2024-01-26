@@ -2013,4 +2013,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.tailscale.ipn",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "5C:DB:29:55:51:BF:E1:A0:87:FE:D6:AC:DA:07:14:1C:6C:92:9F:A7:C2:9B:D2:73:A7:09:28:13:AC:C4:34:BF"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "37:05:F1:84:CB:67:D6:83:E7:6E:CC:20:3C:C9:CC:35:7E:64:48:C5:0E:59:00:24:19:08:5B:4C:28:6D:F0:E8"
+                ),
+                false
+            )
+        )
+    ),
 )
