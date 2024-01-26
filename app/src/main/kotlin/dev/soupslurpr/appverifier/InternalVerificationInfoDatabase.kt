@@ -1900,4 +1900,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.torproject.torbrowser",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "20:06:1F:04:5E:73:7C:67:37:5C:17:79:4C:FE:DB:43:6A:03:CE:C6:BA:CB:7C:B9:F9:66:42:20:5C:A2:CE:C8"
+                ),
+                false
+            )
+        )
+    ),
 )
