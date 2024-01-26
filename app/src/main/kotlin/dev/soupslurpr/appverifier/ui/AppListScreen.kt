@@ -4,25 +4,30 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Verified
+import androidx.compose.material3.DockedSearchBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.soupslurpr.appverifier.data.Hashes
@@ -31,8 +36,10 @@ import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(
+    searchQuery: String,
     onClickAppItem: (
         name: String,
         packageName: String,
@@ -41,6 +48,9 @@ fun AppListScreen(
         internalDatabaseInfo: InternalDatabaseInfo,
     ) -> Unit,
     onLaunchedEffect: () -> Unit,
+    onQueryChange: (query: String) -> Unit,
+    onSearch: (query: String) -> Unit,
+    onSearchActiveChange: (active: Boolean) -> Unit,
     getHashesFromPackageInfo: (packageInfo: PackageInfo) -> Hashes,
     getInternalDatabaseInfoFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseInfo,
 ) {
@@ -62,28 +72,49 @@ fun AppListScreen(
         onLaunchedEffect()
     }
 
-    LazyColumn {
-        items(userInstalledPackages) {
-            // Do not show AppVerifier in the list as there is no point in using it to verify itself.
-            if (it.packageName != context.packageName) {
-                val packageInfo = packageManager.getPackageInfo(it.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
-
-                val hashes = getHashesFromPackageInfo(packageInfo)
-
-                val verificationInfo = VerificationInfo(packageInfo.packageName, hashes)
-
-                AppItem(
-                    name = packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
-                    packageName = packageInfo.packageName,
-                    hashes = hashes,
-                    icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
-                    onClickAppItem = onClickAppItem,
-                    internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
-                )
-            }
+    Scaffold(
+        topBar = {
+            DockedSearchBar(
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                placeholder = { Text(stringResource(android.R.string.search_go)) },
+                modifier = Modifier.fillMaxWidth().padding(16.dp, 8.dp),
+                query = searchQuery,
+                onQueryChange = onQueryChange,
+                onSearch = onSearch,
+                active = false,
+                onActiveChange = onSearchActiveChange,
+            ) {}
         }
-        item {
-            Spacer(Modifier.padding(WindowInsets.navigationBars.asPaddingValues()))
+    ) { innerPadding ->
+        LazyColumn(Modifier.padding(innerPadding)) {
+            items(userInstalledPackages) {
+                // Do not show AppVerifier in the list as there is no point in using it to verify itself.
+                if (it.packageName == context.packageName) return@items
+
+                val packageInfo = packageManager.getPackageInfo(
+                    it.packageName,
+                    PackageManager.GET_SIGNING_CERTIFICATES
+                )
+                val name = packageManager.getApplicationLabel(packageInfo.applicationInfo)
+                    .toString()
+
+                if (searchQuery == "" || name.contains(searchQuery) ||
+                    it.packageName.contains(searchQuery))
+                {
+                    val hashes = getHashesFromPackageInfo(packageInfo)
+
+                    val verificationInfo = VerificationInfo(packageInfo.packageName, hashes)
+
+                    AppItem(
+                        name = name,
+                        packageName = packageInfo.packageName,
+                        hashes = hashes,
+                        icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
+                        onClickAppItem = onClickAppItem,
+                        internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
+                    )
+                }
+            }
         }
     }
 }

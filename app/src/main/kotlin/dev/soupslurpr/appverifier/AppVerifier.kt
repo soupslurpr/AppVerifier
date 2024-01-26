@@ -140,6 +140,7 @@ fun AppVerifierApp(
             }
             composable(route = AppVerifierScreens.AppList.name) {
                 AppListScreen(
+                    verifyAppUiState.value.searchQuery.value,
                     { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseInfo:
                     InternalDatabaseInfo ->
                         verifyAppViewModel.setAppVerificationInfo(
@@ -152,6 +153,9 @@ fun AppVerifierApp(
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
                     { verifyAppViewModel.clearUiState() },
+                    { verifyAppViewModel.setSearchQuery(it) },
+                    { },
+                    { },
                     { verifyAppViewModel.getHashesFromPackageInfo(it) },
                     { verifyAppViewModel.getInternalDatabaseInfoFromVerificationInfo(it) }
                 )
