@@ -1900,4 +1900,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "us.spotco.fennec_dos",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "26:0E:0A:49:67:8C:78:B7:0C:02:D6:53:7A:DD:3B:6D:C0:A1:71:71:BB:DE:8C:E7:5F:D4:02:6A:8A:3E:18:D2"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "FF:81:F5:BE:56:39:65:94:EE:E7:0F:EF:28:32:25:6E:15:21:41:22:E2:BA:9C:ED:D2:60:05:FF:D4:BC:AA:A8"
+                ),
+                false
+            )
+        )
+    ),
 )
