@@ -98,8 +98,8 @@ fun AppListScreen(
                 val name = packageManager.getApplicationLabel(packageInfo.applicationInfo)
                     .toString()
 
-                if (searchQuery == "" || name.contains(searchQuery) ||
-                    it.packageName.contains(searchQuery))
+                if (searchQuery == "" || name.contains(searchQuery, true) ||
+                    it.packageName.contains(searchQuery, true))
                 {
                     val hashes = getHashesFromPackageInfo(packageInfo)
 
