@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.thestorygraph.thestorygraph",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "E8:DA:D2:64:BA:81:3D:0C:B7:FC:D9:29:BC:70:2D:ED:0C:EA:76:34:C8:B6:E9:86:93:6D:39:F4:6A:23:CA:6D"
+                ),
+                false
+            )
+        )
+    ),
 )
