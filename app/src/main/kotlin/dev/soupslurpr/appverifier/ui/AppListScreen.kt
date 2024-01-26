@@ -16,8 +16,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Verified
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,8 +33,10 @@ import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
 import dev.soupslurpr.appverifier.data.VerificationInfo
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(
+    searchQuery: String,
     onClickAppItem: (
         name: String,
         packageName: String,
@@ -41,6 +45,9 @@ fun AppListScreen(
         internalDatabaseInfo: InternalDatabaseInfo,
     ) -> Unit,
     onLaunchedEffect: () -> Unit,
+    onQueryChange: (query: String) -> Unit,
+    onSearch: (query: String) -> Unit,
+    onSearchActiveChange: (active: Boolean) -> Unit,
     getHashesFromPackageInfo: (packageInfo: PackageInfo) -> Hashes,
     getInternalDatabaseInfoFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseInfo,
 ) {
@@ -63,10 +70,23 @@ fun AppListScreen(
     }
 
     LazyColumn {
+        item {
+            SearchBar(
+                modifier = Modifier.padding(horizontal = 24.dp),
+                query = searchQuery,
+                onQueryChange = onQueryChange,
+                onSearch = onSearch,
+                active = false,
+                onActiveChange = onSearchActiveChange,
+            ) {}
+        }
         items(userInstalledPackages) {
             // Do not show AppVerifier in the list as there is no point in using it to verify itself.
-            if (it.packageName != context.packageName) {
-                val packageInfo = packageManager.getPackageInfo(it.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            if (it.packageName != context.packageName &&
+                (searchQuery == "" || it.packageName.contains(searchQuery))
+            ) {
+                val packageInfo =
+                    packageManager.getPackageInfo(it.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
 
                 val hashes = getHashesFromPackageInfo(packageInfo)
 
