@@ -1961,4 +1961,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "me.ash.reader",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "71:56:96:91:4A:35:36:6D:98:FA:45:31:2A:F9:68:11:F7:E6:DE:40:85:B5:E4:70:9F:4C:1E:74:F8:BD:E4:D0"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "CE:F3:38:A4:74:52:3B:DF:CF:3F:B8:2C:BE:E2:D4:5F:6F:D9:61:0E:95:90:2B:A7:8C:8C:79:A4:5E:10:2A:E9"
+                ),
+                false
+            )
+        )
+    ),
 )
