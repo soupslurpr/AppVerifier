@@ -1901,4 +1901,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.huawei.appmarket",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "A9:43:66:44:E0:BD:71:FF:51:2C:63:83:9F:8A:C2:71:14:39:9F:36:95:69:58:68:85:55:DF:CC:63:25:7E:DE"
+                ),
+                false
+            )
+        )
+    ),
 )
