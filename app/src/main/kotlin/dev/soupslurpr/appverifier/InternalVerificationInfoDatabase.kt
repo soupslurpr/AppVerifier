@@ -1900,4 +1900,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.fmsys.snapdrop",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "0C:97:DF:80:2B:A6:F9:93:CB:0E:DA:C2:EC:86:B6:63:40:E6:58:4E:AE:7F:98:39:10:98:DD:3B:1D:D5:72:7E"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "D6:6A:CA:E2:4B:35:9B:80:6D:E8:30:91:B6:B5:B4:E8:55:BA:DD:01:8F:5F:1B:33:C1:B5:F1:17:71:D6:D3:1E"
+                ),
+                false
+            )
+        )
+    ),
 )
