@@ -1901,4 +1901,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.alibaba.aliexpresshd",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "4F:C3:B2:67:39:3E:A2:35:1C:47:16:B3:7E:69:10:51:7F:19:7E:B4:79:BC:43:D9:C9:A5:A4:6D:49:DD:70:0E"
+                ),
+                false
+            )
+        )
+    ),
 )
