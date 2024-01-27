@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.tk.tkapp",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "64:59:9C:D0:AB:91:92:B7:CF:FA:91:10:3A:F5:CB:63:02:5B:63:2F:ED:BB:3B:0C:C4:9C:79:80:6E:B9:3D:6E"
+                ),
+                false
+            )
+        )
+    ),
 )
