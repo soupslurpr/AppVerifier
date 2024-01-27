@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.logseq.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                ),
+                listOf(
+                    "E2:EA:95:DF:B0:1D:FD:B8:CD:DC:8A:63:B4:1D:97:66:E5:3D:68:B2:CE:85:1E:C7:A7:E5:FD:F3:D1:66:D2:35"
+                ),
+                false
+            )
+        )
+    ),
 )
