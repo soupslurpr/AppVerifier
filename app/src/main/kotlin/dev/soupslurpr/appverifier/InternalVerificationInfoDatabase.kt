@@ -1984,4 +1984,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "xyz.blueskyweb.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "C1:4D:3C:6B:B5:D6:D9:AE:CF:C5:0B:BC:C1:9B:29:6D:D4:E6:87:46:36:D5:4C:1A:64:1C:14:08:BF:7E:F9:62"
+                ),
+                false
+            )
+        )
+    ),
 )
