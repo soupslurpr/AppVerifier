@@ -1901,4 +1901,29 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.jellyfin.mobile",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID
+                ),
+                listOf(
+                    "D8:81:79:6E:D2:A6:7F:F6:EF:9F:67:68:28:72:3C:6B:1F:A1:8E:09:38:89:62:CB:A4:AB:C4:A5:94:A6:91:31"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE,
+                    // Source.AMAZON_APPSTORE // TODO check which signature this has
+                ),
+                listOf(
+                    "B4:5C:1F:EC:A9:B0:18:07:97:2A:EE:30:41:B7:0F:3D:47:67:E6:99:09:EA:EC:75:3E:CF:B9:38:DE:B3:0A:63"
+                ),
+                false
+            )
+        )
+    ),
 )
