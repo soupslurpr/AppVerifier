@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.americanexpress.android.acctsvcs.de",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "DC:DA:0E:27:5E:04:C3:3A:04:06:8A:FF:EB:D4:03:ED:CF:A6:AE:B5:5D:F5:64:85:D5:4B:14:7E:B6:CF:1F:55"
+                ),
+                false
+            )
+        )
+    ),
 )
