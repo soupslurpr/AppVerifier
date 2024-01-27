@@ -1900,4 +1900,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.valvesoftware.android.steam.community",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "5D:FF:6B:05:76:14:47:A5:BD:F9:19:EA:88:FC:6F:DF:20:D3:01:E3:0B:23:15:41:5C:4D:36:8E:C0:FB:DA:45"
+                ),
+                false
+            )
+        )
+    ),
 )
