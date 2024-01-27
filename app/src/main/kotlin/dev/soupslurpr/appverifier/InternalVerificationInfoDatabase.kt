@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.barclaycard.germany",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "A3:26:EF:94:DC:4D:6E:24:8C:8E:47:12:39:77:FD:1B:61:38:56:6A:D6:A8:1D:45:6A:67:4C:73:57:6D:49:E7"
+                ),
+                false
+            )
+        )
+    ),
 )
