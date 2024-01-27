@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.c24.bankapp",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "F7:58:CE:7B:93:17:70:47:91:84:20:E9:D1:AE:39:49:85:37:0E:01:76:43:EB:6A:9C:E8:AC:7F:95:FC:BD:D2"
+                ),
+                false
+            )
+        )
+    ),
 )
