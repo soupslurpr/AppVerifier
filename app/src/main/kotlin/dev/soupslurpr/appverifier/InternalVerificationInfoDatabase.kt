@@ -1938,4 +1938,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "us.spotco.malwarescanner",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "26:0E:0A:49:67:8C:78:B7:0C:02:D6:53:7A:DD:3B:6D:C0:A1:71:71:BB:DE:8C:E7:5F:D4:02:6A:8A:3E:18:D2"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "79:36:60:51:6B:62:AE:8D:EB:A6:6D:5E:5E:42:44:E0:93:17:49:AB:9F:48:57:5B:50:12:44:CE:EA:85:8A:84"
+                ),
+                false
+            )
+        )
+    ),
 )
