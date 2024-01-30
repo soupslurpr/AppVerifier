@@ -12,9 +12,12 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.LayoutDirection
@@ -99,6 +102,8 @@ fun AppVerifierApp(
             }
         }
 
+    var searchQuery by rememberSaveable { mutableStateOf("") }
+
     Scaffold(
         topBar = {
             AppVerifierAppBar()
@@ -136,11 +141,17 @@ fun AppVerifierApp(
                     onVerifyApkFileButtonClicked = {
                         openApkFileLauncher.launch(arrayOf("application/vnd.android.package-archive"))
                     },
+                    onLaunchedEffect = {
+                        // clear VerifyAppUiState when exiting VerifyAppScreen from opening an apk and going back to StartupScreen.
+                        verifyAppViewModel.clearUiState()
+                        // clear searchQuery when going back to StartupScreen.
+                        searchQuery = ""
+                    }
                 )
             }
             composable(route = AppVerifierScreens.AppList.name) {
                 AppListScreen(
-                    verifyAppUiState.value.searchQuery.value,
+                    searchQuery,
                     { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseInfo:
                     InternalDatabaseInfo ->
                         verifyAppViewModel.setAppVerificationInfo(
@@ -153,7 +164,7 @@ fun AppVerifierApp(
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
                     { verifyAppViewModel.clearUiState() },
-                    { verifyAppViewModel.setSearchQuery(it) },
+                    { searchQuery = it },
                     { },
                     { },
                     { verifyAppViewModel.getHashesFromPackageInfo(it) },
