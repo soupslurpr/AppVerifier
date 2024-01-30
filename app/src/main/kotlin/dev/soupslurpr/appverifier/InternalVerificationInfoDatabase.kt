@@ -1900,4 +1900,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.materna.bbk.mobile.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "CA:6E:F5:65:07:4E:90:33:D6:A5:D5:DD:1B:B9:B1:E8:0B:B6:7E:43:D4:A9:A0:34:A5:51:C7:B0:5F:6C:FB:A3"
+                ),
+                false
+            )
+        )
+    ),
 )
