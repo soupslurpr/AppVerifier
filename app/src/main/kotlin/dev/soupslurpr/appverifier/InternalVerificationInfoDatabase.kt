@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.hughesmedia.big_finish",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "E6:97:94:51:67:D7:D0:88:CD:01:38:05:B9:C1:E1:51:A8:2D:A1:E6:90:54:C2:B3:04:08:AB:B2:4F:8D:A4:78"
+                ),
+                false
+            )
+        )
+    ),
 )
