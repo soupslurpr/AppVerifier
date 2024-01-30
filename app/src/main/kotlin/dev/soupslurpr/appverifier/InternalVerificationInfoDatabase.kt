@@ -14,6 +14,7 @@ enum class Source(val displayName: String) {
     APP_FDROID_REPO("App's F-Droid Repo"),
     WEBSITE("App's Website"),
     GITLAB("GitLab"),
+    HUAWEI_APP_GALLERY("Huawei AppGallery"),
 }
 
 /**
@@ -1895,6 +1896,22 @@ val internalVerificationInfoDatabase = setOf(
                 ),
                 listOf(
                     "F7:C3:EC:3B:0D:58:8D:3C:B5:29:83:E9:EB:1A:74:21:C9:3D:43:39:A2:86:39:8E:71:D7:B6:51:E8:D8:EC:DD"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.governikus.ausweisapp2",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "B0:2A:C7:6B:50:A4:97:AE:81:0A:EA:C2:25:98:18:7B:3D:42:90:27:7D:08:51:A7:FA:8E:1A:EA:5A:97:98:70"
                 ),
                 false
             )
