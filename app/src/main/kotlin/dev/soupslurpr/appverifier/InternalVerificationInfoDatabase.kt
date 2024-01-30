@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "tv.trakt.trakt",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "2A:FF:40:C6:A3:68:82:31:0C:6B:D1:B3:9F:F1:0D:A0:4A:DD:FB:D2:D1:00:1B:8C:29:3C:9B:CF:5C:40:F5:8B"
+                ),
+                false
+            )
+        )
+    ),
 )
