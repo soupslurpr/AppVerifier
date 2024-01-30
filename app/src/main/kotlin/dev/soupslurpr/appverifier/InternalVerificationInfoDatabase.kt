@@ -14,6 +14,7 @@ enum class Source(val displayName: String) {
     APP_FDROID_REPO("App's F-Droid Repo"),
     WEBSITE("App's Website"),
     GITLAB("GitLab"),
+    HUAWEI_APP_GALLERY("Huawei AppGallery"),
 }
 
 /**
@@ -1895,6 +1896,21 @@ val internalVerificationInfoDatabase = setOf(
                 ),
                 listOf(
                     "F7:C3:EC:3B:0D:58:8D:3C:B5:29:83:E9:EB:1A:74:21:C9:3D:43:39:A2:86:39:8E:71:D7:B6:51:E8:D8:EC:DD"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.huawei.appmarket",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "A9:43:66:44:E0:BD:71:FF:51:2C:63:83:9F:8A:C2:71:14:39:9F:36:95:69:58:68:85:55:DF:CC:63:25:7E:DE"
                 ),
                 false
             )
