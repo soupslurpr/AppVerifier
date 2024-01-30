@@ -141,6 +141,12 @@ fun AppVerifierApp(
                     onVerifyApkFileButtonClicked = {
                         openApkFileLauncher.launch(arrayOf("application/vnd.android.package-archive"))
                     },
+                    onLaunchedEffect = {
+                        // clear VerifyAppUiState when exiting VerifyAppScreen from opening an apk and going back to StartupScreen.
+                        verifyAppViewModel.clearUiState()
+                        // clear searchQuery when going back to StartupScreen.
+                        searchQuery = ""
+                    }
                 )
             }
             composable(route = AppVerifierScreens.AppList.name) {
