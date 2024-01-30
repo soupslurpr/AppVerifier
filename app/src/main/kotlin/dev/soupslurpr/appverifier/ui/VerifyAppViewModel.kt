@@ -143,9 +143,6 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
 
         return parseVerificationInfoTextToVerificationStatus(getVerificationInfoText(text))
     }
-    fun setSearchQuery(query: String): Unit {
-      uiState.value.searchQuery.value = query
-    }
 
     fun getHashesFromPackageInfo(packageInfo: PackageInfo): Hashes {
         val signingInfo = packageInfo.signingInfo

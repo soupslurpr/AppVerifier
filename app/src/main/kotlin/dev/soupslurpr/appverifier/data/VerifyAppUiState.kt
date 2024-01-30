@@ -20,7 +20,6 @@ data class VerifyAppUiState(
             listOf(Source.NONE)
         )
     ),
-    val searchQuery: MutableState<String> = mutableStateOf(""),
 )
 
 
