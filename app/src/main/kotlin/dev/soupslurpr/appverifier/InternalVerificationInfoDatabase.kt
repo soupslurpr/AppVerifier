@@ -14,6 +14,7 @@ enum class Source(val displayName: String) {
     APP_FDROID_REPO("App's F-Droid Repo"),
     WEBSITE("App's Website"),
     GITLAB("GitLab"),
+    HUAWEI_APP_GALLERY("Huawei AppGallery"),
 }
 
 /**
@@ -1895,6 +1896,34 @@ val internalVerificationInfoDatabase = setOf(
                 ),
                 listOf(
                     "F7:C3:EC:3B:0D:58:8D:3C:B5:29:83:E9:EB:1A:74:21:C9:3D:43:39:A2:86:39:8E:71:D7:B6:51:E8:D8:EC:DD"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "de.dwins.financeguru",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "F9:38:2D:C3:42:83:AB:0E:8C:83:90:29:C0:91:44:A7:BE:2F:82:B0:B4:0D:8D:7C:39:52:B5:1A:31:83:70:06"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "de.dwins.financeguru.huawei",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.HUAWEI_APP_GALLERY
+                ),
+                listOf(
+                    "C9:72:1D:A6:C4:BF:9A:54:31:B6:55:C1:B4:E1:42:1A:6F:18:30:DE:CF:DD:76:A3:B1:1C:79:6E:E5:A3:53:73"
                 ),
                 false
             )
