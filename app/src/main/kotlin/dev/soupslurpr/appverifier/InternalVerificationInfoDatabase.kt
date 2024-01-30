@@ -14,6 +14,7 @@ enum class Source(val displayName: String) {
     APP_FDROID_REPO("App's F-Droid Repo"),
     WEBSITE("App's Website"),
     GITLAB("GitLab"),
+    AMAZON_APPSTORE("Amazon Appstore"),
 }
 
 /**
@@ -1895,6 +1896,21 @@ val internalVerificationInfoDatabase = setOf(
                 ),
                 listOf(
                     "F7:C3:EC:3B:0D:58:8D:3C:B5:29:83:E9:EB:1A:74:21:C9:3D:43:39:A2:86:39:8E:71:D7:B6:51:E8:D8:EC:DD"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.overdrive.mobile.android.libby",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE,
+                    Source.AMAZON_APP_STORE
+                ),
+                listOf(
+                    "59:1F:64:E1:42:F4:ED:C3:F0:5C:AC:2D:23:3D:44:4C:2E:20:94:71:79:87:24:EC:9E:02:74:B9:5A:98:D6:96"
                 ),
                 false
             )
