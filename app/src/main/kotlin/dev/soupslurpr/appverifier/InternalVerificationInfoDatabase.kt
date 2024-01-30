@@ -1900,4 +1900,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "de.slub.catalog",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "7C:97:47:84:21:EE:02:2E:9D:00:B2:B0:AB:60:9B:CA:5B:53:10:A7:50:99:65:6D:0E:27:DA:06:8D:87:F9:1B"
+                ),
+                false
+            )
+        )
+    ),
 )
