@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.tippingcanoe.mydealz",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "53:5F:09:6C:DD:74:26:86:A5:30:DC:D0:56:8F:E5:D9:7C:8C:A8:CA:D1:BB:17:05:95:33:F1:92:63:7E:7E:01"
+                ),
+                false
+            )
+        )
+    ),
 )
