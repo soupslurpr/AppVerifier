@@ -1900,4 +1900,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.thomsonreuters.reuters",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "EA:8A:C7:F9:F2:38:AD:63:DC:9E:3D:BB:29:16:67:CA:97:40:5A:9B:1B:A9:08:AE:0B:AD:7D:70:3D:FE:76:01"
+                ),
+                false
+            )
+        )
+    ),
 )
