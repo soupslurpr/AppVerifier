@@ -1900,4 +1900,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "A8:54:1B:7E:6C:69:76:B0:B7:E3:A9:0B:E8:9C:63:A6:66:BE:37:3F:1D:BB:ED:A6:71:AC:2E:17:26:5D:6A:0F"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "17:94:30:56:5A:4A:04:BF:E7:82:74:83:24:30:99:BD:10:87:04:10:80:0C:D7:C4:C7:B4:8D:8D:32:26:DF:55"
+                ),
+                false
+            )
+        )
+    ),
 )
