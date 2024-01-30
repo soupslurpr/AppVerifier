@@ -4,9 +4,14 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,14 +25,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.soupslurpr.appverifier.data.Hashes
@@ -77,7 +81,9 @@ fun AppListScreen(
             DockedSearchBar(
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 placeholder = { Text(stringResource(android.R.string.search_go)) },
-                modifier = Modifier.fillMaxWidth().padding(16.dp, 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp, 8.dp),
                 query = searchQuery,
                 onQueryChange = onQueryChange,
                 onSearch = onSearch,
@@ -86,7 +92,13 @@ fun AppListScreen(
             ) {}
         }
     ) { innerPadding ->
-        LazyColumn(Modifier.padding(innerPadding)) {
+        LazyColumn(
+            Modifier.padding(
+                innerPadding.calculateStartPadding(LayoutDirection.Ltr),
+                innerPadding.calculateTopPadding(),
+                innerPadding.calculateEndPadding(LayoutDirection.Ltr)
+            )
+        ) {
             items(userInstalledPackages) {
                 // Do not show AppVerifier in the list as there is no point in using it to verify itself.
                 if (it.packageName == context.packageName) return@items
@@ -114,6 +126,9 @@ fun AppListScreen(
                         internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
                     )
                 }
+            }
+            item {
+                Spacer(Modifier.padding(WindowInsets.navigationBars.asPaddingValues()))
             }
         }
     }
