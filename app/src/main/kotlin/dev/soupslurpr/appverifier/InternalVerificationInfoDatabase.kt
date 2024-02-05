@@ -1923,4 +1923,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.wirelessalien.zipxtract",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID,
+                ),
+                listOf(
+                    "FF:F2:AC:2B:BF:EA:ED:30:30:51:CA:F1:38:C1:4F:CD:98:0A:92:6F:56:29:65:43:DF:05:C2:55:FD:89:A6:B7"
+                ),
+                false
+            )
+        )
+    ),
 )
