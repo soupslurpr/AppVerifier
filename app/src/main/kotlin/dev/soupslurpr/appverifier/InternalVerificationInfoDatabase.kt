@@ -1923,4 +1923,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "me.lucky.silence",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "00:6A:FF:63:E6:03:9B:1B:A2:B6:80:2A:3A:E1:5D:C4:A5:55:4D:5C:2D:BF:66:DD:DB:C0:38:60:25:18:F5:F5"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "B2:64:6C:0E:BA:F7:D7:19:A5:71:AD:37:CE:D4:96:3F:8C:DE:26:07:E7:AE:42:1E:95:8C:5C:0D:F4:89:5B:83"
+                ),
+                false
+            )
+        )
+    ),
 )
