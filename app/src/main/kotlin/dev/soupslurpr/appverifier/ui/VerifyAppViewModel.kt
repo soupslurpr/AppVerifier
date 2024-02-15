@@ -87,7 +87,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         fun parseVerificationInfoTextToVerificationStatus(verificationInfoText: String): VerificationStatus {
             if (!uiState.value.hashes.value.hasMultipleSigners) {
                 if (
-                    uiState.value.hashes.value.hashes.contains(verificationInfoText.lines()[0])
+                    (uiState.value.hashes.value.hashes.last() == verificationInfoText.lines()[0])
                     || (verificationInfoText.lines()[0].trim().iterator().run {
                         var convertedHash = ""
                         this.withIndex().forEach {
@@ -96,11 +96,10 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                                 convertedHash += ":"
                             }
                         }
-                        uiState.value.hashes.value.hashes.contains(convertedHash.uppercase())
+                        uiState.value.hashes.value.hashes.last() == convertedHash.uppercase()
                     })
-                    || uiState.value.hashes.value.hashes.contains(
+                    || uiState.value.hashes.value.hashes.last() ==
                         verificationInfoText.lines()[0].trim() + ":" + verificationInfoText.lines()[1].trim()
-                    )
                 ) {
                     return VerificationStatus.PKG_NOT_GIVEN_BUT_SIG_HASH_MATCH
                 } else if (verificationInfoText.lines()[0].length == 95) {
@@ -118,7 +117,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                     VerificationStatus.NOMATCH
                 }
             } else if (verificationInfoText.lines().drop(1).any {
-                    uiState.value.hashes.value.hashes.contains(it)
+                    uiState.value.hashes.value.hashes.last() == it
                 }) {
                 VerificationStatus.MATCH
             } else {
@@ -246,8 +245,8 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                             == verificationInfo.hashes
                                 .hasMultipleSigners
                         ) {
-                            verificationInfo.hashes.hashes.forEach { hash ->
-                                if (internalDatabaseHashes.hashes.contains(hash)) {
+                            verificationInfo.hashes.hashes.last().let { hash ->
+                                if (internalDatabaseHashes.hashes.last() == hash) {
                                     return@run InternalDatabaseInfo(
                                         InternalDatabaseStatus.MATCH,
                                         internalDatabaseHashes.sources
