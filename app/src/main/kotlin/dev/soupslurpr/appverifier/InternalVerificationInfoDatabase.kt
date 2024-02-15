@@ -1984,4 +1984,27 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.github.andreyasadchy.xtra",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "70:F4:C9:D0:51:03:78:96:D5:93:EA:84:1F:30:95:72:04:EF:6C:45:D7:E4:91:A8:52:C0:17:55:2A:46:D5:43"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "60:9D:52:B3:8F:3F:8C:F7:57:C7:18:D3:64:B5:2E:94:59:A7:FB:FC:4D:B7:BB:0C:05:79:D7:14:6B:42:02:8D"
+                ),
+                false
+            )
+        )
+    ),
 )
