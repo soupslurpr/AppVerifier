@@ -2013,4 +2013,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.android.gpstest.osmdroid",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                ),
+                listOf(
+                    "67:E0:43:83:A9:6A:83:47:64:26:AD:CB:DD:95:C4:C7:5D:78:02:8A:5C:4A:DA:75:C0:03:34:B1:C7:A5:D7:06"
+                ),
+                false
+            )
+        )
+    ),
 )
