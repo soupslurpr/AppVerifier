@@ -2013,4 +2013,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "io.github.teccheck.fastlyrics",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID,
+                ),
+                listOf(
+                    "96:96:16:FE:C2:3D:5B:88:1D:CD:91:80:28:96:19:7B:EE:B8:2B:CC:F2:DF:33:17:42:58:37:2A:94:B7:1B:0A"
+                ),
+                false
+            )
+        )
+    ),
 )
