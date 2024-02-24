@@ -1923,7 +1923,7 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
-InternalDatabaseVerificationInfo(
+    InternalDatabaseVerificationInfo(
         "org.fossify.calendar",
         listOf(
             Hashes(
@@ -1934,6 +1934,96 @@ InternalDatabaseVerificationInfo(
                 ),
                 listOf(
                     "AF:FD:B1:24:D3:F4:72:0C:2F:98:DB:CA:9E:AC:BA:05:14:FB:A4:30:6E:20:A2:78:6C:86:1C:3C:0D:6F:F2:92",
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.wirelessalien.zipxtract",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID,
+                ),
+                listOf(
+                    "FF:F2:AC:2B:BF:EA:ED:30:30:51:CA:F1:38:C1:4F:CD:98:0A:92:6F:56:29:65:43:DF:05:C2:55:FD:89:A6:B7"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "us.spotco.malwarescanner",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "26:0E:0A:49:67:8C:78:B7:0C:02:D6:53:7A:DD:3B:6D:C0:A1:71:71:BB:DE:8C:E7:5F:D4:02:6A:8A:3E:18:D2"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "79:36:60:51:6B:62:AE:8D:EB:A6:6D:5E:5E:42:44:E0:93:17:49:AB:9F:48:57:5B:50:12:44:CE:EA:85:8A:84"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "me.ash.reader",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "71:56:96:91:4A:35:36:6D:98:FA:45:31:2A:F9:68:11:F7:E6:DE:40:85:B5:E4:70:9F:4C:1E:74:F8:BD:E4:D0"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.FDROID
+                ),
+                listOf(
+                    "CE:F3:38:A4:74:52:3B:DF:CF:3F:B8:2C:BE:E2:D4:5F:6F:D9:61:0E:95:90:2B:A7:8C:8C:79:A4:5E:10:2A:E9"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "xyz.blueskyweb.app",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "C1:4D:3C:6B:B5:D6:D9:AE:CF:C5:0B:BC:C1:9B:29:6D:D4:E6:87:46:36:D5:4C:1A:64:1C:14:08:BF:7E:F9:62"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
+        "com.valvesoftware.android.steam.community",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.WEBSITE,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "5D:FF:6B:05:76:14:47:A5:BD:F9:19:EA:88:FC:6F:DF:20:D3:01:E3:0B:23:15:41:5C:4D:36:8E:C0:FB:DA:45"
                 ),
                 false
             )
