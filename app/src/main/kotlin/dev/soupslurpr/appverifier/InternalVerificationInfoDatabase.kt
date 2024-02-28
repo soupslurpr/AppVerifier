@@ -135,21 +135,6 @@ val internalVerificationInfoDatabase = setOf(
         )
     ),
     InternalDatabaseVerificationInfo(
-        "app.accrescent.client",
-        listOf(
-            Hashes(
-                listOf(
-                    Source.WEBSITE,
-                    Source.GITHUB
-                ),
-                listOf(
-                    "06:7A:40:C4:19:3A:AD:51:AC:87:F9:DD:FD:EB:B1:5E:24:A1:85:0B:AB:FA:48:21:C2:8C:5C:25:C3:FD:C0:71"
-                ),
-                false
-            )
-        )
-    ),
-    InternalDatabaseVerificationInfo(
         "net.mullvad.mullvadvpn",
         listOf(
             Hashes(
