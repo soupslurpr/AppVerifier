@@ -8,8 +8,6 @@ You can simply share the verification info to others and receive verification in
 share the received verification info to AppVerifier and you will see the verification status.\
 AppVerifier does the heavy lifting for you 💪
 
-Check [CONTRIBUTING.md](CONTRIBUTING.md) if you'd like to contribute to the internal database.
-
 ## Download
 
 AppVerifier is available on the [Accrescent](https://accrescent.app) app store and GitHub releases. [Accrescent](https://accrescent.app) is the recommended way to get AppVerifier as it is more secure than GitHub releases.\
