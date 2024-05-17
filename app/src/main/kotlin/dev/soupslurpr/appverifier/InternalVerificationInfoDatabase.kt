@@ -2013,4 +2013,21 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "net.leodesouza.blitz",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.ACCRESCENT,
+                    Source.FDROID,
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "6D:7F:D2:71:5E:D2:1C:FF:64:08:6D:C5:FC:F8:82:0A:68:5A:79:3E:BD:07:D9:72:16:3D:86:17:2B:AB:BA:75"
+                ),
+                false
+            )
+        )
+    ),
 )
