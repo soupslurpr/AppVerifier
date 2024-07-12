@@ -63,15 +63,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-    bundle {
-        language {
-            /** Disable splits for language for now since Accrescent does not support automatically
-             * fetching language splits when language is changed and instead needs a reinstall of the app.
-             * Remove once Accrescent gets support.
-             */
-            enableSplit = false
-        }
-    }
     // Useless since we don't publish to the Google Play Store and they are the only ones who can
     // view it.
     // Reference: https://developer.android.com/reference/tools/gradle-api/8.6/com/android/build/api/dsl/DependenciesInfo
