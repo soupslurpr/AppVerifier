@@ -72,6 +72,9 @@ android {
             enableSplit = false
         }
     }
+    // Useless since we don't publish to the Google Play Store and they are the only ones who can
+    // view it.
+    // Reference: https://developer.android.com/reference/tools/gradle-api/8.6/com/android/build/api/dsl/DependenciesInfo
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
         includeInApk = false
