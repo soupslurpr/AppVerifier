@@ -15,14 +15,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:memtagMode="async"
-        android:theme="@style/Theme.appverifier"
+        android:theme="@style/Theme.AppVerifier"
         tools:targetApi="34">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:documentLaunchMode="intoExisting"
-            android:theme="@style/Theme.appverifier">
+            android:documentLaunchMode="intoExisting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
