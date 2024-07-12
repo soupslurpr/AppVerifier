@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FileOpen
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -34,17 +33,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.soupslurpr.appverifier.R
 
 @Composable
 fun StartupScreen(
     modifier: Modifier,
-    splashMessage: String,
     onSettingsButtonClicked: () -> Unit,
     onAppListButtonClicked: () -> Unit,
-    verifyAppViewModel: VerifyAppViewModel,
     onVerifyApkFileButtonClicked: () -> Unit,
     onLaunchedEffect: () -> Unit,
 ) {
@@ -74,20 +70,15 @@ fun StartupScreen(
             )
         }
         Text(
-            text = stringResource(R.string.welcome),
+            text = stringResource(R.string.app_name),
             style = typography.headlineLarge
-        )
-        Text(
-            text = splashMessage,
-            style = typography.bodySmall,
-            textAlign = TextAlign.Center
         )
         FilledTonalButton(
             modifier = modifier.fillMaxWidth(),
             onClick = { onAppListButtonClicked() }
         ) {
             Icon(
-                imageVector = Icons.Filled.List,
+                imageVector = Icons.AutoMirrored.Filled.List,
                 contentDescription = null
             )
             Spacer(modifier = modifier.width(8.dp))

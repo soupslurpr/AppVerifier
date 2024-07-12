@@ -29,8 +29,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
@@ -52,7 +52,6 @@ import dev.soupslurpr.appverifier.ui.StartupScreen
 import dev.soupslurpr.appverifier.ui.VerifyAppScreen
 import dev.soupslurpr.appverifier.ui.VerifyAppViewModel
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 enum class AppVerifierScreens(@StringRes val title: Int) {
     Start(title = R.string.app_name),
@@ -95,14 +94,6 @@ fun AppVerifierApp(
 //        backStackEntry?.destination?.route ?: AppVerifierScreens.Start.name
 //    )
 
-    val randomValue = Random.nextInt(0, 10)
-    val splashMessage = rememberSaveable {
-        when (randomValue) {
-            0 -> "Gotta verify 'em all!"
-            else -> "App verification, but easy."
-        }
-    }
-
     val context = LocalContext.current
 
     val openApkFileLauncher =
@@ -137,22 +128,20 @@ fun AppVerifierApp(
                 AppVerifierScreens.Start.name
             },
             modifier = modifier.padding(
-                innerPadding.calculateStartPadding(LayoutDirection.Ltr),
+                innerPadding.calculateStartPadding(LocalLayoutDirection.current),
                 innerPadding.calculateTopPadding(),
-                innerPadding.calculateEndPadding(LayoutDirection.Ltr)
+                innerPadding.calculateEndPadding(LocalLayoutDirection.current)
             ),
         ) {
             composableWithDefaultSlideTransitions(route = AppVerifierScreens.Start) {
                 StartupScreen(
                     modifier = modifier,
-                    splashMessage = splashMessage,
                     onSettingsButtonClicked = {
                         navController.navigate(AppVerifierScreens.Settings.name)
                     },
                     onAppListButtonClicked = {
                         navController.navigate(AppVerifierScreens.AppList.name)
                     },
-                    verifyAppViewModel = verifyAppViewModel,
                     onVerifyApkFileButtonClicked = {
                         openApkFileLauncher.launch(arrayOf("application/vnd.android.package-archive"))
                     },
