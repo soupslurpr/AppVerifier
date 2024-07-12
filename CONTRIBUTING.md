@@ -4,6 +4,9 @@ Thanks for your interest in contributing!
 
 If you want to suggest a feature or notify us about a bug, please use the issue tracker.
 
+Before working on a feature, please make sure to discuss the planned implementation in the issue for
+the feature and get approval from @soupslurpr to ensure it meets the project's requirements.
+
 Contributions to the internal verification info database might not be accepted at this time.
 
 If you need help with development or have questions it's recommended to join the AppVerifier room on Matrix at
