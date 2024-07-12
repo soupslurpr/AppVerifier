@@ -4,6 +4,15 @@ import android.graphics.drawable.Drawable
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
@@ -20,9 +29,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDeepLink
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
@@ -127,7 +142,7 @@ fun AppVerifierApp(
                 innerPadding.calculateEndPadding(LayoutDirection.Ltr)
             ),
         ) {
-            composable(route = AppVerifierScreens.Start.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.Start) {
                 StartupScreen(
                     modifier = modifier,
                     splashMessage = splashMessage,
@@ -149,7 +164,7 @@ fun AppVerifierApp(
                     }
                 )
             }
-            composable(route = AppVerifierScreens.AppList.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.AppList) {
                 AppListScreen(
                     searchQuery,
                     { name: String, packageName: String, hashes: Hashes, icon: Drawable, internalDatabaseInfo:
@@ -171,7 +186,7 @@ fun AppVerifierApp(
                     { verifyAppViewModel.getInternalDatabaseInfoFromVerificationInfo(it) }
                 )
             }
-            composable(route = AppVerifierScreens.VerifyApp.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.VerifyApp) {
                 VerifyAppScreen(
                     verifyAppUiState.value.icon.value,
                     verifyAppUiState.value.name.value,
@@ -191,7 +206,7 @@ fun AppVerifierApp(
                     }
                 )
             }
-            composable(route = AppVerifierScreens.Settings.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.Settings) {
                 SettingsScreen(
                     onLicenseIconButtonClicked = {
                         navController.navigate(AppVerifierScreens.License.name)
@@ -208,21 +223,144 @@ fun AppVerifierApp(
                     }
                 )
             }
-            composable(route = AppVerifierScreens.License.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.License) {
                 LicenseScreen()
             }
-            composable(route = AppVerifierScreens.PrivacyPolicy.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.PrivacyPolicy) {
                 PrivacyPolicyScreen()
             }
-            composable(route = AppVerifierScreens.Credits.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.Credits) {
                 CreditsScreen()
             }
-            composable(route = AppVerifierScreens.Donation.name) {
+            composableWithDefaultSlideTransitions(route = AppVerifierScreens.Donation) {
                 DonationScreen()
             }
         }
     }
 }
 
+fun getStateDestinationRoute(state: NavBackStackEntry): AppVerifierScreens? {
+    state.destination.route?.let { return AppVerifierScreens.valueOf(it) }
+    return null
+}
 
+fun getEnterTransition(
+    initialState: NavBackStackEntry,
+    targetState: NavBackStackEntry,
+): EnterTransition {
+    val initialNavBarRoute = getStateDestinationRoute(initialState)
+    val targetNavBarRoute = getStateDestinationRoute(targetState)
 
+    return if ((initialNavBarRoute != null) && (targetNavBarRoute != null)) {
+        slideIn {
+            IntOffset(
+                if (initialNavBarRoute.ordinal > targetNavBarRoute.ordinal) {
+                    -it.width
+                } else {
+                    it.width
+                }, 0
+            )
+        } + fadeIn()
+    } else {
+        EnterTransition.None
+    }
+}
+
+fun getExitTransition(
+    initialState: NavBackStackEntry,
+    targetState: NavBackStackEntry,
+): ExitTransition {
+    val initialNavBarRoute = getStateDestinationRoute(initialState)
+    val targetNavBarRoute = getStateDestinationRoute(targetState)
+
+    return if ((initialNavBarRoute != null) && (targetNavBarRoute != null)) {
+        slideOut {
+            IntOffset(
+                if (initialNavBarRoute.ordinal > targetNavBarRoute.ordinal) {
+                    it.width
+                } else {
+                    -it.width
+                }, 0
+            )
+        } + fadeOut()
+    } else {
+        ExitTransition.None
+    }
+}
+
+fun NavGraphBuilder.composableWithDefaultSlideTransitions(
+    route: AppVerifierScreens,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    enterTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
+    exitTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = null,
+    popEnterTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = enterTransition,
+    popExitTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = exitTransition,
+    sizeTransform: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> SizeTransform?)? = null,
+    content: @Composable (AnimatedContentScope.(NavBackStackEntry) -> Unit),
+) {
+    composable(route.name, arguments, deepLinks, if (enterTransition == null) {
+        {
+            getEnterTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (exitTransition == null) {
+        {
+            getExitTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (popEnterTransition == null) {
+        {
+            getEnterTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (popExitTransition == null) {
+        {
+            getExitTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, sizeTransform, content)
+}
+
+fun NavGraphBuilder.navigationWithDefaultSlideTransitions(
+    startDestination: String,
+    route: AppVerifierScreens,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    enterTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
+    exitTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = null,
+    popEnterTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = enterTransition,
+    popExitTransition: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = exitTransition,
+    sizeTransform: (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> SizeTransform?)? = null,
+    builder: NavGraphBuilder.() -> Unit,
+) {
+    navigation(startDestination, route.name, arguments, deepLinks, if (enterTransition == null) {
+        {
+            getEnterTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (exitTransition == null) {
+        {
+            getExitTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (popEnterTransition == null) {
+        {
+            getEnterTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, if (popExitTransition == null) {
+        {
+            getExitTransition(initialState, targetState)
+        }
+    } else {
+        null
+    }, sizeTransform, builder)
+}
