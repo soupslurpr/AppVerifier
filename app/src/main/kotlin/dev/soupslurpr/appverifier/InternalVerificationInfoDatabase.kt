@@ -113,7 +113,8 @@ val internalVerificationInfoDatabase = setOf(
                     Source.GOOGLE_PLAY_STORE
                 ),
                 listOf(
-                    "29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"
+                    "29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26",
+                    "4B:E4:F6:CD:5B:E8:44:08:3E:90:02:79:DC:82:2A:F6:5A:54:7F:EC:C2:6A:BA:7F:F1:F5:20:3A:45:51:8C:D8"
                 ),
                 false
             )
