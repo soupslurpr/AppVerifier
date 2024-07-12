@@ -88,7 +88,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("com.google.accompanist:accompanist-drawablepainter:0.33.2-alpha")
 
-    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 }
