@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:memtagMode="async"
         android:theme="@style/Theme.AppVerifier"
-        tools:targetApi="34">
+        tools:targetApi="33">
         <activity
             android:name=".MainActivity"
             android:exported="true"
