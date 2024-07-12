@@ -1,1 +1,0 @@
-java -jar ./bundletool-all-1.15.6.jar build-apks --bundle="./app-release.aab" --output="./AppVerifier-app-release.apks" --overwrite --ks-key-alias="key0" --ks="/Users/user/AppVerifierkeystore.jks" --ks-pass=pass:""
