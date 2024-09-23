@@ -288,7 +288,7 @@ val internalVerificationInfoDatabase = setOf(
             Hashes(
                 listOf(
                     Source.GITHUB,
-                    Source.FDROID
+                    Source.FDROID_REPO
                 ),
                 listOf(
                     "6A:A8:0F:DF:4A:8C:C1:37:37:CF:B4:34:FC:0C:DE:48:6F:09:CF:8F:CD:A2:1A:67:BE:A5:EE:1C:A2:70:08:86"
@@ -424,7 +424,7 @@ val internalVerificationInfoDatabase = setOf(
             ),
             Hashes(
                 listOf(
-                    Source.FDROID
+                    Source.FDROID_REPO
                 ),
                 listOf(
                     "DE:6E:C9:14:31:55:79:95:29:7B:F3:E6:5B:C8:03:49:BC:60:3A:04:70:81:60:61:8C:86:BC:99:94:17:1C:90"
@@ -907,10 +907,19 @@ val internalVerificationInfoDatabase = setOf(
             Hashes(
                 listOf(
                     Source.GOOGLE_PLAY_STORE,
-                    Source.GITHUB
                 ),
                 listOf(
                     "C6:DB:9B:9C:8C:BD:D6:5D:16:E8:EC:8C:8B:91:C8:31:B9:EF:C9:5C:BF:98:AE:41:F6:A9:D8:35:15:1A:7E:16"
+                ),
+                false
+                        listOf(
+            Hashes(
+                listOf(
+                    Source.FDROID,
+                    Source.GITHUB
+                ),
+                listOf(
+                    "6A:2F:DC:31:48:04:9C:E0:D5:C6:E8:50:10:72:3B:83:FB:20:7D:20:C7:47:7F:5C:22:AC:53:C8:77:E9:2D:47"
                 ),
                 false
             )
