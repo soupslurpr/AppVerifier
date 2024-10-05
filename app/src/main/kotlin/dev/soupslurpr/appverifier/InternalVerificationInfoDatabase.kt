@@ -913,8 +913,7 @@ val internalVerificationInfoDatabase = setOf(
                     "C6:DB:9B:9C:8C:BD:D6:5D:16:E8:EC:8C:8B:91:C8:31:B9:EF:C9:5C:BF:98:AE:41:F6:A9:D8:35:15:1A:7E:16"
                 ),
                 false
-                                false
-                        listOf(
+            ),
             Hashes(
                 listOf(
                     Source.FDROID,
@@ -923,8 +922,7 @@ val internalVerificationInfoDatabase = setOf(
                 listOf(
                     "6A:2F:DC:31:48:04:9C:E0:D5:C6:E8:50:10:72:3B:83:FB:20:7D:20:C7:47:7F:5C:22:AC:53:C8:77:E9:2D:47"
                 ),
-                
-
+                false
             )
         )
     ),
