@@ -31,6 +31,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -75,7 +76,9 @@ fun StartupScreen(
             style = typography.headlineLarge
         )
         FilledTonalButton(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .testTag("AppListButton"),
             onClick = { onAppListButtonClicked() }
         ) {
             Icon(
@@ -97,7 +100,9 @@ fun StartupScreen(
             Text("Verify APK File")
         }
         FilledTonalButton(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .testTag("SettingsButton"),
             onClick = { onSettingsButtonClicked() }
         ) {
             Icon(
