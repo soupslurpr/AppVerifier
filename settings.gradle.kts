@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AppVerifier"
 include(":app")
+include(":baselineprofile")
