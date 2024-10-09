@@ -7,9 +7,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -22,6 +27,7 @@ import dev.soupslurpr.appverifier.ui.theme.AppVerifierTheme
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "preferences")
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -75,16 +81,25 @@ class MainActivity : ComponentActivity() {
             AppVerifierTheme(
                 preferencesViewModel = preferencesViewModel
             ) {
-                if (!preferencesUiState.acceptedPrivacyPolicyAndLicense.second.value) {
-                    ReviewPrivacyPolicyAndLicense(preferencesViewModel = preferencesViewModel)
-                } else if (preferencesUiState.acceptedPrivacyPolicyAndLicense.second.value) {
-                    AppVerifierApp(
-                        modifier = Modifier,
-                        verifyAppViewModel = verifyAppViewModel,
-                        preferencesViewModel = preferencesViewModel,
-                        isActionSend = isActionSend,
-                        isActionView = isActionView,
-                    )
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .semantics {
+                            // Required for UIAutomator to find UI elements
+                            testTagsAsResourceId = true
+                        }
+                ) {
+                    if (!preferencesUiState.acceptedPrivacyPolicyAndLicense.second.value) {
+                        ReviewPrivacyPolicyAndLicense(preferencesViewModel = preferencesViewModel)
+                    } else if (preferencesUiState.acceptedPrivacyPolicyAndLicense.second.value) {
+                        AppVerifierApp(
+                            modifier = Modifier,
+                            verifyAppViewModel = verifyAppViewModel,
+                            preferencesViewModel = preferencesViewModel,
+                            isActionSend = isActionSend,
+                            isActionView = isActionView,
+                        )
+                    }
                 }
             }
         }
