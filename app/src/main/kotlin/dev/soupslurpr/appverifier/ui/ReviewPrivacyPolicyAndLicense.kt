@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -45,6 +46,7 @@ fun ReviewPrivacyPolicyAndLicense(
     ) { innerPadding ->
         Column(
             modifier = Modifier
+                .testTag("PrivacyPolicyColumn")
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
                 .padding(innerPadding)
@@ -57,12 +59,14 @@ fun ReviewPrivacyPolicyAndLicense(
                 fontWeight = FontWeight.Bold
             )
             Checkbox(
+                modifier = Modifier.testTag("PrivacyPolicyCheckbox"),
                 checked = checked,
                 onCheckedChange = {
                     checked = it
                 }
             )
             Button(
+                modifier = Modifier.testTag("PrivacyPolicyContinueButton"),
                 onClick = {
                     coroutineScope.launch {
                         preferencesViewModel.setPreference(
