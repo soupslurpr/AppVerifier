@@ -298,6 +298,21 @@ val internalVerificationInfoDatabase = setOf(
         )
     ),
     InternalDatabaseVerificationInfo(
+        "im.molly.app.unifiedpush",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.APP_FDROID_REPO
+                ),
+                listOf(
+                    "6A:A8:0F:DF:4A:8C:C1:37:37:CF:B4:34:FC:0C:DE:48:6F:09:CF:8F:CD:A2:1A:67:BE:A5:EE:1C:A2:70:08:86"
+                ),
+                false
+            )
+        )
+    ),
+    InternalDatabaseVerificationInfo(
         "org.oxycblt.auxio",
         listOf(
             Hashes(
