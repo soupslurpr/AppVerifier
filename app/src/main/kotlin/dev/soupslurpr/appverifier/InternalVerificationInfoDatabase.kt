@@ -2026,4 +2026,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.ichi2.anki",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "20:71:53:4F:0F:4B:5E:54:AE:95:2D:D2:75:D7:0D:A6:E3:45:9E:E6:99:09:D2:AB:1B:48:43:C4:C5:B2:1A:45"
+                ),
+                false
+            )
+        )
+    ),
 )
