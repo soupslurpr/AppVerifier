@@ -167,7 +167,7 @@ fun AppVerifierApp(
                         verifyAppViewModel.setAppIcon(icon)
                         navController.navigate(AppVerifierScreens.VerifyApp.name)
                     },
-                    { verifyAppViewModel.clearUiState() },
+                    { },
                     { searchQuery = it },
                     { },
                     { },
