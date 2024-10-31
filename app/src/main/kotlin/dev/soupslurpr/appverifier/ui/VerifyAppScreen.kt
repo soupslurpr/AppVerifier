@@ -156,7 +156,7 @@ fun VerifyAppScreen(
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, "$packageName\n${hashes.hashes.joinToString("\n")}")
-                    type = "plain/text"
+                    type = "text/plain"
                 }
 
                 val shareIntent = Intent.createChooser(
