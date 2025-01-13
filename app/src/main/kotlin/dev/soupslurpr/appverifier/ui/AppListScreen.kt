@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -100,11 +99,8 @@ fun AppListScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp, 8.dp),
-                colors = colors1,
-                content = fun ColumnScope.() {
-
-                },
-            )
+                colors = colors1
+            ) {}
         }
     ) { innerPadding ->
         LazyColumn(
