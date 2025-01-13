@@ -1,10 +1,12 @@
 package dev.soupslurpr.appverifier.ui
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -25,6 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -78,18 +81,30 @@ fun AppListScreen(
 
     Scaffold(
         topBar = {
+            val colors1 = SearchBarDefaults.colors()
             DockedSearchBar(
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                placeholder = { Text(stringResource(android.R.string.search_go)) },
+                inputField = {
+                    SearchBarDefaults.InputField(
+                        query = searchQuery,
+                        onQueryChange = onQueryChange,
+                        onSearch = onSearch,
+                        expanded = false,
+                        onExpandedChange = onSearchActiveChange,
+                        placeholder = { Text(stringResource(android.R.string.search_go)) },
+                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                        colors = colors1.inputFieldColors,
+                    )
+                },
+                expanded = false,
+                onExpandedChange = onSearchActiveChange,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp, 8.dp),
-                query = searchQuery,
-                onQueryChange = onQueryChange,
-                onSearch = onSearch,
-                active = false,
-                onActiveChange = onSearchActiveChange,
-            ) {}
+                colors = colors1,
+                content = fun ColumnScope.() {
+
+                },
+            )
         }
     ) { innerPadding ->
         LazyColumn(
@@ -107,8 +122,10 @@ fun AppListScreen(
                     it.packageName,
                     PackageManager.GET_SIGNING_CERTIFICATES
                 )
-                val name = packageManager.getApplicationLabel(packageInfo.applicationInfo)
-                    .toString()
+                val name = packageInfo.applicationInfo?.let { it1 ->
+                    packageManager.getApplicationLabel(it1)
+                        .toString()
+                } ?: null.toString()
 
                 if (searchQuery == "" || name.contains(searchQuery, true) ||
                     it.packageName.contains(searchQuery, true))
@@ -121,7 +138,9 @@ fun AppListScreen(
                         name = name,
                         packageName = packageInfo.packageName,
                         hashes = hashes,
-                        icon = packageManager.getApplicationIcon(packageInfo.applicationInfo),
+                        icon = packageManager.getApplicationIcon(
+                            packageInfo.applicationInfo ?: ApplicationInfo()
+                        ),
                         onClickAppItem = onClickAppItem,
                         internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
                     )

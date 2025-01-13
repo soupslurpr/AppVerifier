@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "dev.soupslurpr.appverifier"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "dev.soupslurpr.appverifier"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 11
         versionName = "0.8.1"
 

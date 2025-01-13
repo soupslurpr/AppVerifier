@@ -2,6 +2,7 @@ package dev.soupslurpr.appverifier.ui
 
 import android.app.Application
 import android.content.ContentResolver
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -148,7 +149,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun getHashesFromPackageInfo(packageInfo: PackageInfo): Hashes {
         val signingInfo = packageInfo.signingInfo
-        val hasMultipleSigners = signingInfo.hasMultipleSigners()
+        val hasMultipleSigners = signingInfo!!.hasMultipleSigners()
 
         val signatures = if (hasMultipleSigners) {
             signingInfo.apkContentsSigners
@@ -193,15 +194,20 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 val packageInfo =
                     packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
 
+                val applicationInfo = packageInfo.applicationInfo ?: ApplicationInfo()
+
                 val hashes = getHashesFromPackageInfo(packageInfo)
 
                 setAppVerificationInfo(
-                    packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
+                    packageManager.getApplicationLabel(
+                        applicationInfo
+                    )
+                        .toString(),
                     packageInfo.packageName,
                     hashes,
                     getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
                 )
-                setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
+                setAppIcon(packageManager.getApplicationIcon(applicationInfo))
             } else {
                 setAppNotFoundOrInvalidFormat(true)
             }
@@ -276,6 +282,7 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 tempFile.path,
                 PackageManager.GET_SIGNING_CERTIFICATES
             )
+            val applicationInfo = packageInfo?.applicationInfo ?: ApplicationInfo()
 
             if (packageInfo == null) {
                 setApkFailedToParse(true)
@@ -292,20 +299,20 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
                 return
             }
 
-            packageInfo.applicationInfo.sourceDir = tempFile.path
-            packageInfo.applicationInfo.publicSourceDir = tempFile.path
+            applicationInfo.sourceDir = tempFile.path
+            applicationInfo.publicSourceDir = tempFile.path
 
             val packageName = packageInfo.packageName
 
             val hashes = getHashesFromPackageInfo(packageInfo)
 
             setAppVerificationInfo(
-                packageManager.getApplicationLabel(packageInfo.applicationInfo).toString(),
+                packageManager.getApplicationLabel(applicationInfo).toString(),
                 packageName,
                 hashes,
                 getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
             )
-            setAppIcon(packageManager.getApplicationIcon(packageInfo.applicationInfo))
+            setAppIcon(packageManager.getApplicationIcon(applicationInfo))
 
             val isFileDeleted = tempFile.delete()
 
