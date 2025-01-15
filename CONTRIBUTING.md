@@ -9,6 +9,8 @@ the feature and get approval from @soupslurpr to ensure it meets the project's r
 
 Contribution of new apps to the internal verification info database won't be accepted at this time.
 
+Translations won't be accepted at this time.
+
 If you need help with development or have questions it's recommended to join the AppVerifier room on Matrix at
 https://matrix.to/#/#appverifier:matrix.org and ask for help there from [soupslurpr](https://github.com/soupslurpr),
 the lead developer.
