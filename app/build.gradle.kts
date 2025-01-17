@@ -81,7 +81,7 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.2")
     implementation("com.google.accompanist:accompanist-drawablepainter:0.37.0")
 
-    implementation(platform("androidx.compose:compose-bom:2024.12.01"))
+    implementation(platform("androidx.compose:compose-bom:2025.01.00"))
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui-tooling-preview")
