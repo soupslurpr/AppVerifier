@@ -1,6 +1,7 @@
 package dev.soupslurpr.appverifier.ui
 
 import android.app.ActivityOptions
+import android.content.ClipData
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
@@ -37,6 +38,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -152,11 +154,13 @@ fun VerifyAppScreen(
                     fontWeight = FontWeight.Black
                 )
             }
+            val verificationData = "$packageName\n${hashes.hashes.joinToString("\n")}"
+            val mimeType = "text/plain"
             Button(onClick = {
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "$packageName\n${hashes.hashes.joinToString("\n")}")
-                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, verificationData)
+                    type = mimeType
                 }
 
                 val shareIntent = Intent.createChooser(
@@ -166,7 +170,13 @@ fun VerifyAppScreen(
 
                 startActivity(context, shareIntent, ActivityOptions.makeBasic().toBundle())
             }) {
-                Text("Share/Copy Verification Info")
+                Text("Share Verification Info")
+            }
+            Button(onClick = {
+                val clip: ClipData = ClipData.newPlainText(mimeType, verificationData)
+                clipboardManager.setClip(ClipEntry(clip));
+            }) {
+                Text("Copy Verification Info")
             }
             Button(onClick = {
                 if (clipboardManager.hasText()) {
