@@ -1412,15 +1412,6 @@ val internalVerificationInfoDatabase = setOf(
         listOf(
             Hashes(
                 listOf(
-                    Source.GITHUB
-                ),
-                listOf(
-                    "B9:C7:AE:79:A5:A9:02:70:DF:08:A1:32:E5:36:B9:C6:66:F5:BE:F1:F5:9B:30:4F:CE:CF:86:87:86:5E:4B:5B"
-                ),
-                false
-            ),
-            Hashes(
-                listOf(
                     Source.GOOGLE_PLAY_STORE
                 ),
                 listOf(
