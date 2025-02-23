@@ -1332,10 +1332,20 @@ val internalVerificationInfoDatabase = setOf(
         listOf(
             Hashes(
                 listOf(
-                    Source.GOOGLE_PLAY_STORE
+                    Source.WEBSITE
                 ),
                 listOf(
                     "C8:76:8D:2C:EA:0C:4B:62:2E:41:9B:4B:47:15:98:19:46:82:1E:4E:BC:03:5F:B4:17:76:CA:D3:95:A7:F6:8E"
+                ),
+                false
+            ),
+            Hashes(
+                listOf(
+                    Source.GOOGLE_PLAY_STORE
+                ),
+                listOf(
+                    "C8:76:8D:2C:EA:0C:4B:62:2E:41:9B:4B:47:15:98:19:46:82:1E:4E:BC:03:5F:B4:17:76:CA:D3:95:A7:F6:8E",
+                    "7D:BD:54:B2:14:EB:5E:E9:C0:F2:2F:97:AB:98:49:AA:96:86:F4:15:3F:32:F4:69:6B:43:8E:EC:9B:78:7A:0A"
                 ),
                 false
             ),
