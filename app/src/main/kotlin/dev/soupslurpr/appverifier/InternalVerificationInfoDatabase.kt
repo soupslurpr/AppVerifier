@@ -2008,6 +2008,15 @@ val internalVerificationInfoDatabase = setOf(
                     "C1:4D:3C:6B:B5:D6:D9:AE:CF:C5:0B:BC:C1:9B:29:6D:D4:E6:87:46:36:D5:4C:1A:64:1C:14:08:BF:7E:F9:62"
                 ),
                 false
+            ),
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "40:05:8E:C6:8A:35:55:21:D0:8D:F2:49:98:CF:99:A7:14:91:33:5C:65:D7:58:85:03:9E:80:C0:25:AA:DD:FF"
+                ),
+                false
             )
         )
     ),
