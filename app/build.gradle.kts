@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "dev.soupslurpr.appverifier"
     compileSdk = 35
-    buildToolsVersion = "35.0.1"
+    buildToolsVersion = "36.0.0"
     ndkVersion = "27.2.12479018"
 
     defaultConfig {
