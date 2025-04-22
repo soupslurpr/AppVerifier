@@ -887,6 +887,15 @@ val internalVerificationInfoDatabase = setOf(
                     "93:D7:9B:1E:72:D5:A6:B0:BC:68:11:B9:BC:0A:83:18:1C:35:10:D5:8C:11:57:11:40:FF:3F:8A:63:F2:21:74"
                 ),
                 false
+            ),
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "BF:1B:69:C1:4D:A2:42:0C:A7:20:11:F7:2C:F4:83:74:58:EC:5D:3C:C4:B5:38:24:34:37:BC:17:C1:92:01:C6"
+                ),
+                false
             )
         )
     ),
