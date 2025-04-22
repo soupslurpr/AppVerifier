@@ -8,7 +8,7 @@ android {
     namespace = "dev.soupslurpr.appverifier"
     compileSdk = 35
     buildToolsVersion = "36.0.0"
-    ndkVersion = "27.2.12479018"
+    ndkVersion = "28.1.13356709"
 
     defaultConfig {
         applicationId = "dev.soupslurpr.appverifier"
