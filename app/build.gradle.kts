@@ -14,8 +14,8 @@ android {
         applicationId = "dev.soupslurpr.appverifier"
         minSdk = 28
         targetSdk = 35
-        versionCode = 12
-        versionName = "0.8.2"
+        versionCode = 13
+        versionName = versionCode.toString()
 
         vectorDrawables {
             useSupportLibrary = true
