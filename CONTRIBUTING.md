@@ -8,8 +8,7 @@ Before working on a feature, please make sure to discuss the planned implementat
 the feature and get approval from @soupslurpr to ensure it meets the project's requirements.
 
 Contribution of new apps to the internal verification info database won't be accepted at this time.
-Please notify us by making a new issue (check existing issues first) if an app that is already in
-the database is failing to verify.
+If an app that is already in the database is failing to verify, please notify us by making a new issue (check existing issues first).
 
 Translations won't be accepted at this time.
 
