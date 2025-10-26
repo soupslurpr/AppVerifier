@@ -2055,4 +2055,19 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "com.polymorphicshade.tubular",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB,
+                    Source.FDROID
+                ),
+                listOf(
+                    "8A:D7:02:5A:8C:91:14:54:E2:A7:B4:51:5E:36:0C:52:CA:63:EC:04:10:A0:42:FF:46:E9:AD:05:B5:09:E1:87"
+                ),
+                false
+            )
+        )
+    ),   
 )
