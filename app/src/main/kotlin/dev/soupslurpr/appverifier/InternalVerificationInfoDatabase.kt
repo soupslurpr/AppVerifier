@@ -2055,4 +2055,18 @@ val internalVerificationInfoDatabase = setOf(
             )
         )
     ),
+    InternalDatabaseVerificationInfo(
+        "org.fossify.calendar",
+        listOf(
+            Hashes(
+                listOf(
+                    Source.GITHUB
+                ),
+                listOf(
+                    "AF:FD:B1:24:D3:F4:72:0C:2F:98:DB:CA:9E:AC:BA:05:14:FB:A4:30:6E:20:A2:78:6C:86:1C:3C:0D:6F:F2:92"
+                ),
+                false
+            )
+        )
+    ),
 )
