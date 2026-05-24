@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.FileOpen
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.FilledTonalButton
@@ -43,6 +44,7 @@ fun StartupScreen(
     onSettingsButtonClicked: () -> Unit,
     onAppListButtonClicked: () -> Unit,
     onVerifyApkFileButtonClicked: () -> Unit,
+    onPasteFromClipboard: () -> Unit,
     onLaunchedEffect: () -> Unit,
 ) {
     LaunchedEffect(key1 = Unit) {
@@ -84,6 +86,17 @@ fun StartupScreen(
             )
             Spacer(modifier = modifier.width(8.dp))
             Text("App List")
+        }
+        FilledTonalButton(
+            modifier = modifier.fillMaxWidth(),
+            onClick = { onPasteFromClipboard() }
+        ) {
+            Icon(
+                Icons.Filled.ContentPaste,
+                null
+            )
+            Spacer(Modifier.width(8.dp))
+            Text("Paste app list from clipboard")
         }
         FilledTonalButton(
             modifier = modifier.fillMaxWidth(),

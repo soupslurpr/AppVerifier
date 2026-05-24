@@ -5,7 +5,7 @@ import android.content.ClipData
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +38,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -50,6 +51,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
+import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
 import dev.soupslurpr.appverifier.data.VerificationStatus
 
 @Composable
@@ -66,6 +68,7 @@ fun VerifyAppScreen(
     apkFailedToParse: Boolean,
     showHasMultipleSigners: Boolean,
     showClipboardEmptyMessage: () -> Unit,
+    sharedTextHashMatch: Boolean? = null,
 ) {
     val context = LocalContext.current
 
@@ -88,7 +91,6 @@ fun VerifyAppScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp)
             .verticalScroll(verticalScroll),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (apkFailedToParse) {
@@ -109,24 +111,22 @@ fun VerifyAppScreen(
                         "\n\nThere may be multiple hashes, which is normal."
             )
         } else {
-            Text(
-                "Internal Database Status:"
-            )
-            Row {
-                FilledTonalButton(
-                    onClick = { showMoreInfoAboutInternalDatabaseStatusDialog = true },
-                ) {
-                    Text(
-                        internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.name.replace('_', ' '),
-                        style = typography.headlineLarge
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Icon(
-                        Icons.Default.Info,
-                        "More info about internal database status",
-                        tint = internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.color,
-                    )
-                }
+            Text("Database Status:", style = typography.titleMedium)
+            Spacer(Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.clickable { showMoreInfoAboutInternalDatabaseStatusDialog = true },
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(
+                    Icons.Default.Info,
+                    "More info about internal database status",
+                    tint = internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.color,
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    "Internal: ${internalDatabaseInfo.internalDatabaseStatus.simpleInternalDatabaseStatus.name.replace('_', ' ')}",
+                    style = typography.titleLarge,
+                )
             }
             Spacer(Modifier.height(8.dp))
             if (icon != null) {
@@ -187,6 +187,16 @@ fun VerifyAppScreen(
             }) {
                 Text("Verify from clipboard")
             }
+            val displayVerificationStatus = if (sharedTextHashMatch != null) {
+                if (sharedTextHashMatch) "MATCH" else "NOMATCH"
+            } else {
+                verificationStatus.simpleVerificationStatus.name
+            }
+            val displayVerificationColor = if (sharedTextHashMatch != null) {
+                if (sharedTextHashMatch) Color(0xFFFF9800) else SimpleVerificationStatus.FAILURE.color
+            } else {
+                verificationStatus.simpleVerificationStatus.color
+            }
             Text(
                 "Verification Status:",
             )
@@ -195,14 +205,14 @@ fun VerifyAppScreen(
                     onClick = { showMoreInfoAboutVerificationStatusDialog = true },
                 ) {
                     Text(
-                        verificationStatus.simpleVerificationStatus.name,
+                        displayVerificationStatus,
                         style = typography.headlineLarge
                     )
                     Spacer(Modifier.width(8.dp))
                     Icon(
                         Icons.Default.Info,
                         "More info about verification status",
-                        tint = verificationStatus.simpleVerificationStatus.color,
+                        tint = displayVerificationColor,
                     )
                 }
             }
@@ -257,6 +267,25 @@ fun VerifyAppScreen(
     }
 
     if (showMoreInfoAboutVerificationStatusDialog) {
+        val dialogTitle = if (sharedTextHashMatch != null) {
+            if (sharedTextHashMatch) "MATCH" else "NOMATCH"
+        } else {
+            verificationStatus.name
+        }
+        val dialogColor = if (sharedTextHashMatch != null) {
+            if (sharedTextHashMatch) Color(0xFFFF9800) else SimpleVerificationStatus.FAILURE.color
+        } else {
+            verificationStatus.simpleVerificationStatus.color
+        }
+        val dialogInfo = if (sharedTextHashMatch != null) {
+            if (sharedTextHashMatch) {
+                "The app's hashes match the shared text's expected values."
+            } else {
+                "The app's hashes do NOT match the shared text's expected values."
+            }
+        } else {
+            verificationStatus.info
+        }
         AlertDialog(
             onDismissRequest = { showMoreInfoAboutVerificationStatusDialog = false },
             confirmButton = {
@@ -272,16 +301,16 @@ fun VerifyAppScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        verificationStatus.name,
+                        dialogTitle,
                         style = typography.headlineSmall,
-                        color = verificationStatus.simpleVerificationStatus.color,
+                        color = dialogColor,
                     )
                 }
             },
             text = {
                 LazyColumn {
                     item {
-                        Text(verificationStatus.info)
+                        Text(dialogInfo)
                     }
                 }
             }

@@ -1,5 +1,9 @@
 package dev.soupslurpr.appverifier.ui
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.Signature
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -25,11 +30,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import dev.soupslurpr.appverifier.R
 import dev.soupslurpr.appverifier.preferences.PreferencesViewModel
 import kotlinx.coroutines.launch
@@ -46,6 +53,7 @@ fun SettingsScreen(
     onDonationSettingsItemClicked: () -> Unit,
 ) {
     val localUriHandler = LocalUriHandler.current
+    val context = LocalContext.current
     val preferencesUiState by preferencesViewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -82,24 +90,52 @@ fun SettingsScreen(
                     }
                 }
             )
+            SettingsItem(
+                name = "Share all verification info",
+                description = "Share verification info of all installed apps as text",
+                hasIcon = true,
+                onClickIconSetting = {
+                    val packageManager = context.packageManager
+                    val userInstalledPackages = packageManager.getInstalledPackages(0)
+                    val systemPackages = packageManager.getInstalledPackages(PackageManager.MATCH_SYSTEM_ONLY)
+                    userInstalledPackages.removeIf { userPkg ->
+                        systemPackages.any { it.packageName == userPkg.packageName }
+                    }
+                    val text = userInstalledPackages.joinToString("\n\n") { pkg ->
+                        val packageInfo = packageManager.getPackageInfo(
+                            pkg.packageName,
+                            PackageManager.GET_SIGNING_CERTIFICATES
+                        )
+                        val signingInfo = packageInfo.signingInfo!!
+                        val signatures = if (signingInfo.hasMultipleSigners()) {
+                            signingInfo.apkContentsSigners
+                        } else {
+                            signingInfo.signingCertificateHistory
+                        }
+                        val hashStrings = signatures.map { signature ->
+                            java.security.MessageDigest
+                                .getInstance("SHA-256")
+                                .digest(signature.toByteArray())
+                                .joinToString(":") { "%02x".format(it) }
+                                .uppercase()
+                        }
+                        "${pkg.packageName}\n${hashStrings.joinToString("\n")}"
+                    }
+                    val sendIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, text)
+                        type = "text/plain"
+                    }
+                    startActivity(context, Intent.createChooser(sendIntent, null), ActivityOptions.makeBasic().toBundle())
+                },
+                icon = {
+                    Icon(Icons.Filled.Share, null)
+                }
+            )
         }
 
         Column {
             SettingsCategoryText(category = stringResource(id = R.string.about))
-//            SettingsItem(
-//                name = stringResource(id = R.string.open_appverifier_website_setting_name),
-//                description = stringResource(id = R.string.open_appverifier_website_setting_description),
-//                hasIcon = true,
-//                onClickIconSetting = {
-//                    localUriHandler.openUri("https://appverifier.soupslurpr.dev")
-//                },
-//                icon = {
-//                    Icon(
-//                        imageVector = Icons.Filled.ExitToApp,
-//                        contentDescription = null
-//                    )
-//                }
-//            )
             SettingsItem(
                 name = stringResource(id = R.string.view_source_code_setting_name),
                 description = stringResource(id = R.string.view_source_code_setting_description),

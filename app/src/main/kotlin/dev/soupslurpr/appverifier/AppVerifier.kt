@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +29,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.IntOffset
@@ -41,6 +43,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
+import dev.soupslurpr.appverifier.data.UserDatabaseEntry
+import dev.soupslurpr.appverifier.data.parseUserDatabaseEntriesFromText
 import dev.soupslurpr.appverifier.preferences.PreferencesViewModel
 import dev.soupslurpr.appverifier.ui.AppListScreen
 import dev.soupslurpr.appverifier.ui.CreditsScreen
@@ -65,8 +69,7 @@ enum class AppVerifierScreens(@StringRes val title: Int) {
 }
 
 @Composable
-fun AppVerifierAppBar(
-) {
+fun AppVerifierAppBar() {
 
 }
 
@@ -77,6 +80,7 @@ fun AppVerifierApp(
     preferencesViewModel: PreferencesViewModel,
     isActionSend: Boolean,
     isActionView: Boolean,
+    sharedFilteredEntries: List<UserDatabaseEntry>? = null,
 ) {
     val preferencesUiState = preferencesViewModel.uiState.collectAsState()
 
@@ -86,15 +90,19 @@ fun AppVerifierApp(
 
     val snackbarCoroutineScope = rememberCoroutineScope()
 
+    var filteredEntries by remember { mutableStateOf(sharedFilteredEntries) }
+
+    LaunchedEffect(sharedFilteredEntries) {
+        if (sharedFilteredEntries != null) {
+            filteredEntries = sharedFilteredEntries
+        }
+    }
+
     val navController = rememberNavController()
 
-//    val backStackEntry by navController.currentBackStackEntryAsState()
-
-//    val currentScreen = AppVerifierScreens.valueOf(
-//        backStackEntry?.destination?.route ?: AppVerifierScreens.Start.name
-//    )
-
     val context = LocalContext.current
+
+    val clipboardManager = LocalClipboardManager.current
 
     val openApkFileLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.OpenDocument()) { uri ->
@@ -122,10 +130,14 @@ fun AppVerifierApp(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = if (isActionSend || isActionView) {
-                AppVerifierScreens.VerifyApp.name
-            } else {
-                AppVerifierScreens.Start.name
+            startDestination = remember(Unit) {
+                if (filteredEntries != null) {
+                    AppVerifierScreens.AppList.name
+                } else if (isActionSend || isActionView) {
+                    AppVerifierScreens.VerifyApp.name
+                } else {
+                    AppVerifierScreens.Start.name
+                }
             },
             modifier = modifier.padding(
                 innerPadding.calculateStartPadding(LocalLayoutDirection.current),
@@ -145,10 +157,38 @@ fun AppVerifierApp(
                     onVerifyApkFileButtonClicked = {
                         openApkFileLauncher.launch(arrayOf("application/vnd.android.package-archive"))
                     },
+                    onPasteFromClipboard = {
+                        val text = clipboardManager.getText()?.text
+                        if (text != null) {
+                            val trimmed = text.trim()
+                            val entries = trimmed.split("\n\n").filter { it.isNotBlank() }
+                            if (entries.size > 1) {
+                                val parsed = parseUserDatabaseEntriesFromText(trimmed)
+                                if (parsed != null) {
+                                    filteredEntries = parsed
+                                    navController.navigate(AppVerifierScreens.AppList.name)
+                                } else {
+                                    snackbarCoroutineScope.launch {
+                                        snackbarHostState.showSnackbar("Clipboard text is not in a valid format")
+                                    }
+                                }
+                            } else {
+                                val verificationInfoText = verifyAppViewModel.getVerificationInfoText(trimmed)
+                                verifyAppViewModel.findAndSetAppVerificationInfoFromPackageName(
+                                    verificationInfoText.lines()[0],
+                                    context.packageManager
+                                )
+                                verifyAppViewModel.verifyFromText(verificationInfoText)
+                                navController.navigate(AppVerifierScreens.VerifyApp.name)
+                            }
+                        } else {
+                            snackbarCoroutineScope.launch {
+                                snackbarHostState.showSnackbar("Clipboard is empty!")
+                            }
+                        }
+                    },
                     onLaunchedEffect = {
-                        // clear VerifyAppUiState when exiting VerifyAppScreen from opening an apk and going back to StartupScreen.
                         verifyAppViewModel.clearUiState()
-                        // clear searchQuery when going back to StartupScreen.
                         searchQuery = ""
                     }
                 )
@@ -172,15 +212,34 @@ fun AppVerifierApp(
                     { },
                     { },
                     { verifyAppViewModel.getHashesFromPackageInfo(it) },
-                    { verifyAppViewModel.getInternalDatabaseInfoFromVerificationInfo(it) }
+                    { verifyAppViewModel.getInternalDatabaseInfoFromVerificationInfo(it) },
+                    filteredEntries,
+                    onDoneFiltered = {
+                        filteredEntries = null
+                        verifyAppViewModel.clearUiState()
+                        navController.navigate(AppVerifierScreens.Start.name) {
+                            popUpTo(AppVerifierScreens.AppList.name) { inclusive = true }
+                        }
+                    },
                 )
             }
             composableWithDefaultSlideTransitions(route = AppVerifierScreens.VerifyApp) {
+                val currentPackageName = verifyAppUiState.value.packageName.value
+                val currentHashes = verifyAppUiState.value.hashes.value
+
+                val sharedTextEntryForVerify = filteredEntries?.find { it.packageName == currentPackageName }
+                val sharedTextHashMatchForVerify = if (sharedTextEntryForVerify != null && sharedTextEntryForVerify.hashes.isNotEmpty()) {
+                    if (currentHashes.hasMultipleSigners) sharedTextEntryForVerify.hashes == currentHashes.hashes
+                    else currentHashes.hashes.last() in sharedTextEntryForVerify.hashes
+                } else {
+                    null
+                }
+
                 VerifyAppScreen(
                     verifyAppUiState.value.icon.value,
                     verifyAppUiState.value.name.value,
-                    verifyAppUiState.value.packageName.value,
-                    verifyAppUiState.value.hashes.value,
+                    currentPackageName,
+                    currentHashes,
                     verifyAppUiState.value.verificationStatus.value,
                     verifyAppUiState.value.appNotFoundOrInvalidFormat.value,
                     { verifyAppViewModel.verifyFromText(it) },
@@ -192,7 +251,8 @@ fun AppVerifierApp(
                         snackbarCoroutineScope.launch {
                             snackbarHostState.showSnackbar("Clipboard is empty!")
                         }
-                    }
+                    },
+                    sharedTextHashMatch = sharedTextHashMatchForVerify,
                 )
             }
             composableWithDefaultSlideTransitions(route = AppVerifierScreens.Settings) {

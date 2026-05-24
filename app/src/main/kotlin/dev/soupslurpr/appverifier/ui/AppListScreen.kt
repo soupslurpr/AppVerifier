@@ -6,11 +6,15 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
@@ -30,7 +34,9 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
@@ -40,6 +46,7 @@ import dev.soupslurpr.appverifier.data.Hashes
 import dev.soupslurpr.appverifier.data.InternalDatabaseInfo
 import dev.soupslurpr.appverifier.data.InternalDatabaseStatus
 import dev.soupslurpr.appverifier.data.SimpleVerificationStatus
+import dev.soupslurpr.appverifier.data.UserDatabaseEntry
 import dev.soupslurpr.appverifier.data.VerificationInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,6 +66,8 @@ fun AppListScreen(
     onSearchActiveChange: (active: Boolean) -> Unit,
     getHashesFromPackageInfo: (packageInfo: PackageInfo) -> Hashes,
     getInternalDatabaseInfoFromVerificationInfo: (verification: VerificationInfo) -> InternalDatabaseInfo,
+    sharedFilteredEntries: List<UserDatabaseEntry>? = null,
+    onDoneFiltered: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
 
@@ -72,6 +81,13 @@ fun AppListScreen(
         userInstalledPackage.packageName == systemPackages.firstOrNull {
             it.packageName == userInstalledPackage.packageName
         }?.packageName
+    }
+
+    val filteredPackages = if (sharedFilteredEntries != null) {
+        val filterNames = sharedFilteredEntries.map { it.packageName }.toSet()
+        userInstalledPackages.filter { it.packageName in filterNames }
+    } else {
+        userInstalledPackages
     }
 
     LaunchedEffect(key1 = Unit) {
@@ -110,7 +126,38 @@ fun AppListScreen(
                 innerPadding.calculateEndPadding(LayoutDirection.Ltr)
             )
         ) {
-            items(userInstalledPackages) {
+            if (sharedFilteredEntries != null) {
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            "Showing ${filteredPackages.size} installed of ${sharedFilteredEntries.size} total",
+                            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                        )
+                        androidx.compose.material3.TextButton(onClick = { onDoneFiltered?.invoke() }) {
+                            Text("Done")
+                        }
+                    }
+                }
+            }
+            if (filteredPackages.isEmpty() && sharedFilteredEntries != null) {
+                item {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            "No installed apps match the shared package names.",
+                            modifier = Modifier.padding(32.dp),
+                            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                }
+            }
+            items(filteredPackages) {
                 // Do not show AppVerifier in the list as there is no point in using it to verify itself.
                 if (it.packageName == context.packageName) return@items
 
@@ -129,6 +176,20 @@ fun AppListScreen(
                     val hashes = getHashesFromPackageInfo(packageInfo)
 
                     val verificationInfo = VerificationInfo(packageInfo.packageName, hashes)
+                    val internalDbInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo)
+
+                    val sharedEntry = sharedFilteredEntries?.find {
+                        it.packageName == packageInfo.packageName
+                    }
+                    val sharedHashMatch = if (sharedEntry != null && sharedEntry.hashes.isNotEmpty()) {
+                        if (hashes.hasMultipleSigners) {
+                            sharedEntry.hashes == hashes.hashes
+                        } else {
+                            hashes.hashes.last() in sharedEntry.hashes
+                        }
+                    } else {
+                        null
+                    }
 
                     AppItem(
                         name = name,
@@ -138,7 +199,9 @@ fun AppListScreen(
                             packageInfo.applicationInfo ?: ApplicationInfo()
                         ),
                         onClickAppItem = onClickAppItem,
-                        internalDatabaseInfo = getInternalDatabaseInfoFromVerificationInfo(verificationInfo),
+                        internalDatabaseInfo = internalDbInfo,
+                        internalDbStatus = internalDbInfo.internalDatabaseStatus,
+                        sharedHashMatch = sharedHashMatch,
                     )
                 }
             }
@@ -163,6 +226,8 @@ fun AppItem(
         internalDatabaseInfo: InternalDatabaseInfo
     ) -> Unit,
     internalDatabaseInfo: InternalDatabaseInfo,
+    internalDbStatus: InternalDatabaseStatus = InternalDatabaseStatus.NOT_FOUND,
+    sharedHashMatch: Boolean? = null,
 ) {
     ListItem(
         modifier = Modifier.clickable {
@@ -182,21 +247,37 @@ fun AppItem(
             )
         },
         trailingContent = {
-            when (internalDatabaseInfo.internalDatabaseStatus) {
-                InternalDatabaseStatus.NOT_FOUND -> null
-                InternalDatabaseStatus.MATCH -> Icon(
-                    Icons.Filled.Verified,
-                    "Verified successfully with internal database",
-                    Modifier,
-                    SimpleVerificationStatus.SUCCESS.color,
-                )
-
-                InternalDatabaseStatus.NOMATCH -> Icon(
-                    Icons.Filled.Error,
-                    "Verification with internal database NOT successful!",
-                    Modifier,
-                    SimpleVerificationStatus.FAILURE.color,
-                )
+            Row {
+                when (internalDbStatus) {
+                    InternalDatabaseStatus.NOT_FOUND -> {}
+                    InternalDatabaseStatus.MATCH -> Icon(
+                        Icons.Filled.Verified,
+                        "Verified successfully with internal database",
+                        Modifier,
+                        SimpleVerificationStatus.SUCCESS.color,
+                    )
+                    InternalDatabaseStatus.NOMATCH -> Icon(
+                        Icons.Filled.Error,
+                        "Verification with internal database NOT successful!",
+                        Modifier,
+                        SimpleVerificationStatus.FAILURE.color,
+                    )
+                }
+                when (sharedHashMatch) {
+                    true -> Icon(
+                        Icons.Filled.Verified,
+                        "Shared text hashes match installed app",
+                        Modifier,
+                        Color(0xFFFF9800),
+                    )
+                    false -> Icon(
+                        Icons.Filled.Error,
+                        "Shared text hashes do NOT match installed app",
+                        Modifier,
+                        Color(0xFFFF9800),
+                    )
+                    null -> {}
+                }
             }
         }
     )
