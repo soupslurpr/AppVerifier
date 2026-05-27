@@ -69,11 +69,6 @@ enum class AppVerifierScreens(@StringRes val title: Int) {
 }
 
 @Composable
-fun AppVerifierAppBar() {
-
-}
-
-@Composable
 fun AppVerifierApp(
     modifier: Modifier,
     verifyAppViewModel: VerifyAppViewModel,
@@ -119,9 +114,6 @@ fun AppVerifierApp(
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
-        topBar = {
-            AppVerifierAppBar()
-        },
         snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState,
