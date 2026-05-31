@@ -5,6 +5,7 @@ import android.content.ContentResolver
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.util.Log
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
@@ -20,7 +21,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.io.File
-import java.io.IOException
 import java.security.MessageDigest
 
 class VerifyAppViewModel(application: Application) : AndroidViewModel(application) {
@@ -271,57 +271,56 @@ class VerifyAppViewModel(application: Application) : AndroidViewModel(applicatio
         uri: Uri,
         packageManager: PackageManager,
     ) {
-        contentResolver.openInputStream(uri).use { inputStream ->
-            val tempFile = File.createTempFile("temp", null, getApplication<Application>().cacheDir)
-
-            tempFile.outputStream().use { fileOut ->
-                inputStream.use { it!!.copyTo(fileOut) }
-            }
-
-            val packageInfo = packageManager.getPackageArchiveInfo(
-                tempFile.path,
-                PackageManager.GET_SIGNING_CERTIFICATES
-            )
-            val applicationInfo = packageInfo?.applicationInfo ?: ApplicationInfo()
-
-            if (packageInfo == null) {
+        try {
+            val inputStream = contentResolver.openInputStream(uri)
+            if (inputStream == null) {
+                Log.e("VerifyAppViewModel", "openInputStream returned null for URI: $uri")
                 setApkFailedToParse(true)
-
-                val isFileDeleted = tempFile.delete()
-
-                if (!isFileDeleted) {
-                    throw IOException(
-                        "Temporary APK file couldn't be deleted! Report this bug please with instructions " +
-                                "on how to reproduce!"
-                    )
-                }
-
                 return
             }
 
-            applicationInfo.sourceDir = tempFile.path
-            applicationInfo.publicSourceDir = tempFile.path
+            val tempFile = File.createTempFile("temp", null, getApplication<Application>().cacheDir)
 
-            val packageName = packageInfo.packageName
+            try {
+                inputStream.use { fileIn ->
+                    tempFile.outputStream().use { fileOut ->
+                        fileIn.copyTo(fileOut)
+                    }
+                }
 
-            val hashes = getHashesFromPackageInfo(packageInfo)
-
-            setAppVerificationInfo(
-                packageManager.getApplicationLabel(applicationInfo).toString(),
-                packageName,
-                hashes,
-                getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
-            )
-            setAppIcon(packageManager.getApplicationIcon(applicationInfo))
-
-            val isFileDeleted = tempFile.delete()
-
-            if (!isFileDeleted) {
-                throw IOException(
-                    "Temporary APK file couldn't be deleted! Report this bug please with instructions " +
-                            "on how to reproduce!"
+                val packageInfo = packageManager.getPackageArchiveInfo(
+                    tempFile.path,
+                    PackageManager.GET_SIGNING_CERTIFICATES
                 )
+                val applicationInfo = packageInfo?.applicationInfo ?: ApplicationInfo()
+
+                if (packageInfo == null) {
+                    setApkFailedToParse(true)
+                    return
+                }
+
+                applicationInfo.sourceDir = tempFile.path
+                applicationInfo.publicSourceDir = tempFile.path
+
+                val packageName = packageInfo.packageName
+
+                val hashes = getHashesFromPackageInfo(packageInfo)
+
+                setAppVerificationInfo(
+                    packageManager.getApplicationLabel(applicationInfo).toString(),
+                    packageName,
+                    hashes,
+                    getInternalDatabaseInfoFromVerificationInfo(VerificationInfo(packageName, hashes)),
+                )
+                setAppIcon(packageManager.getApplicationIcon(applicationInfo))
+            } finally {
+                if (!tempFile.delete()) {
+                    Log.e("VerifyAppViewModel", "Failed to delete temporary APK file")
+                }
             }
+        } catch (e: Exception) {
+            Log.e("VerifyAppViewModel", "Failed to process APK file", e)
+            setApkFailedToParse(true)
         }
     }
 

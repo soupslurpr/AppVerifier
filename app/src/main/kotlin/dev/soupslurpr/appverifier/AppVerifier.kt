@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -96,6 +97,15 @@ fun AppVerifierApp(
 
     val context = LocalContext.current
 
+    var pendingNavigation by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(pendingNavigation) {
+        pendingNavigation?.let { route ->
+            navController.navigate(route)
+            pendingNavigation = null
+        }
+    }
+
     val openApkFileLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) {
@@ -104,7 +114,7 @@ fun AppVerifierApp(
                     uri,
                     context.packageManager,
                 )
-                navController.navigate(AppVerifierScreens.VerifyApp.name)
+                pendingNavigation = AppVerifierScreens.VerifyApp.name
             }
         }
 
