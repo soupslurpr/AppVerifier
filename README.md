@@ -36,7 +36,3 @@ Join the Matrix space at https://matrix.to/#/#appverifier-space:matrix.org for t
 
 Check [CONTRIBUTING.md](https://github.com/soupslurpr/AppVerifier/blob/master/CONTRIBUTING.md) for things to know
 if you want to contribute.
-
-## Donation
-
-Thank you to everyone who donated.
